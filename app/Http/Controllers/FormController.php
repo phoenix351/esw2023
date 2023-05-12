@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRutaRequest;
+use App\Http\Requests\UpdateRutaRequest;
+use App\Models\MasterWilayah;
+use App\Models\Rt;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -24,6 +28,44 @@ class FormController extends Controller
      */
     public function index()
     {
-        return view('form', ['page' => "Form Entry"]);
+        $wilayah = MasterWilayah::all();
+        return view('form', [
+            'wilayah' => $wilayah,
+            'page' => "Form Entri"
+        ]);
+    }
+    
+    public function entri()
+    {
+        $wilayah = MasterWilayah::all();
+        return view('rt.entri', [
+            'wilayah' => $wilayah,
+            'page' => "Form Entri"
+        ]);
+    }
+    
+    public function store(StoreRutaRequest $request)
+    {
+        $this->validate($request,[
+            'nomor_bangunan' => 'required',
+            'nurtup' => 'required',
+            'nama_krt' => 'required',
+            'jumlah_uup' => 'required',
+        ]);
+
+        Rt::create($request->all());
+        return redirect('/entri-trial');
+    }
+
+    public function update(UpdateRutaRequest $request, Rt $rt)
+    {
+        $this->validate($request,[
+            'nomor_bangunan' => 'required',
+            'nurtup' => 'required',
+            'nama_krt' => 'required',
+            'jumlah_uup' => 'required',
+        ]);
+
+        Rt::where('id', $rt->id)->update($request->all());
     }
 }
