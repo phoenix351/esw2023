@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +22,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::view('about', 'about')->name('about');
-    Route::get('entry', [\App\Http\Controllers\FormController::class, 'index'])->name('form.index');
 
+Route::middleware('auth','verified')->group(function () {
+    Route::view('about', 'about')->name('about');
+    Route::get('entri', [\App\Http\Controllers\FormController::class, 'index'])->name('form.index');
+    //trial
+    Route::get('entri-trial', [\App\Http\Controllers\FormController::class, 'entri'])->name('form.entri');
+    // Route::resource('form', FormController::class);
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::post('store', [\App\Http\Controllers\FormController::class, 'store'])->name('form.store');
 });
