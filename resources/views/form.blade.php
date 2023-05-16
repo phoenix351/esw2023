@@ -1,10 +1,7 @@
 @extends('layouts.tail')
 
 @section('content')
- 
-
-
-<section class="bg-white dark:bg-gray-900">
+ <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16">
         <form action="#">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">I. KETERANGAN TEMPAT</h2>
@@ -19,18 +16,12 @@
                 
                 <div>
                     <label for="kabkot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
-<<<<<<< Updated upstream
-                    <select id="kabkot" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        <option selected disabled>Pilih Kabupatenclear/Kota</option>
-                        <option value="Bolaang Mongondow">Bolaang Mongondow</option>
-=======
                     <select data-te-select-placeholder="Pilih Kabupaten/Kota" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" id="kabkot" name="kabkot" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         
                         {{-- <option value="Bolaang Mongondow">Bolaang Mongondow</option> --}}
                         @foreach($wilayah as $wil)
                         <option value={{$wil->kode_kab}}>{{$wil->nama_kab}}</option>
                         @endforeach
->>>>>>> Stashed changes
                     </select>
                 </div>
                 <div>
@@ -69,8 +60,6 @@
                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
               </svg>
             </button>
-<<<<<<< Updated upstream
-=======
             <div class="hidden">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">I. KETERANGAN RUMAH TANGGA</h2>
 <br>
@@ -114,7 +103,6 @@
                 </button>
             </div>
          
->>>>>>> Stashed changes
         </form>
             {{-- Table  --}}
             <section class="bg-gray-50 dark:bg-gray-900 mt-5">
@@ -235,23 +223,10 @@
             </section>
     </div>
   </section>
-<<<<<<< Updated upstream
-  @include('modals.add_ruta');
-@endsection
-=======
   {{-- <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script> --}}
->>>>>>> Stashed changes
 
-
+@include('modals.add_ruta');
 <script>
-<<<<<<< Updated upstream
-    document.addEventListener("DOMContentLoaded", (event) => {  
-        document.getElementById('muat-data-sls-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-    });});
-    // fungsi muat data by sls 
-   
-=======
     document.addEventListener("DOMContentLoaded", () => {
         // Initialization for ES Users
 
@@ -265,17 +240,12 @@
         console.log(kabkot);
 
     }
->>>>>>> Stashed changes
     function copyValue(e){
         console.log(e.value);
         document.getElementById('email').value = e.value;
     }
 
-<<<<<<< Updated upstream
-</script>
-=======
 </script>
 @endsection
 
 
->>>>>>> Stashed changes
