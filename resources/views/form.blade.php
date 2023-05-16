@@ -15,43 +15,39 @@
                 </div> 
                 
                 <div>
-                    <label for="kabkot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
-                    <select data-te-select-placeholder="Pilih Kabupaten/Kota" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" id="kabkot" name="kabkot" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                    <label for="id_kab" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
+                    <select data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" id="id_kab" name="id_kab" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         
                         {{-- <option value="Bolaang Mongondow">Bolaang Mongondow</option> --}}
                         @foreach($wilayah as $wil)
-                        <option value={{$wil->kode_kab}}>{{$wil->nama_kab}}</option>
+                        <option value={{$wil->id_kab}}>{{$wil->nama_kab}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="kec" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
-                    <select data-te-select-placeholder="Pilih Kecamatan" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" id="kec" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        
-                        <option value="Bolaang Mongondow">Poigar</option>
+                    <label for="id_kec" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                    <select data-te-select-placeholder="Pilih Kecamatan" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" name="id_kec" id="id_kec" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                     </select>
                 </div>
                 <div>
-                    <label for="desa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desa/Kelurahan</label>
-                    <select data-te-select-placeholder="Pilih Desa/Kelurahan" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" id="desa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        
-                        <option value="Bolaang Mongondow">Poigar I</option>
+                    <label for="id_desa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desa/Kelurahan</label>
+                    <select data-te-select-placeholder="Pilih Desa/Kelurahan" data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true" name="id_desa" id="id_desa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>    
                     </select>
                 </div>
                 <div>
-                    <label for="sls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SLS</label>
-                    <select id="sls" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                    <label for="id_sls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SLS</label>
+                    <select id="id_sls" name="id_sls" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         <option selected disabled>Pilih SLS</option>
                         <option value="Bolaang Mongondow">Poigar I</option>
                     </select>
                 </div>
-                <div>
+                {{-- <div>
                     <label for="subsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SubSLS</label>
                     <select id="subsls" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         <option selected disabled>Pilih SubSLS</option>
                         <option value="Bolaang Mongondow">Poigar I</option>
                     </select>
-                </div>
+                </div> --}}
                 
             </div>
             <button type="submit" id="muat-data-sls-btn" class="mt-4 flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -230,9 +226,82 @@
     document.addEventListener("DOMContentLoaded", () => {
         // Initialization for ES Users
 
-        document.getElementById("kabkot").addEventListener("change", () => {
-            getKec();
-        })
+    
+        $('#id_kab').change(function() {
+                var id_kab = $(this).val()
+                if (id_kab){
+                    $.ajax({
+                        url: '/getKec/' + id_kab,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#id_kec').empty()
+                            $('#id_kec').append('<option value="">-- Pilih Kecamatan --</option>')
+                            $.each(data, function(key, value){
+                                $('#id_kec').append('<option value="' + value + '">' + key + '</option>')
+                            })
+                        }
+                    })
+                } else {
+                    $('#id_kec').empty()
+                    $('#id_kec').append('<option value="">-- Pilih Kecamatan --</option>')
+                    $('#id_desa').empty()
+                    $('#id_desa').append('<option value="">-- Pilih Desa --</option>')
+                    $('#id_sls').empty()
+                    $('#id_sls').append('<option value="">-- Pilih SLS --</option>')
+                }
+            })
+            
+            $('#id_kec').change(function() {
+                var id_kec = $(this).val()
+                if (id_kec){
+                    $.ajax({
+                        url: '/getDesa/' + id_kec,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#id_desa').empty()
+                            $('#id_desa').append('<option value="">-- Pilih Desa --</option>')
+                            $.each(data, function(key, value){
+                                $('#id_desa').append('<option value="' + value + '">' + key + '</option>')
+                            })
+                        }
+                    })
+                } else {
+                    $('#id_desa').empty()
+                    $('#id_desa').append('<option value="">-- Pilih Desa --</option>')
+                    $('#id_sls').empty()
+                    $('#id_sls').append('<option value="">-- Pilih SLS --</option>')
+                }
+            })
+            
+            $('#id_desa').change(function() {
+                var id_desa = $(this).val()
+                if (id_desa){
+                    $.ajax({
+                        url: '/getSls/' + id_desa,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#id_sls').empty()
+                            $('#id_sls').append('<option value="">-- Pilih SLS --</option>')
+                           
+                            $.each(data, function(indeks,data){
+                                console.log(data.id);
+                                $('#id_sls').append('<option value="' + data.id + '">' + data.nama_sls +' - ['+ data.id_sls6 + ']</option>')
+                            })
+                        }
+                    })
+                } else {
+                    $('#id_sls').empty()
+                    $('#id_sls').append('<option value="">-- Pilih SLS --</option>')
+                }
+            })
+            $("#muat-data-sls-btn").click(()=>{
+                const input_idsls = $("#id_sls").val();
+                $("#idsls").val(input_idsls);
+                //show
+            });
     });
 
     function getKec() {
@@ -244,7 +313,7 @@
         console.log(e.value);
         document.getElementById('email').value = e.value;
     }
-
+  
 </script>
 @endsection
 

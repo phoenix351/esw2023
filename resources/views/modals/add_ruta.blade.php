@@ -1,5 +1,5 @@
-<div id="add-ruta-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-4xl max-h-full">
+<div id="add-ruta-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <!-- Modal header -->
@@ -48,7 +48,10 @@
                             <label for="r201u" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Ruta Pengelola UP</label>
                             <input type="number" name="r201u" min="0" id="r201u" class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="5" required="">
                         </div>
-                        
+                        <div>
+                            <label for="idsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID SLS</label>
+                            <input type="number" min="1" name="idsls" id="idsls" class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="001" required="">
+                        </div>
                     </div>
                     <button id="halaman-1-next"  class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" data-tabs-target="#pengelola" role="tab" aria-controls="pengelola" aria-selected="false">
                         Berikutnya
@@ -82,131 +85,10 @@
                                                 <td class="px-4 py-3 text-right">NULL</td>
                                                 <td class="px-4 py-3 text-right">NULL</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-1-aksi-button" data-dropdown-toggle="pengelola-1-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-1-aksi" class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(656px, 102px);" data-popper-placement="bottom">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-1-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr><tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">2</th>
-                                                <td class="px-4 py-3 text-left">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-2-aksi-button" data-dropdown-toggle="pengelola-2-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-2-aksi" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-2-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr><tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">3</th>
-                                                <td class="px-4 py-3 text-left">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-3-aksi-button" data-dropdown-toggle="pengelola-3-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-3-aksi" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-3-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr><tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">4</th>
-                                                <td class="px-4 py-3 text-left">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-4-aksi-button" data-dropdown-toggle="pengelola-4-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-4-aksi" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-4-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr><tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">5</th>
-                                                <td class="px-4 py-3 text-left">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-5-aksi-button" data-dropdown-toggle="pengelola-5-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-5-aksi" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-5-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
+                                                    <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                    <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                                 </td>
                                             </tr>
-                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -257,40 +139,44 @@
                     
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="lahan" role="tabpanel" aria-labelledby="settings-tab">
-                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <form action="#">
+                    <div class="grid gap-8 mb-4 sm:grid-cols-3">
+                      
+                        @csrf
                         <div>
-                            <label for="r107" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Urut Bangunan</label>
-                            <input type="number" name="r107" id="r107" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="contoh:001" required="">
+                            <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
+                            <input type="number" name="r301" id="r301" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required>
                         </div>
                         <div>
-                            <label for="r108" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Urut Rumah Tangga Usaha Pertanian</label>
-                            <input type="number" name="r108" id="r108" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="contoh:001" required="">
+                            <label for="r302" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R302</label>
+                            <input type="text" name="r302" id="r302" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
                         </div>
                         <div>
-                            <label for="r109" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kepala Rumah Tangga</label>
-                            <input type="text" name="r109" id="r109" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="contoh:Yulius Adwendi" required="">
+                            <label for="r303" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R303</label>
+                            <input type="text" name="r303" id="r303" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[18rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                         </div>
                         <div>
-                            <label for="r201u" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Ruta Pengelola UP</label>
-                            <input type="number" name="r201u" id="r201u" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="contoh:5" required="">
+                            <label for="r307" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R307</label>
+                            <input type="number" min="1" max="4" name="r307" id="r307" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[3rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                         </div>
-                        
+                        <div>
+                            <label for="r309" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R309</label>
+                            <input type="number" min="0" name="r309" id="r309" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                        </div>
                     </div>
-                    <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                       
+
+                    <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
                         Berikutnya
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-    
-                    </button>                </div>
+                    
+                    </button>
+                </form>
+
+                </div>
+
             </div>
             
-            <form action="#">
-               
-               
-             
-             
-              
-            </form>
+           
         </div>
     </div>
 </div>
@@ -302,20 +188,46 @@
         - This doesn't wait for stylesheets, 
           images, and subframes to finish loading. 
       */
-     document.getElementById("")
+      $("#r303").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     console.log(e.which)
+     if(e.which>57 || e.which<48){
+e.preventDefault()   }
+   });
      document.getElementById("halaman-1-next").addEventListener("click", function(){
             // ambil data dari dom
+
             const r107 = document.getElementById("r107").value;
             const r108 = document.getElementById("r108").value;
             const r109 = document.getElementById("r109").value;
             const r201u = document.getElementById("r201u").value;
 
             const tabel = document.getElementById("pengelola-body");
+            const id_sls = document.getElementById("idsls").value;
+            let token = document.getElementsByName('_token')[0].value;
+
            
             // asign ke json
             const ruta = {
-                r107,r108,r109,r201u
+                idsls:id_sls,
+                nomor_bangunan: r107,
+                nurtup: r108,
+                nama_krt:r109,
+                jumlah_uup:r201u,
+                _token: token
+
             };
+            
+            // input ke ruta 
+            $.ajax({
+                        url: '/simpanRuta',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:ruta,
+                        success: function(data){
+                           console.log(data);
+                        }
+                    })
 
             // cek jumlah pengelola
             
@@ -331,46 +243,31 @@
                         r309:"NULL"
                     }
                     const row_blank =  `<tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
+                                                <th scope="row" class="r301 px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
                                                 <td class="px-4 py-3 text-left">${r302}</td>
                                                 <td class="px-4 py-3 text-right">${r303}</td>
                                                 <td class="px-4 py-3 text-right">${r307}</td>
                                                 <td class="px-4 py-3 text-right">${r309}</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
-                                                    <button id="pengelola-${i}-aksi-button" data-dropdown-toggle="pengelola-${i}-aksi" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                        </svg>
-                                                    </button>
-                                                    <div id="pengelola-${i}-aksi" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(656px, 102px);" data-popper-placement="bottom">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="pengelola-${i}-aksi-button">
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                        </div>
-                                                    </div>
+                                                    <a href="#" class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
+                                                    <a href="#" class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                                 </td>
                                             </tr>`;
                    
                     tabel.innerHTML = tabel.innerHTML + row_blank;
-                    document.getElementById(`pengelola-${i}-aksi-button`).addEventListener("click", function(){
-                        if(document.getElementById(`pengelola-${i}-aksi`).classList.contains("hidden")){
-                            document.getElementById(`pengelola-${i}-aksi`).classList.remove("hidden");
-                            document.getElementById(`pengelola-${i}-aksi`).classList.add("block");
-                            return 0;
-                        }
-                        document.getElementById(`pengelola-${i}-aksi`).classList.remove("block");
-                            document.getElementById(`pengelola-${i}-aksi`).classList.add("hidden");
-                            return 0;
+                    
+                    // $('.edit-pengelola').click((e)=>{
+                    //     let r301 = $(this).closest('tr');
+                    //     let cell = r301.find('th').text();
+                    //     console.log(cell);
+                    //     $('#r301').val(r301);
+                    // });
+                    $(document).on('click', '.edit-pengelola', function() {
+                        var r301 = $(this).closest('tr').find('th').text();
+                        $('#r301').val(r301);
+                        // You can use the headerValue variable as per your requirement
+                });
 
-                       
-                    });
                     document.getElementById("pengelola-tab").click();
                    
                 }
