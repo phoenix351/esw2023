@@ -138,14 +138,14 @@
                         </section>
                     
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="lahan" role="tabpanel" aria-labelledby="settings-tab">
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="lahan" role="tabpanel" aria-labelledby="settings-tab" disabled>
                     <form action="#">
                     <div class="grid gap-8 mb-4 sm:grid-cols-3">
                       
                         @csrf
                         <div>
                             <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
-                            <input type="number" name="r301" id="r301" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required>
+                            <input type="number" name="r301" id="r301" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
                         </div>
                         <div>
                             <label for="r302" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R302</label>
@@ -153,7 +153,7 @@
                         </div>
                         <div>
                             <label for="r303" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R303</label>
-                            <input type="text" name="r303" id="r303" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[18rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
+                            <input type="text" maxlength="16" name="r303" id="r303" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[18rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                         </div>
                         <div>
                             <label for="r307" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R307</label>
@@ -165,14 +165,39 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
-                        Berikutnya
+                    <button type="submit" name="lahan-submit" id="lahan-submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
+                        Simpan
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    
                     </button>
                 </form>
+                
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-right">r310</th>
+                            <th scope="col" class="px-4 py-3 text-right">r311</th>
+                            <th scope="col" class="px-4 py-3 text-right">r312</th>
+                            <th scope="col" class="px-4 py-3 text-right">r313</th>
+                            <th scope="col" class="px-4 py-3 text-right">r314</th>
+                            <th scope="col" class="px-4 py-3 text-right">r315</th>
+                            <th scope="col" class="px-4 py-3 text-right">r316</th>
+                            <th scope="col" class="px-4 py-3 text-right">r317</th>
+                            <th scope="col" class="px-4 py-3 text-right">r318</th>
+                            <th scope="col" class="px-4 py-3 text-right">r319</th>
+                            <th scope="col" class="px-4 py-3 text-right">r320</th>
+                            <th scope="col" class="px-4 py-3 text-right">r321</th>
+                            <th scope="col" class="px-4 py-3 text-right">r322</th>
+                            <th scope="col" class="px-4 py-3 text-right">r323</th>
 
+                          
+                        </tr>
+                    </thead>
+                    <tbody id="lahan-body">
+                     
+                    </tbody>
+                </table>
                 </div>
+                
 
             </div>
             
@@ -190,10 +215,82 @@
       */
       $("#r303").keypress(function (e) {
      //if the letter is not digit then display error and don't type anything
-     console.log(e.which)
-     if(e.which>57 || e.which<48){
-e.preventDefault()   }
-   });
+        if(e.which>57 || e.which<48){
+            e.preventDefault();
+            }
+        });
+        
+    
+    $('#lahan-submit').click((e)=>{
+        e.preventDefault();
+        const r301 = document.getElementById("r301").value;
+        const r302 = document.getElementById("r302").value;
+        const r303 = document.getElementById("r303").value;
+        const r307 = document.getElementById("r307").value;
+        const r309 = document.getElementById("r309").value;
+
+        let token = document.getElementsByName('_token')[0].value;
+
+        const uup = {
+            r301,r302,r303,r307,r309,token
+        }
+        console.log(uup);
+
+        $.ajax({
+            url: '/simpanUup',
+            type: 'POST',
+            dataType: 'json',
+            data:uup,
+            success: function(data){
+            console.log(data);
+            }
+        })
+
+        if(r309) {
+            const blank_lahan  = `  <tr class="border-b dark:border-gray-700">
+                            <td scope="row" class="px-4 py-3">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                        </tr>`;
+            $('#lahan-body').html("");
+            for(let i = 1; i <=Number(r309); i ++){
+                $('#lahan-body').html($('#lahan-body').html()+blank_lahan);
+            }
+            $(".only_num").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+        if(e.which>57 || e.which<48){
+            e.preventDefault();
+            }
+        });
+        } 
+        
+    });
+
      document.getElementById("halaman-1-next").addEventListener("click", function(){
             // ambil data dari dom
 
@@ -255,7 +352,10 @@ e.preventDefault()   }
                                             </tr>`;
                    
                     tabel.innerHTML = tabel.innerHTML + row_blank;
+                    // create ajax request in jquery
+
                     
+                                        
                     // $('.edit-pengelola').click((e)=>{
                     //     let r301 = $(this).closest('tr');
                     //     let cell = r301.find('th').text();

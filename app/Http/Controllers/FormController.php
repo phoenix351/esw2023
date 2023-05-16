@@ -85,6 +85,7 @@ class FormController extends Controller
         ]);
     }
 
+
     public function update(UpdateRutaRequest $request, Rt $rt)
     {
         $this->validate($request, [
