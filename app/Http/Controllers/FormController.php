@@ -28,13 +28,13 @@ class FormController extends Controller
      */
     public function index()
     {
-        $wilayah = MasterWilayah::all();
+        $wilayah = MasterWilayah::select('nama_kab', 'kode_kab')->groupBy('nama_kab', 'kode_kab')->orderBy('kode_kab')->get();
         return view('form', [
             'wilayah' => $wilayah,
             'page' => "Form Entri"
         ]);
     }
-    
+
     public function entri()
     {
         $wilayah = MasterWilayah::all();
@@ -43,10 +43,10 @@ class FormController extends Controller
             'page' => "Form Entri"
         ]);
     }
-    
+
     public function store(StoreRutaRequest $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'nomor_bangunan' => 'required',
             'nurtup' => 'required',
             'nama_krt' => 'required',
@@ -59,7 +59,7 @@ class FormController extends Controller
 
     public function update(UpdateRutaRequest $request, Rt $rt)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'nomor_bangunan' => 'required',
             'nurtup' => 'required',
             'nama_krt' => 'required',
