@@ -141,7 +141,7 @@
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="lahan" role="tabpanel" aria-labelledby="settings-tab" disabled>
                     <form action="#">
-                    <div class="grid gap-8 mb-4 sm:grid-cols-3">
+                    <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
                       
                         @csrf
                         <div>
@@ -170,30 +170,44 @@
                         </div>
                     </div>
 
+                    <div class="sm:max-md:grid justify-between md:flex grid-cols-1 gap-4 md:grid-cols-2 mt-4">
+                    <div class="mb-4">
                     <button type="submit" name="lahan-submit" id="lahan-submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
-                        Simpan
+                        Generate Lahan
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
+                </div>
+                <div class="mb-4">
+                    <button type="button" name="lahan-submit" id="lahan-submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
+                        Simpan Lahan
+                        <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /></svg>
+                    </button>
+                </div>
+                    </div>
                 </form>
                 
                 <div class="overflow-x-auto mt-4">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-4 py-3 text-right">r310</th>
-                            <th scope="col" class="px-4 py-3 text-right">r311</th>
-                            <th scope="col" class="px-4 py-3 text-right">r312</th>
-                            <th scope="col" class="px-4 py-3 text-right">r313</th>
-                            <th scope="col" class="px-4 py-3 text-right">r314</th>
-                            <th scope="col" class="px-4 py-3 text-right">r315</th>
-                            <th scope="col" class="px-4 py-3 text-right">r316</th>
-                            <th scope="col" class="px-4 py-3 text-right">r317</th>
-                            <th scope="col" class="px-4 py-3 text-right">r318</th>
-                            <th scope="col" class="px-4 py-3 text-right">r319</th>
-                            <th scope="col" class="px-4 py-3 text-right">r320</th>
-                            <th scope="col" class="px-4 py-3 text-right">r321</th>
-                            <th scope="col" class="px-4 py-3 text-right">r322</th>
-                            <th scope="col" class="px-4 py-3 text-right">r323</th>                          
+                            <th scope="col" class="px-4 py-3 text-center">r310</th>
+                            <th scope="col" class="px-4 py-3 text-center">r311</th>
+                            <th scope="col" class="px-4 py-3 text-center">r312</th>
+                            <th scope="col" class="px-4 py-3 text-center">r313</th>
+                            <th scope="col" class="px-4 py-3 text-center">r314</th>
+                            <th scope="col" class="px-4 py-3 text-center">r315</th>
+                            <th scope="col" class="px-4 py-3 text-center">r316</th>
+                            <th scope="col" class="px-4 py-3 text-center">r317</th>
+                            <th scope="col" class="px-4 py-3 text-center">r318</th>
+                            <th scope="col" class="px-4 py-3 text-center">r319</th>
+                            <th scope="col" class="px-4 py-3 text-center">r320</th>
+                            <th scope="col" class="px-4 py-3 text-center">r321</th>
+                            <th scope="col" class="px-4 py-3 text-center">r322</th>
+                            <th scope="col" class="px-4 py-3 text-center">r323</th>                          
+                            <th scope="col" class="px-4 py-3 text-center">prov</th>                          
+                            <th scope="col" class="px-4 py-3 text-center">kabkot</th>                          
+                            <th scope="col" class="px-4 py-3 text-center">kec</th>                          
+                            <th scope="col" class="px-4 py-3 text-center">desa</th>                          
                         </tr>
                     </thead>
                     <tbody id="lahan-body">
@@ -288,33 +302,41 @@
 
         if(r309) {
             const blank_lahan  = `  <tr class="border-b dark:border-gray-700">
-                            <td scope="row" class="px-4 py-3">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
+</td>
+                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
 </td>
                         </tr>`;
             $('#lahan-body').html("");
