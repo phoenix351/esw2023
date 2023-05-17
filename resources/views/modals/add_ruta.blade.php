@@ -145,8 +145,8 @@
                       
                         @csrf
                         <div>
-                            <label for="idRuta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">idRuta</label>
-                            <input type="number" name="idRuta" id="idRuta" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
+                            <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
+                            <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
                         </div>
                         <div>
                             <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
@@ -364,7 +364,7 @@
                         data:ruta,
                         success: function(data){
                            
-                            $('#idRuta').val(data.idRuta);
+                            $('#id_rt').val(data.id_rt);
                             console.log(data);
                         }
                     })
