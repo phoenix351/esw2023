@@ -80,14 +80,14 @@ class FormController extends Controller
             'jumlah_uup' => 'required',
         ]);
 
-        // $id_rt = $request->id;
-        $rt = Rt::create($request->all());
+        $id_rt = $request->id;
+        Rt::create($request->all());
         return response()->json([
             'message'   => 'success',
-            'id_rt' => $rt->id,
+            'id_rt' => $id_rt,
         ]);
     }
-
+    
     public function simpanUup(StoreRutaRequest $request)
     {
         $this->validate($request, [
