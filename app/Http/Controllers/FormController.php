@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DependentDropdownRequest;
+use App\Http\Requests\StorePengelolaRequest;
 use App\Http\Requests\StoreRutaRequest;
+use App\Http\Requests\StoreUupRequest;
 use App\Http\Requests\UpdateRutaRequest;
 use App\Models\MasterWilayah;
+use App\Models\Pengelola;
 use App\Models\Rt;
 use App\Models\Uup;
 use Illuminate\Http\Request;
@@ -87,8 +90,9 @@ class FormController extends Controller
             'id_rt' => $id_rt,
         ]);
     }
-    
-    public function simpanUup(StoreRutaRequest $request)
+
+
+    public function simpanUup(StoreUupRequest $request)
     {
         $this->validate($request, [
             'id_rt' => 'required',
@@ -99,11 +103,40 @@ class FormController extends Controller
             'r309' => 'required',
         ]);
 
-        Uup::create($request->all());
+        $uup = Uup::create($request->all());
+        return response()->json([
+            'message'   => 'success',
+            'id_uup' => $uup->id,
+        ]);
+    }
+
+    public function simpanPengelola(StorePengelolaRequest $request)
+    {
+        $this->validate($request, [
+            'id_uup' => 'required',
+            'r310' => 'required',
+            'r311' => 'required',
+            'r312' => 'required',
+            'r313' => 'required',
+            'r314' => 'required',
+            'r315' => 'required',
+            'r316' => 'required',
+            'r317' => 'required',
+            'r318' => 'required',
+            'r319' => 'required',
+            'r320' => 'required',
+            'r321' => 'required',
+            'r322' => 'required',
+            'r323' => 'required',
+            ['r324_kabkot', 'r324_kec', 'r324_desa' => 'required'],
+        ]);
+
+        $pengelola = Pengelola::create($request->all());
         return response()->json([
             'message'   => 'success',
         ]);
     }
+
 
 
     public function update(UpdateRutaRequest $request, Rt $rt)
