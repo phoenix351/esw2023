@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRutaRequest;
 use App\Http\Requests\UpdateRutaRequest;
 use App\Models\MasterWilayah;
 use App\Models\Rt;
+use App\Models\Uup;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -79,7 +80,26 @@ class FormController extends Controller
             'jumlah_uup' => 'required',
         ]);
 
+        $id_rt = $request->id;
         Rt::create($request->all());
+        return response()->json([
+            'message'   => 'success',
+            'id_rt' => $id_rt,
+        ]);
+    }
+    
+    public function simpanUup(StoreRutaRequest $request)
+    {
+        $this->validate($request, [
+            'id_rt' => 'required',
+            'r301' => 'required',
+            'r302' => 'required',
+            'r303' => 'required',
+            'r307' => 'required',
+            'r309' => 'required',
+        ]);
+
+        Uup::create($request->all());
         return response()->json([
             'message'   => 'success',
         ]);
