@@ -65,7 +65,7 @@
                             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                                 
                                 <div class="overflow-x-auto">
-                                    <table id="pengelola-tabel" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <table id="pengelola-tabel" class="relative overflow-x-auto shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
                                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
                                                 <th scope="col" class="px-4 py-3 text-right">R301. No. Urut UUP</th>
@@ -79,14 +79,15 @@
                                             </tr>
                                         </thead>
                                         <tbody id="pengelola-body">
+                                            <tr>
                                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">1</th>
-                                                <td class="px-4 py-3 text-left">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 text-right">NULL</td>
+                                                <td class="r302 px-4 py-3 text-left">NULL</td>
+                                                <td class="r303 px-4 py-3 text-right">NULL</td>
+                                                <td class="r307 px-4 py-3 text-right">NULL</td>
+                                                <td class="r309 px-4 py-3 text-right">NULL</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
-                                                    <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                    <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                    <a href="#" class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                    <a href="#" class="hapus-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -144,6 +145,10 @@
                       
                         @csrf
                         <div>
+                            <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
+                            <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
+                        </div>
+                        <div>
                             <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
                             <input type="number" name="r301" id="r301" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
                         </div>
@@ -171,7 +176,8 @@
                     </button>
                 </form>
                 
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
+                <div class="overflow-x-auto mt-4">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3 text-right">r310</th>
@@ -187,15 +193,14 @@
                             <th scope="col" class="px-4 py-3 text-right">r320</th>
                             <th scope="col" class="px-4 py-3 text-right">r321</th>
                             <th scope="col" class="px-4 py-3 text-right">r322</th>
-                            <th scope="col" class="px-4 py-3 text-right">r323</th>
-
-                          
+                            <th scope="col" class="px-4 py-3 text-right">r323</th>                          
                         </tr>
                     </thead>
                     <tbody id="lahan-body">
                      
                     </tbody>
                 </table>
+            </div>
                 </div>
                 
 
@@ -213,6 +218,7 @@
         - This doesn't wait for stylesheets, 
           images, and subframes to finish loading. 
       */
+
       $("#r303").keypress(function (e) {
      //if the letter is not digit then display error and don't type anything
         if(e.which>57 || e.which<48){
@@ -220,21 +226,55 @@
             }
         });
         
-    
+        $(document).on('click', '.edit-pengelola',function() {
+                        var r301 = $(this).closest('tr').find('th').text();
+                        var r302 = $(this).closest('tr').find('.r302').text();
+                        var r303 = $(this).closest('tr').find('.r303').text();
+                        var r307 = $(this).closest('tr').find('.r307').text();
+                        var r309 = $(this).closest('tr').find('.r309').text();
+                        
+                        $('#r301').val(r301);
+                        $('#r302').val(r302);
+                        $('#r303').val(r303);
+                        $('#r307').val(r307);
+                        $('#r309').val(r309);
+                        // open tabs
+                        $('#lahan-tab').prop('disabled', false);
+                        $('#lahan-tab').click();
+                        $('#lahan-tab').prop('disabled', true);
+                        
+        });
+
+    $('#lahan-tab').prop('disabled', true);
+
     $('#lahan-submit').click((e)=>{
+        
         e.preventDefault();
+        
         const r301 = document.getElementById("r301").value;
         const r302 = document.getElementById("r302").value;
         const r303 = document.getElementById("r303").value;
         const r307 = document.getElementById("r307").value;
         const r309 = document.getElementById("r309").value;
+        
+        // cek validasi 
 
+        // assign ke tab pengelola
+
+        // define row
+        const row = $('#pengelola-body tr').eq(Number(r301)-1);
+        
+        row.find('.r302').html(r302)
+        row.find('.r303').html(r303)
+        row.find('.r307').html(r307)
+        row.find('.r309').html(r309)
+                
         let token = document.getElementsByName('_token')[0].value;
 
         const uup = {
             r301,r302,r303,r307,r309,token
         }
-        console.log(uup);
+        // console.log(uup);
 
         $.ajax({
             url: '/simpanUup',
@@ -291,6 +331,7 @@
         
     });
 
+    // fungsi simpan ruta dan generate pengelola
      document.getElementById("halaman-1-next").addEventListener("click", function(){
             // ambil data dari dom
 
@@ -322,7 +363,9 @@
                         dataType: 'json',
                         data:ruta,
                         success: function(data){
-                           console.log(data);
+                           
+                            $('#id_rt').val(data.id_rt);
+                            console.log(data);
                         }
                     })
 
@@ -336,15 +379,15 @@
                     const {r302,r303,r307,r309}= {
                         r302:"NULL",
                         r303:"NULL",
-                        r307:"NULL",
-                        r309:"NULL"
+                        r307:NaN,
+                        r309:NaN
                     }
                     const row_blank =  `<tr class="pengelola-row border-b dark:border-gray-700">
                                                 <th scope="row" class="r301 px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
-                                                <td class="px-4 py-3 text-left">${r302}</td>
-                                                <td class="px-4 py-3 text-right">${r303}</td>
-                                                <td class="px-4 py-3 text-right">${r307}</td>
-                                                <td class="px-4 py-3 text-right">${r309}</td>
+                                                <td class="r302 px-4 py-3 text-left">${r302}</td>
+                                                <td class="r303 px-4 py-3 text-right">${r303}</td>
+                                                <td class="r307 px-4 py-3 text-right">${r307}</td>
+                                                <td class="r309 px-4 py-3 text-right">${r309}</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
                                                     <a href="#" class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
                                                     <a href="#" class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
@@ -365,8 +408,12 @@
                     $(document).on('click', '.edit-pengelola', function() {
                         var r301 = $(this).closest('tr').find('th').text();
                         $('#r301').val(r301);
-                        // You can use the headerValue variable as per your requirement
-                });
+                        // open tabs
+                        $('#lahan-tab').prop('disabled', false);
+                        $('#lahan-tab').click();
+                        $('#lahan-tab').prop('disabled', true);
+                        
+                    });
 
                     document.getElementById("pengelola-tab").click();
                    
