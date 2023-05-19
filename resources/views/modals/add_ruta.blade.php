@@ -143,10 +143,10 @@
                     <form action="#">
                     <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
                       
-                        @csrf
+                        <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{csrf_token()}}">
                         <div>
-                            <label for="idRuta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">idRuta</label>
-                            <input type="number" name="idRuta" id="idRuta" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
+                            <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
+                            <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
                         </div>
                         <div>
                             <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
@@ -172,12 +172,15 @@
 
                     <div class="sm:max-md:grid justify-between md:flex grid-cols-1 gap-4 md:grid-cols-2 mt-4">
                     <div class="mb-4">
-                    <button type="submit" name="lahan-submit" id="lahan-submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
+                        
+                    <button type="submit" name="lahan-generate" id="lahan-generate" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
                         Generate Lahan
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </div>
                 <div class="mb-4">
+                    <form>
+                        @csrf
                     <button type="button" name="lahan-submit" id="lahan-submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">                       
                         Simpan Lahan
                         <svg aria-hidden="true" class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /></svg>
@@ -213,6 +216,7 @@
                     <tbody id="lahan-body">
                      
                     </tbody>
+                </form>
                 </table>
             </div>
                 </div>
@@ -261,7 +265,7 @@
 
     $('#lahan-tab').prop('disabled', true);
 
-    $('#lahan-submit').click((e)=>{
+    $('#lahan-generate').click((e)=>{
         
         e.preventDefault();
         
@@ -283,11 +287,13 @@
         row.find('.r307').html(r307)
         row.find('.r309').html(r309)
                 
-        let token = document.getElementsByName('_token')[0].value;
+        // let token = document.getElementsByName('_token')[0].value;
 
         const uup = {
-            r301,r302,r303,r307,r309,token
+            r301,r302,r303,r307,r309
         }
+        uup['_token'] = $('#csrf-pengelola').val();
+        uup['id_rt'] = $('#id_rt').val();
         // console.log(uup);
 
         $.ajax({
@@ -301,44 +307,28 @@
         })
 
         if(r309) {
+
+            const generateRow = (namaVar)=> `<td scope="row" class="px-4 py-3"><input type="text"  name="${namaVar}"  class="${namaVar} only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
             const blank_lahan  = `  <tr class="border-b dark:border-gray-700">
-                            <td scope="row" class="px-4 py-3">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                            <td scope="row" class="px-4 py-3 text-right">                            <input type="text"  name="r301" id="r301x" class="only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-</td>
-                        </tr>`;
+                ${generateRow("r310")}
+                ${generateRow("r311")}
+                ${generateRow("r312")}
+                ${generateRow("r313")}
+                ${generateRow("r314")}
+                ${generateRow("r315")}
+                ${generateRow("r316")}
+                ${generateRow("r317")}
+                ${generateRow("r318")}
+                ${generateRow("r319")}
+                ${generateRow("r320")}
+                ${generateRow("r321")}
+                ${generateRow("r322")}
+                ${generateRow("r323")}
+                ${generateRow("r324_prov")}
+                ${generateRow("r324_kabkot")}
+                ${generateRow("r324_kec")}
+                ${generateRow("r324_desa")}
+                </tr>`;
             $('#lahan-body').html("");
             for(let i = 1; i <=Number(r309); i ++){
                 $('#lahan-body').html($('#lahan-body').html()+blank_lahan);
@@ -351,6 +341,57 @@
         });
         } 
         
+    });
+
+    $('#lahan-submit').click((e)=>{
+        e.preventDefault();
+        // ambil data dari form input
+        let data = {
+            data: [],
+            _token: document.getElementsByName('_token')[0].value   
+        };
+        for (let i = 0; i < $('#lahan-body tr').length; i++) {
+            let data_i = {
+            id_uup: $('#r301').val(),
+            r310 :  $('#lahan-body tr').eq(i).find('.r310').val(),
+             r311 :  $('#lahan-body tr').eq(i).find('.r311').val(),
+             r312 :  $('#lahan-body tr').eq(i).find('.r312').val(),
+             r313 :  $('#lahan-body tr').eq(i).find('.r313').val(),
+             r314 :  $('#lahan-body tr').eq(i).find('.r314').val(),
+             r315 :  $('#lahan-body tr').eq(i).find('.r315').val(),
+             r316 :  $('#lahan-body tr').eq(i).find('.r316').val(),
+             r317 :  $('#lahan-body tr').eq(i).find('.r317').val(),
+             r318 :  $('#lahan-body tr').eq(i).find('.r318').val(),
+             r319 :  $('#lahan-body tr').eq(i).find('.r319').val(),
+             r320 :  $('#lahan-body tr').eq(i).find('.r320').val(),
+             r321 :  $('#lahan-body tr').eq(i).find('.r321').val(),
+             r322 :  $('#lahan-body tr').eq(i).find('.r322').val(),
+             r323 :  $('#lahan-body tr').eq(i).find('.r323').val(),
+             r324_prov :  $('#lahan-body tr').eq(i).find('.r324_prov').val(),
+             r324_kabkot :  $('#lahan-body tr').eq(i).find('.r324_kabkot').val(),
+             r324_kec :  $('#lahan-body tr').eq(i).find('.r324_kec').val(),
+             r324_desa :  $('#lahan-body tr').eq(i).find('.r324_desa').val(),
+            }
+
+            data.data.push(data_i);
+            
+        }
+
+        console.log(data);
+        // cek validasi
+
+        // kirim ke server
+        $.ajax({
+                        url: '/simpanPengelola',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:data,
+                        success: function(data){
+                           console.log(data);
+                        }
+                    })
+
+
     });
 
     // fungsi simpan ruta dan generate pengelola
@@ -386,7 +427,7 @@
                         data:ruta,
                         success: function(data){
                            
-                            $('#idRuta').val(data.idRuta);
+                            $('#id_rt').val(data.id_rt);
                             console.log(data);
                         }
                     })

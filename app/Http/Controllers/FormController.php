@@ -83,11 +83,10 @@ class FormController extends Controller
             'jumlah_uup' => 'required',
         ]);
 
-        $id_rt = $request->id;
-        Rt::create($request->all());
+        $input_db = Rt::create($request->all());
         return response()->json([
             'message'   => 'success',
-            'id_rt' => $id_rt,
+            'id_rt' => $input_db->id,
         ]);
     }
 
@@ -112,26 +111,29 @@ class FormController extends Controller
 
     public function simpanPengelola(StorePengelolaRequest $request)
     {
-        $this->validate($request, [
-            'id_uup' => 'required',
-            'r310' => 'required',
-            'r311' => 'required',
-            'r312' => 'required',
-            'r313' => 'required',
-            'r314' => 'required',
-            'r315' => 'required',
-            'r316' => 'required',
-            'r317' => 'required',
-            'r318' => 'required',
-            'r319' => 'required',
-            'r320' => 'required',
-            'r321' => 'required',
-            'r322' => 'required',
-            'r323' => 'required',
-            ['r324_kabkot', 'r324_kec', 'r324_desa' => 'required'],
-        ]);
-
-        $pengelola = Pengelola::create($request->all());
+        // $this->validate($request, [
+        //     '*.id_uup' => 'required',
+        //     '*.r310' => 'required',
+        //     '*.r311' => 'required',
+        //     '*.r312' => 'required',
+        //     '*.r313' => 'required',
+        //     '*.r314' => 'required',
+        //     '*.r315' => 'required',
+        //     '*.r316' => 'required',
+        //     '*.r317' => 'required',
+        //     '*.r318' => 'required',
+        //     '*.r319' => 'required',
+        //     '*.r320' => 'required',
+        //     '*.r321' => 'required',
+        //     '*.r322' => 'required',
+        //     '*.r323' => 'required',
+        //     ['*.r324_kabkot', '*.r324_kec', '*.r324_desa' => 'required'],
+        // ]);
+        $data = $request->input('data');
+        foreach ($data as $datas) {
+            Pengelola::create($datas);
+        }
+        // $pengelola = Pengelola::create($request->all());
         return response()->json([
             'message'   => 'success',
         ]);
