@@ -144,7 +144,10 @@
                     <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
                       
                         <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{csrf_token()}}" class="hidden">
+<<<<<<< HEAD
                         <input type="text" name="id-uup" id="id-uup" value="" class="hidden">
+=======
+>>>>>>> 827313c0ebf3a16711acbcf3c2e8afdd50445de5
                         <div>
                             <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
                             <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
@@ -381,7 +384,7 @@
             
         }
 
-        console.log(data);
+        // console.log(data);
         // cek validasi
 
         // kirim ke server

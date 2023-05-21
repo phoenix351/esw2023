@@ -51,11 +51,6 @@ class FormController extends Controller
         ]);
     }
 
-
-    public function getKab(DependentDropdownRequest $request)
-    {
-    }
-
     public function getKec(DependentDropdownRequest $request, $id_kab)
     {
         $kecamatan = MasterWilayah::where('id_kab', $id_kab)->pluck('id_kec', 'nama_kec');
@@ -77,6 +72,37 @@ class FormController extends Controller
     {
         $sls = Rt::select('id', 'idsls', 'nomor_bangunan', 'nurtup', 'nama_krt', 'jumlah_uup')->where('idsls', $id_sls)->paginate(10);
         return response()->json($sls);
+    }
+
+    //getDisaster
+    public function getRt(Request $request, $id_sls)
+    {
+        $rt = Rt::where('id_sls', $id_sls)->get();
+        return response()->json($rt);
+    }
+
+    public function getRtById(Request $request, $id)
+    {
+        $rt = Rt::where('id', $id)->get();
+        return response()->json($rt);
+    }
+
+    public function getUupByRt(Request $request, $id_rt)
+    {
+        $uup = Uup::where('id_rt', $id_rt)->get();
+        return response()->json($uup);
+    }
+
+    public function getUupById(Request $request, $id)
+    {
+        $uup = Uup::where('id', $id)->get();
+        return response()->json($uup);
+    }
+
+    public function getPengelola(Request $request, $id_uup)
+    {
+        $pengelola = Pengelola::where('id_uup', $id_uup)->get();
+        return response()->json($pengelola);
     }
 
     public function simpanRuta(StoreRutaRequest $request)
@@ -107,7 +133,7 @@ class FormController extends Controller
             'r309' => 'required',
         ]);
 
-        $uup = Uup::create($request->all());
+        $uup = Uup::updateOrCreate(['id' => $request->get('id')], $request->all());
         return response()->json([
             'message'   => 'success',
             'id_uup' => $uup->id,
@@ -137,15 +163,14 @@ class FormController extends Controller
         $data = $request->input('data');
         $pengelolas = [];
         foreach ($data as $datas) {
-            $pengelola = Pengelola::create($datas);
+            $pengelola = Pengelola::updateOrCreate(['id' => $datas['id']], $datas);
             $id = $pengelola->id;
-            array_push($data_return, [
-                'message' => 'success',
-                'id'   => $id
-            ]);
+            array_push($pengelolas, $id);
         }
         // $pengelola = Pengelola::create($request->all());
-        return response()->json($data_return);
+        return response()->json([
+            'message'   => 'success',
+        ]);
     }
 
 
