@@ -143,7 +143,8 @@
                     <form action="#">
                     <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
                       
-                        <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{csrf_token()}}">
+                        <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{csrf_token()}}" class="hidden">
+                        <input type="text" name="id-uup" id="id-uup" value="" class="hidden">
                         <div>
                             <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
                             <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
@@ -310,6 +311,7 @@
 
             const generateRow = (namaVar)=> `<td scope="row" class="px-4 py-3"><input type="text"  name="${namaVar}"  class="${namaVar} only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
             const blank_lahan  = `  <tr class="border-b dark:border-gray-700">
+                ${generateRow("id_lahan")}
                 ${generateRow("r310")}
                 ${generateRow("r311")}
                 ${generateRow("r312")}
@@ -352,7 +354,9 @@
         };
         for (let i = 0; i < $('#lahan-body tr').length; i++) {
             let data_i = {
-            id_uup: $('#r301').val(),
+            id_uup: $('#r301').val(), // belum,
+            
+            id :  $('#lahan-body tr').eq(i).find('.id_lahan').val() ? $('#lahan-body tr').eq(i).find('.id_lahan').val() : null,
             r310 :  $('#lahan-body tr').eq(i).find('.r310').val(),
              r311 :  $('#lahan-body tr').eq(i).find('.r311').val(),
              r312 :  $('#lahan-body tr').eq(i).find('.r312').val(),

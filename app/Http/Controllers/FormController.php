@@ -73,6 +73,11 @@ class FormController extends Controller
         $sls = MasterWilayah::select('id', 'id_sls6', 'nama_sls')->where('id_desa', $id_desa)->get();
         return response()->json($sls);
     }
+    public function getRt(Request $request, $id_sls)
+    {
+        $sls = Rt::select('id', 'idsls', 'nomor_bangunan', 'nurtup', 'nama_krt', 'jumlah_uup')->where('idsls', $id_sls)->paginate(10);
+        return response()->json($sls);
+    }
 
     public function simpanRuta(StoreRutaRequest $request)
     {
@@ -130,13 +135,17 @@ class FormController extends Controller
         //     ['*.r324_kabkot', '*.r324_kec', '*.r324_desa' => 'required'],
         // ]);
         $data = $request->input('data');
+        $pengelolas = [];
         foreach ($data as $datas) {
-            Pengelola::create($datas);
+            $pengelola = Pengelola::create($datas);
+            $id = $pengelola->id;
+            array_push($data_return, [
+                'message' => 'success',
+                'id'   => $id
+            ]);
         }
         // $pengelola = Pengelola::create($request->all());
-        return response()->json([
-            'message'   => 'success',
-        ]);
+        return response()->json($data_return);
     }
 
 
