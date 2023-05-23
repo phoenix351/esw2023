@@ -35,7 +35,7 @@ href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
     </head>
     
 
-<body class="bg-white dark:bg-gray-900">
+<body class="bg-white dark:bg-gray-900 h-screen">
     @include('layouts.navbar_tail')
 
     <main class="content">
@@ -50,7 +50,8 @@ href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
         document.getElementById('email').value = e.value;
     }
 </script>
-   
+
+@include('layouts.footer_tail')
 </body>
 
 </html>

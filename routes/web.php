@@ -44,6 +44,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
 
     Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
+    Route::get('getPengelola/{id_rt}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
+    Route::get('getLahan/{id_uup}', [\App\Http\Controllers\FormController::class, 'getLahan'])->name('form.getLahan');
     Route::get('getRtById/{id}', [\App\Http\Controllers\FormController::class, 'getRtById'])->name('form.getRtById');
     Route::get('getUupByRt/{id_rt}', [\App\Http\Controllers\FormController::class, 'getUupByRt'])->name('form.getUupByRt');
     Route::get('getUupById/{id}', [\App\Http\Controllers\FormController::class, 'getUupById'])->name('form.getUupById');

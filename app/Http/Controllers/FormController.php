@@ -74,13 +74,6 @@ class FormController extends Controller
         return response()->json($sls);
     }
 
-    //getDisaster
-    public function getRt(Request $request, $id_sls)
-    {
-        $rt = Rt::where('id_sls', $id_sls)->get();
-        return response()->json($rt);
-    }
-
     public function getRtById(Request $request, $id)
     {
         $rt = Rt::where('id', $id)->get();
@@ -99,12 +92,22 @@ class FormController extends Controller
         return response()->json($uup);
     }
 
-    public function getPengelola(Request $request, $id_uup)
+    public function getPengelolaById(Request $request, $id_uup)
     {
         $pengelola = Pengelola::where('id_uup', $id_uup)->get();
         return response()->json($pengelola);
     }
 
+    public function getPengelola(Request $request, $id_rt)
+    {
+        $pengelola = Uup::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
+        return response()->json($pengelola);
+    }
+    public function getLahan(Request $request, $id_uup)
+    {
+        $lahan = Pengelola::where('id_uup', $id_uup)->paginate(10);
+        return response()->json($lahan);
+    }
     public function simpanRuta(StoreRutaRequest $request)
     {
         $this->validate($request, [

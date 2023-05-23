@@ -1,11 +1,11 @@
-<div id="add-ruta-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="add-ruta-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <!-- Modal header -->
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Tambah Ruta</h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="add-ruta-modal" data-modal-toggle="add-ruta-modal">
+                <h3 id="modal-title" class="modal-title text-lg font-semibold text-gray-900 dark:text-white"></h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" onclick="$('#add-ruta-modal').hide();$('#modal-backdrop').remove();">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
@@ -31,7 +31,7 @@
             <div id="myTabContent">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="ruta" role="tabpanel" aria-labelledby="profile-tab">
                     {{-- <h3 class="mt-4 mb-2 text-lg font-semibold text-gray-900 dark:text-white">Keterangan Ruta</h3> --}}
-                    <div class="grid gap-4 mb-4 sm:grid-cols-4">
+                    <div class="grid xs:grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                         <div>
                             <label for="r107" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Urut Bangunan</label>
                             <input type="number" min="1" name="r107" id="r107" class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="001" required="">
@@ -48,7 +48,7 @@
                             <label for="r201u" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Ruta Pengelola UP</label>
                             <input type="number" name="r201u" min="0" id="r201u" class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="5" required="">
                         </div>
-                        <div>
+                        <div class="hidden">
                             <label for="idsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID SLS</label>
                             <input type="number" min="1" name="idsls" id="idsls" class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="001" required="">
                         </div>
@@ -79,59 +79,19 @@
                                             </tr>
                                         </thead>
                                         <tbody id="pengelola-body">
-                                            <tr>
-                                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">1</th>
-                                                <td class="r302 px-4 py-3 text-left">NULL</td>
-                                                <td class="r303 px-4 py-3 text-right">NULL</td>
-                                                <td class="r307 px-4 py-3 text-right">NULL</td>
-                                                <td class="r309 px-4 py-3 text-right">NULL</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <a href="#" class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                                    <a href="#" class="hapus-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
                                 <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
                                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                         Showing
-                                        <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
+                                        <span id="pengelola-showing" class="font-semibold text-gray-900 dark:text-white">?</span>
                                         of
-                                        <span class="font-semibold text-gray-900 dark:text-white">1000</span>
+                                        <span id="pengelola-total" class="font-semibold text-gray-900 dark:text-white">?</span>
                                     </span>
-                                    <ul class="inline-flex items-stretch -space-x-px">
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                                <span class="sr-only">Previous</span>
-                                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                                <span class="sr-only">Next</span>
-                                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                                </svg>
-                                            </a>
-                                        </li>
+                                    <ul id="pengelola-pagination" class="inline-flex items-stretch -space-x-px">
+                                       
                                     </ul>
                                 </nav>
                             </div>
@@ -144,10 +104,7 @@
                     <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
                       
                         <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{csrf_token()}}" class="hidden">
-<<<<<<< HEAD
                         <input type="text" name="id-uup" id="id-uup" value="" class="hidden">
-=======
->>>>>>> 827313c0ebf3a16711acbcf3c2e8afdd50445de5
                         <div>
                             <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
                             <input type="number" name="id_rt" id="id_rt" class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  disabled>
@@ -221,7 +178,19 @@
                      
                     </tbody>
                 </form>
+                
                 </table>
+                <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                        Showing
+                        <span id="lahan-showing" class="font-semibold text-gray-900 dark:text-white">?</span>
+                        of
+                        <span id="lahan-total" class="font-semibold text-gray-900 dark:text-white">?</span>
+                    </span>
+                    <ul id="lahan-pagination" class="inline-flex items-stretch -space-x-px">
+                       
+                    </ul>
+                </nav>
             </div>
                 </div>
                 
@@ -241,6 +210,7 @@
           images, and subframes to finish loading. 
       */
 
+      $('#add-ruta-modal').hide();
       $("#r303").keypress(function (e) {
      //if the letter is not digit then display error and don't type anything
         if(e.which>57 || e.which<48){
@@ -249,11 +219,12 @@
         });
         
         $(document).on('click', '.edit-pengelola',function() {
-                        var r301 = $(this).closest('tr').find('th').text();
-                        var r302 = $(this).closest('tr').find('.r302').text();
-                        var r303 = $(this).closest('tr').find('.r303').text();
-                        var r307 = $(this).closest('tr').find('.r307').text();
-                        var r309 = $(this).closest('tr').find('.r309').text();
+                        let id = $(this).closest('tr').find('.id').text();
+                        let r301 = $(this).closest('tr').find('.r301').text();
+                        let r302 = $(this).closest('tr').find('.r302').text();
+                        let r303 = $(this).closest('tr').find('.r303').text();
+                        let r307 = $(this).closest('tr').find('.r307').text();
+                        let r309 = $(this).closest('tr').find('.r309').text();
                         
                         $('#r301').val(r301);
                         $('#r302').val(r302);
@@ -384,7 +355,7 @@
             
         }
 
-        // console.log(data);
+        console.log(data);
         // cek validasi
 
         // kirim ke server
@@ -394,7 +365,9 @@
                         dataType: 'json',
                         data:data,
                         success: function(data){
-                           console.log(data);
+                            $('#lahan-body tr').each(()=>{
+
+                            })
                         }
                     })
 
@@ -459,46 +432,88 @@
                                                 <td class="r307 px-4 py-3 text-right">${r307}</td>
                                                 <td class="r309 px-4 py-3 text-right">${r309}</td>
                                                 <td class="px-4 py-3 flex items-center justify-end">
-                                                    <a href="#" class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
-                                                    <a href="#" class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                    <a href="#" value=${i} class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
+                                                    <a href="#" value=${i} class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                                 </td>
                                             </tr>`;
                    
                     tabel.innerHTML = tabel.innerHTML + row_blank;
                     // create ajax request in jquery
 
-                    
-                                        
-                    // $('.edit-pengelola').click((e)=>{
-                    //     let r301 = $(this).closest('tr');
-                    //     let cell = r301.find('th').text();
-                    //     console.log(cell);
-                    //     $('#r301').val(r301);
-                    // });
-                    $(document).on('click', '.edit-pengelola', function() {
-                        var r301 = $(this).closest('tr').find('th').text();
-                        $('#r301').val(r301);
-                        // open tabs
-                        $('#lahan-tab').prop('disabled', false);
-                        $('#lahan-tab').click();
-                        $('#lahan-tab').prop('disabled', true);
-                        
-                    });
-
-                    document.getElementById("pengelola-tab").click();
-                   
+                    $(document).on('click', '.edit-pengelola', editPengelola)
                 }
+                document.getElementById("pengelola-tab").click();
+                   
+            }
                 return 1;
-            } 
-            // return 
-            return 0;
+            });
             
      });
-  });
     function generateTableRows(table, rows) {
         table.innerHTML = '';
         for (var i = 0; i < count; i++) {
             table.appendChild(row);
         }
     }
+
+    function editPengelola(indeks) {
+                        console.log(indeks);
+                        const r301 = $('#pengelola-body tr').eq(indeks).find('.r301').html();
+                        const id = $('#pengelola-body tr').eq(indeks).find('.id').html();
+                        
+                        $('#r301').val("3");
+                        console.log({r301, id});
+
+                        // ambil data lahan berdasarkan id pengelola
+                        
+                        $.ajax({
+                        url: `/getLahan/${id}`,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data){
+                            $('#lahan-body').html('');
+                            
+                            const links = data.links;
+                            $('#lahan-pagination').html('');
+                            for( let i=0; i<links.length; i++){
+                                let link = generateLink(links[i]);
+                                let currPageLinks = $('#lahan-pagination').html();
+                                $('#lahan-pagination').html(currPageLinks+link);
+                                }
+                            $('#lahan-showing').html(data.from+' - '+data.to);
+                            $('#lahan-total').html(data.total)
+                            // const num_pages = data.data.length%10>0 ? data.length 
+                            $.each(data.data, function(indeks,rt){
+                            let content_html = '<tr class="hover:bg-gray-100 dark:hover:bg-gray-600">';
+                            let aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
+                                                        <button type="button" class="edit-lahan block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
+                                                        <button type="button" class="hapus-lahan block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                                    </td>`;
+                            // console.log({indeks});
+                            content_html = content_html + varGenerator(rt.id,'id',true);
+                            content_html = content_html + varGenerator(rt.r310,'r310',true);
+                            content_html = content_html + varGenerator(rt.r311,'r311',true);
+                            content_html = content_html + varGenerator(rt.r312,'r312',true);
+                            content_html = content_html + varGenerator(rt.r313,'r313',true);
+                            content_html = content_html + varGenerator(rt.r314,'r314',true);
+                            content_html = content_html + varGenerator(rt.r315,'r315',true);
+                            content_html = content_html + varGenerator(rt.r316,'r316',true);
+                            content_html = content_html + varGenerator(rt.r317,'r317',true);
+                            content_html = content_html + varGenerator(rt.r318,'r318',true);
+                            content_html = content_html + varGenerator(rt.r319,'r319',true);
+                            content_html = content_html + varGenerator(rt.r320,'r320',true);
+                            content_html = content_html + varGenerator(rt.r321,'r321',true);
+                            content_html = content_html + varGenerator(rt.r322,'r322',true);
+                            content_html = content_html + varGenerator(rt.r323,'r323',true);
+                            content_html = content_html + varGenerator(rt.r324_desa,'r324_desa',true);
+                            content_html = content_html + varGenerator(rt.r324_kabkot,'r324_kabkot',true);
+                            content_html = content_html + varGenerator(rt.r324_kec,'r324_kec',true);
+                            content_html = content_html + varGenerator(rt.r324_prov,'r324_prov',true);
+                            
+                            content_html = content_html +aksiButton+ '</tr>';
+                            $('#lahan-body').append(content_html);
+                            console.log({content_html});
+                        })
+                    }})
+                }
 </script>
