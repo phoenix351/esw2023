@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
-        <meta name="author" content="Themesberg">
+        <meta name="description" content="EWS merupakan aplikasi untuk mendeteksi dini adanya anomali pada sensus pertanian 2023">
+        <meta name="author" content="Ponimin">
         {{-- <meta name="generator" content="Hugo 0.58.2"> --}}
-        <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/">
+        {{-- <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/"> --}}
         
         @vite(['resources/css/app.css','resources/js/app.js'])
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+        {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" /> --}}
         
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,9 +36,10 @@ href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
     
 
 <body class="bg-white dark:bg-gray-900 h-screen">
+    <div class="flex flex-col min-h-screen">
     @include('layouts.navbar_tail')
 
-    <main class="content">
+    <main class="content flex-grow">
         @yield('content')
     </main>
 
@@ -52,6 +53,7 @@ href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
 </script>
 
 @include('layouts.footer_tail')
+</div>
 </body>
 
 </html>

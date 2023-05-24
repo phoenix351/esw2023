@@ -103,6 +103,14 @@ class FormController extends Controller
         $pengelola = Uup::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
         return response()->json($pengelola);
     }
+
+    public function deletePengelola(Request $request)
+    {
+        $id = $request->input('id');
+        $pengelola = Uup::findOrFail($id);
+        $pengelola->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
     public function getLahan(Request $request, $id_uup)
     {
         $lahan = Pengelola::where('id_uup', $id_uup)->paginate(10);
