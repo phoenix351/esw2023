@@ -512,7 +512,7 @@
                             
                             content_html = content_html +aksiButton+ '</tr>';
                             $('#lahan-body').append(content_html);
-                            console.log({content_html});
+                            // console.log({content_html});
                         })
                     }})
                 }
