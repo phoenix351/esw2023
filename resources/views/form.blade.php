@@ -141,6 +141,7 @@
     @include('modals.delete_ruta')
     @include('modals.pengelola-hapus')
     @include('modals.lahan-hapus')
+    @include('modals.ternak-hapus')
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -150,10 +151,8 @@
             $('#delete-ruta-modal').hide();
             $('#hapus-pengelola-modal').hide();
             $('#hapus-lahan-modal').hide();
-            setTimeout(() => {
-                $('#content').show();
-                $('#splash-screen').hide();
-            }, 1000);
+            $('#hapus-ternak-modal').hide();
+
 
 
             const modalBackDrop =
@@ -267,13 +266,13 @@
                 $('#r307').val(r307);
                 $('#r309').val(r309);
                 // open tabs
-                $('#lahan-tab').prop('disabled', false);
-                $('#lahan-tab').click();
-                $('#lahan-tab').prop('disabled', true);
+                $('#usaha-tab').prop('disabled', false);
+                $('#usaha-tab').click();
+                $('#usaha-tab').prop('disabled', true);
 
             });
 
-            $('#lahan-tab').prop('disabled', true);
+            $('#usaha-tab').prop('disabled', true);
 
             $('#lahan-generate').click(simpanPengelola);
 
@@ -282,6 +281,10 @@
             // fungsi simpan ruta dan generate pengelola
             document.getElementById("halaman-1-next").addEventListener("click", halamanSatuNext);
             loadRt('getRt/12');
+            setTimeout(() => {
+                $('#content').show();
+                $('#splash-screen').hide();
+            }, 1000);
         });
     </script>
 @endsection

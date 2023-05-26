@@ -1,5 +1,5 @@
 <div id="add-ruta-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex">
+    class="fixed top-0 left-0 right-0 z-50 w-screen p-4 overflow-x-hidden md:inset-0 h-[calc(100%-1rem)] justify-center items-center flex">
     <div class="relative w-full max-w-7xl max-h-full">
         <!-- Modal content -->
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -31,20 +31,14 @@
                         <button
                             class="inline-block p-4 border-b-2 rounded-t-lg dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
                             id="pengelola-tab" data-tabs-target="#pengelola" type="button" role="tab"
-                            aria-controls="pengelola" aria-selected="false">Pengelola UP</button>
+                            aria-controls="pengelola" aria-selected="false">Pengelola</button>
                     </li>
                     <li class="mr-2" role="presentation">
                         <button
                             class="inline-block p-4 border-b-2 rounded-t-lg dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
-                            id="lahan-tab" data-tabs-target="#lahan" type="button" role="tab" aria-controls="lahan"
-                            aria-selected="false">Lahan UP</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button
-                            class="inline-block p-4 border-b-2 rounded-t-lg dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
-                            id="peternakan-tab" data-tabs-target="#peternakan" type="button" role="tab"
-                            aria-controls="peternakan" aria-selected="false">Peternakan</button>
-                    </li>
+                            id="usaha-tab" data-tabs-target="#usaha" type="button" role="tab" aria-controls="usaha"
+                            aria-selected="false">Usaha</button>
+
 
                 </ul>
             </div>
@@ -60,11 +54,12 @@
                     @include('modals.ruta-tab-pengelola')
                 </div>
 
-                {{-- Tab Lahan --}}
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="lahan" role="tabpanel"
-                    aria-labelledby="lahan-tab" disabled>
+                {{-- Tab Usaha --}}
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="usaha" role="tabpanel"
+                    aria-labelledby="usaha-tab" disabled>
+                    @include('modals.ruta-tab-usaha')
 
-                    @include('modals.ruta-tab-lahan')
+
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="peternakan" role="tabpanel"
                     aria-labelledby="peternakan-tab" disabled>
