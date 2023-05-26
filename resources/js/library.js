@@ -320,25 +320,25 @@ export function tambahLahan(options) {
     } = options;
     if (!options.length) {
         options = {
-            id: "",
-            r310: "",
-            r311: "",
-            r312: "",
-            r313: "",
-            r314: "",
-            r315: "",
-            r316: "",
-            r317: "",
-            r318: "",
-            r319: "",
-            r320: "",
-            r321: "",
-            r322: "",
-            r323: "",
-            r324_prov: "",
-            r324_kabkot: "",
-            r324_kec: "",
-            r324_desa: "",
+            id: { value: "", length: 3, dataType: "number" },
+            r310: { value: "", length: 3, dataType: "number" },
+            r311: { value: "", length: 3, dataType: "number" },
+            r312: { value: "", length: 3, dataType: "number" },
+            r313: { value: "", length: 3, dataType: "number" },
+            r314: { value: "", length: 3, dataType: "number" },
+            r315: { value: "", length: 3, dataType: "number" },
+            r316: { value: "", length: 3, dataType: "number" },
+            r317: { value: "", length: 3, dataType: "number" },
+            r318: { value: "", length: 3, dataType: "number" },
+            r319: { value: "", length: 3, dataType: "number" },
+            r320: { value: "", length: 3, dataType: "number" },
+            r321: { value: "", length: 3, dataType: "number" },
+            r322: { value: "", length: 3, dataType: "number" },
+            r323: { value: "", length: 3, dataType: "number" },
+            r324_prov: { value: "", length: 3, dataType: "number" },
+            r324_kabkot: { value: "", length: 3, dataType: "number" },
+            r324_kec: { value: "", length: 3, dataType: "number" },
+            r324_desa: { value: "", length: 3, dataType: "number" },
         };
     }
     const aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
@@ -368,7 +368,8 @@ export function generateRowGen2(key, value, length, dataType) {
 
     return `<td scope="row" class="px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
 }
-export function tambahTernak(bodyTableId, fungsiHapus, jenis, data) {
+export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
+    // console.log(data);
     const dataDefault = {
         a: {
             id: { value: "", length: 3, dataType: "number" },
@@ -415,9 +416,44 @@ export function tambahTernak(bodyTableId, fungsiHapus, jenis, data) {
             r617: { value: "", length: 3, dataType: "number" },
             r618: { value: "", length: 3, dataType: "number" },
         },
+        lahan: {
+            id: { value: "", length: 2, dataType: "number" },
+            r310: { value: "", length: 1, dataType: "number" },
+            r311: { value: "", length: 3, dataType: "number" },
+            r312: { value: "", length: 3, dataType: "number" },
+            r313: { value: "", length: 3, dataType: "number" },
+            r314: { value: "", length: 3, dataType: "number" },
+            r315: { value: "", length: 3, dataType: "number" },
+            r316: { value: "", length: 3, dataType: "number" },
+            r317: { value: "", length: 3, dataType: "number" },
+            r318: { value: "", length: 3, dataType: "number" },
+            r319: { value: "", length: 3, dataType: "number" },
+            r320: { value: "", length: 3, dataType: "number" },
+            r321: { value: "", length: 3, dataType: "number" },
+            r322: { value: "", length: 1, dataType: "number" },
+            r323: { value: "", length: 1, dataType: "number" },
+            r324_prov: { value: "", length: 2, dataType: "number" },
+            r324_kabkot: { value: "", length: 2, dataType: "number" },
+            r324_kec: { value: "", length: 2, dataType: "number" },
+            r324_desa: { value: "", length: 2, dataType: "number" },
+        },
     };
 
-    data = data.length ? data : dataDefault[jenis];
+    console.log({ data: data, isTrue: data.length });
+    let dataProcessed = {};
+
+    if (data.length) {
+        console.log("im in");
+        //assign
+
+        dataProcessed = dataDefault[jenis];
+        for (let key in data) {
+            dataProcessed[key]["value"] = data[key];
+        }
+    } else {
+        dataProcessed = dataDefault[jenis];
+    }
+
     const jenisDict = {
         a: "Ternak Kerbau Potong, Kerbau Perah, Sapi Potong, dan Sapi Perah",
         b: "Ternak Domba Potong, Domba Perah, Kambing Potong, Kambing Perah, Babi, Kuda, Kelingci Potong, Rusa, Unta, dan Keledai",
@@ -429,12 +465,12 @@ export function tambahTernak(bodyTableId, fungsiHapus, jenis, data) {
         <button onclick='${fungsiHapus}(this,"${jenisDict[jenis]}")' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
     </td>`;
     let rowsGenerated = "";
-    for (let key in data) {
+    for (let key in dataProcessed) {
         let rowGenerated = generateRowGen2(
             key,
-            data[key].value,
-            data[key].length,
-            data[key].dataType
+            dataProcessed[key].value,
+            dataProcessed[key].length,
+            dataProcessed[key].dataType
         );
         rowsGenerated += rowGenerated;
     }
@@ -599,9 +635,14 @@ export function loadLahan(url) {
             $("#lahan-total").html(data.total);
             // const num_pages = data.data.length%10>0 ? data.length
             $.each(data.data, function (indeks, rt) {
-                const rowLahan = tambahLahan(rt);
-                console.log(rowLahan);
-                $("#lahan-body").append(rowLahan);
+                const rowLahan = tambahUsaha(
+                    "lahan-body",
+                    "hapusLahan",
+                    "lahan",
+                    rt
+                );
+                // console.log(rowLahan);
+                // $("#lahan-body").append(rowLahan);
                 // console.log({content_html});
             });
         },
