@@ -79,7 +79,7 @@
                     <!-- Start coding here -->
                     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                         <div
-                            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            class="flex flex-col md:flex-row items-center justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
 
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -100,6 +100,7 @@
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
+                                        <th scope="col" class="px-4 py-3 text-right">id</th>
                                         <th scope="col" class="px-4 py-3 text-right">Nomor URTUP</th>
                                         <th scope="col" class="px-4 py-3 text-right">Nomor Bangunan</th>
                                         <th scope="col" class="px-4 py-3">Nama Kepala Keluarga</th>
@@ -134,10 +135,13 @@
     </section>
     {{-- <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script> --}}
 
+
     @include('modals.ruta')
     @include('modals.edit_ruta')
     @include('modals.delete_ruta')
     @include('modals.pengelola-hapus')
+    @include('modals.lahan-hapus')
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Initialization for ES Users
@@ -145,6 +149,13 @@
             $('#edit-ruta-modal').hide();
             $('#delete-ruta-modal').hide();
             $('#hapus-pengelola-modal').hide();
+            $('#hapus-lahan-modal').hide();
+            setTimeout(() => {
+                $('#content').show();
+                $('#splash-screen').hide();
+            }, 1000);
+
+
             const modalBackDrop =
                 `<div id="modal-backdrop"><div modal-backdrop class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div><div modal-backdrop class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div></div>`;
             $('body').append(modalBackDrop);
@@ -264,229 +275,13 @@
 
             $('#lahan-tab').prop('disabled', true);
 
-            $('#lahan-generate').click((e) => {
+            $('#lahan-generate').click(simpanPengelola);
 
-                e.preventDefault();
-
-                const id = document.getElementById("id-uup").value;
-                const r301 = document.getElementById("r301").value;
-                const r302 = document.getElementById("r302").value;
-                const r303 = document.getElementById("r303").value;
-                const r307 = document.getElementById("r307").value;
-                const r309 = document.getElementById("r309").value;
-
-                // cek validasi 
-
-                // assign ke tab pengelola
-
-                // define row
-                const indeks = Number(localStorage.getItem('pengelola-indeks'));
-                const row = $('#pengelola-body tr').eq(indeks);
-
-                row.find('.id').html(id);
-                row.find('.301').html(r301);
-                row.find('.r302').html(r302);
-                row.find('.r303').html(r303);
-                row.find('.r307').html(r307);
-                row.find('.r309').html(r309);
-
-                // let token = document.getElementsByName('_token')[0].value;
-
-                const uup = {
-                    id,
-                    r301,
-                    r302,
-                    r303,
-                    r307,
-                    r309
-                }
-                uup['_token'] = $('#csrf-pengelola').val();
-                uup['id_rt'] = $('#id_rt').val();
-                // console.log(uup);
-
-                $.ajax({
-                    url: '/simpanUup',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: uup,
-                    success: function(data) {
-                        console.log(data);
-                    }
-                })
-
-                if (r309) {
-
-                    const generateRow = (namaVar) =>
-                        `<td scope="row" class="px-4 py-3"><input type="text"  name="${namaVar}"  class="${namaVar} only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
-                    const blank_lahan = `  <tr class="border-b dark:border-gray-700">
-                ${generateRow("id_lahan")}
-                ${generateRow("r310")}
-                ${generateRow("r311")}
-                ${generateRow("r312")}
-                ${generateRow("r313")}
-                ${generateRow("r314")}
-                ${generateRow("r315")}
-                ${generateRow("r316")}
-                ${generateRow("r317")}
-                ${generateRow("r318")}
-                ${generateRow("r319")}
-                ${generateRow("r320")}
-                ${generateRow("r321")}
-                ${generateRow("r322")}
-                ${generateRow("r323")}
-                ${generateRow("r324_prov")}
-                ${generateRow("r324_kabkot")}
-                ${generateRow("r324_kec")}
-                ${generateRow("r324_desa")}
-                </tr>`;
-                    $('#lahan-body').html("");
-                    for (let i = 1; i <= Number(r309); i++) {
-                        $('#lahan-body').html($('#lahan-body').html() + blank_lahan);
-                    }
-                    $(".only_num").keypress(function(e) {
-                        //if the letter is not digit then display error and don't type anything
-                        if (e.which > 57 || e.which < 48) {
-                            e.preventDefault();
-                        }
-                    });
-                }
-
-            });
-
-            $('#lahan-submit').click((e) => {
-                e.preventDefault();
-                // ambil data dari form input
-                let data = {
-                    data: [],
-                    _token: document.getElementsByName('_token')[0].value
-                };
-                for (let i = 0; i < $('#lahan-body tr').length; i++) {
-                    let data_i = {
-                        id_uup: $('#r301').val(), // belum,
-
-                        id: $('#lahan-body tr').eq(i).find('.id_lahan').val() ? $('#lahan-body tr').eq(
-                            i).find('.id_lahan').val() : null,
-                        r310: $('#lahan-body tr').eq(i).find('.r310').val(),
-                        r311: $('#lahan-body tr').eq(i).find('.r311').val(),
-                        r312: $('#lahan-body tr').eq(i).find('.r312').val(),
-                        r313: $('#lahan-body tr').eq(i).find('.r313').val(),
-                        r314: $('#lahan-body tr').eq(i).find('.r314').val(),
-                        r315: $('#lahan-body tr').eq(i).find('.r315').val(),
-                        r316: $('#lahan-body tr').eq(i).find('.r316').val(),
-                        r317: $('#lahan-body tr').eq(i).find('.r317').val(),
-                        r318: $('#lahan-body tr').eq(i).find('.r318').val(),
-                        r319: $('#lahan-body tr').eq(i).find('.r319').val(),
-                        r320: $('#lahan-body tr').eq(i).find('.r320').val(),
-                        r321: $('#lahan-body tr').eq(i).find('.r321').val(),
-                        r322: $('#lahan-body tr').eq(i).find('.r322').val(),
-                        r323: $('#lahan-body tr').eq(i).find('.r323').val(),
-                        r324_prov: $('#lahan-body tr').eq(i).find('.r324_prov').val(),
-                        r324_kabkot: $('#lahan-body tr').eq(i).find('.r324_kabkot').val(),
-                        r324_kec: $('#lahan-body tr').eq(i).find('.r324_kec').val(),
-                        r324_desa: $('#lahan-body tr').eq(i).find('.r324_desa').val(),
-                    }
-
-                    data.data.push(data_i);
-
-                }
-
-                console.log(data);
-                // cek validasi
-
-                // kirim ke server
-                $.ajax({
-                    url: '/simpanPengelola',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: data,
-                    success: function(data) {
-                        $('#lahan-body tr').each(() => {
-
-                        })
-                    }
-                })
-
-
-            });
+            $('#lahan-submit').click(simpanLahan);
 
             // fungsi simpan ruta dan generate pengelola
-            document.getElementById("halaman-1-next").addEventListener("click", function() {
-                // ambil data dari dom
-
-                const r107 = document.getElementById("r107").value;
-                const r108 = document.getElementById("r108").value;
-                const r109 = document.getElementById("r109").value;
-                const r201u = document.getElementById("r201u").value;
-
-                const tabel = document.getElementById("pengelola-body");
-                const id_sls = document.getElementById("idsls").value;
-                let token = document.getElementsByName('_token')[0].value;
-
-
-                // asign ke json
-                const ruta = {
-                    idsls: id_sls,
-                    nomor_bangunan: r107,
-                    nurtup: r108,
-                    nama_krt: r109,
-                    jumlah_uup: r201u,
-                    _token: token
-
-                };
-
-                // input ke ruta 
-                $.ajax({
-                    url: '/simpanRuta',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: ruta,
-                    success: function(data) {
-
-                        $('#id_rt').val(data.id_rt);
-                        console.log(data);
-                    }
-                })
-
-                // cek jumlah pengelola
-
-                tabel.innerHTML = "";
-                if (Number(r201u) > 0) {
-                    console.log("masuk");
-                    // generate pengelola
-                    for (let i = 1; i <= Number(r201u); i++) {
-                        const {
-                            r302,
-                            r303,
-                            r307,
-                            r309
-                        } = {
-                            r302: "NULL",
-                            r303: "NULL",
-                            r307: NaN,
-                            r309: NaN
-                        }
-                        const row_blank = `<tr class="pengelola-row border-b dark:border-gray-700">
-                                                <th scope="row" class="r301 px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
-                                                <td class="r302 px-4 py-3 text-left">${r302}</td>
-                                                <td class="r303 px-4 py-3 text-right">${r303}</td>
-                                                <td class="r307 px-4 py-3 text-right">${r307}</td>
-                                                <td class="r309 px-4 py-3 text-right">${r309}</td>
-                                                <td class="px-4 py-3 flex items-center justify-end">
-                                                    <a href="#" value=${i} class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
-                                                    <a href="#" value=${i} class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                                </td>
-                                            </tr>`;
-
-                        tabel.innerHTML = tabel.innerHTML + row_blank;
-                        // create ajax request in jquery
-
-                        $(document).on('click', '.edit-pengelola', editPengelola)
-                    }
-                    document.getElementById("pengelola-tab").click();
-
-                }
-                return 1;
-            });
+            document.getElementById("halaman-1-next").addEventListener("click", halamanSatuNext);
+            loadRt('getRt/12');
         });
     </script>
 @endsection

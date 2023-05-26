@@ -100,16 +100,29 @@ export function editRt(element) {
     $("#r201u").val(data.jumlah_uup);
 
     // fetch and add data pengelola
+    const url = `/getPengelola/${data.id}`;
+    loadPengelola(url);
+
+    $("#modal-title").html("Edit Ruta");
+    $("#ruta-tab").click();
+    $("#add-ruta-modal").show();
+
+    $("#modal-backdrop").show();
+}
+
+export function loadPengelola(url) {
     $.ajax({
-        url: `/getPengelola/${data.id}`,
+        url: url,
         type: "GET",
         dataType: "json",
         success: function (data) {
             $("#pengelola-body").html("");
 
             const links = data.links;
+
             $("#pengelola-pagination").html("");
             for (let i = 0; i < links.length; i++) {
+                links[i]["namaFungsi"] = "loadPengelola";
                 let link = generateLink(links[i]);
                 let currPageLinks = $("#pengelola-pagination").html();
                 $("#pengelola-pagination").html(currPageLinks + link);
@@ -140,21 +153,55 @@ export function editRt(element) {
             });
         },
     });
+}
 
-    $("#modal-title").html("Edit Ruta");
-    $("#add-ruta-modal").show();
+export function simpanPengelola(e) {
+    e.preventDefault();
 
-    $("#modal-backdrop").show();
+    const id = document.getElementById("id-uup").value;
+    const r301 = document.getElementById("r301").value;
+    const id_rt = document.getElementById("id_rt").value;
+    const r302 = document.getElementById("r302").value;
+    const r303 = document.getElementById("r303").value;
+    const r307 = document.getElementById("r307").value;
+    const r309 = document.getElementById("r309").value;
+
+    // cek validasi
+
+    // let token = document.getElementsByName('_token')[0].value;
+
+    const uup = {
+        id,
+        r301,
+        r302,
+        r303,
+        r307,
+        r309,
+    };
+    uup["_token"] = $("#csrf-pengelola").val();
+    uup["id_rt"] = $("#id_rt").val();
+    // console.log(uup);
+
+    $.ajax({
+        url: "/simpanUup",
+        type: "POST",
+        dataType: "json",
+        data: uup,
+        success: function (data) {
+            // load pengelola
+            loadPengelola(`/getPengelola/${id_rt}`);
+        },
+    });
 }
 
 export function backPages(currentPages) {
     return 0;
 }
 
-export function generateLink({ url, label, active }) {
+export function generateLink({ url, label, active, namaFungsi = "loadRt" }) {
     return active
-        ? `<li><button onclick="loadRt('${url}')" id="page-${label}" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">${label}</button></li>`
-        : `<li><button onclick="loadRt('${url}')" id="page-${label}" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${label}</button></li>`;
+        ? `<li><button onclick="${namaFungsi}('${url}')" id="page-${label}" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">${label}</button></li>`
+        : `<li><button onclick="${namaFungsi}('${url}')" id="page-${label}" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${label}</button></li>`;
 }
 
 export function openModal(idSelector, title) {
@@ -241,35 +288,127 @@ export function tambahPengelola() {
     });
     $("#pengelola-body").append(row);
 }
+export function hapusLahan(element) {
+    const id_lahan = $(element.closest("tr")).find("input.id").val();
+    $("#id-lahan-hapus").text(id_lahan);
+    $("#hapus-lahan-modal").show();
+}
+export function tambahLahan(options) {
+    const {
+        id = "",
+        r310 = "",
+        r311 = "",
+        r312 = "",
+        r313 = "",
+        r314 = "",
+        r315 = "",
+        r316 = "",
+        r317 = "",
+        r318 = "",
+        r319 = "",
+        r320 = "",
+        r321 = "",
+        r322 = "",
+        r323 = "",
+        r324_prov = "",
+        r324_kabkot = "",
+        r324_kec = "",
+        r324_desa = "",
+    } = options;
+    const generateRow = (key, value) =>
+        `<td scope="row" class="px-4 py-3"><input type="text" value="${value}"  name="${key}"  class="${key} only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
+    const aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
+        <button onclick='hapusLahan(this)' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+    </td>`;
+    const blank_lahan = `  <tr class="border-b dark:border-gray-700">
+    ${aksiButton}
+    ${generateRow("id", id)}
+    ${generateRow("r310", r310)}
+    ${generateRow("r311", r311)}
+    ${generateRow("r312", r312)}
+    ${generateRow("r313", r313)}
+    ${generateRow("r314", r314)}
+    ${generateRow("r315", r315)}
+    ${generateRow("r316", r316)}
+    ${generateRow("r317", r317)}
+    ${generateRow("r318", r318)}
+    ${generateRow("r319", r319)}
+    ${generateRow("r320", r320)}
+    ${generateRow("r321", r321)}
+    ${generateRow("r322", r322)}
+    ${generateRow("r323", r323)}
+    ${generateRow("r324_prov", r324_prov)}
+    ${generateRow("r324_kabkot", r324_kabkot)}
+    ${generateRow("r324_kec", r324_kec)}
+    ${generateRow("r324_desa", r324_desa)}
+    </tr>`;
+    $("#lahan-body").append(blank_lahan);
+
+    $(".only_num").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which > 57 || e.which < 48) {
+            e.preventDefault();
+        }
+    });
+}
 
 export function hapusPengelola(indeks, token) {
-    // delete in html
-    console.log(indeks);
+    // show loading
 
-    const row = $("#pengelola-body tr").eq(Number(indeks));
     // delete in db is any
-    const id = Number(row.find(".id").html());
-    if (id > 0) {
+    if (indeks > 0) {
         $.ajax({
             url: "/pengelola/delete",
             type: "DELETE",
             dataType: "json",
-            data: { id },
+            data: { id: indeks },
             headers: {
                 "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
             },
             success: function (response) {
-                console.log(response);
+                // console.log(response);
+                // load pengelola
+                const id_rt = $("#id_rt").val();
+                loadPengelola(`/getPengelola/${id_rt}`);
             },
+        }).then(() => {
+            // hide loading
         });
     }
-    // delete row
-    row.remove();
 
     // done
     $("#hapus-pengelola-modal").hide();
 
     return row;
+}
+export function hapusLahanSubmit(indeks, token) {
+    // show loading
+
+    // delete in db is any
+    if (indeks > 0) {
+        $.ajax({
+            url: "/lahan/delete",
+            type: "DELETE",
+            dataType: "json",
+            data: { id: indeks },
+            headers: {
+                "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
+            },
+            success: function (response) {
+                console.log(response);
+                // load pengelola
+                const id_uup = $("#id-uup").val();
+                loadLahan(`/getLahan/${id_uup}`);
+            },
+        }).then(() => {
+            // hide loading
+        });
+    }
+
+    // done
+    $("#hapus-lahan-modal").hide();
+
+    return 1;
 }
 
 export function editPengelola(indeks) {
@@ -286,9 +425,13 @@ export function editPengelola(indeks) {
     });
 
     // ambil data lahan berdasarkan id pengelola
+    const url = `/getLahan/${id_uup}`;
+    loadLahan(url);
+}
 
+export function loadLahan(url) {
     $.ajax({
-        url: `/getLahan/${id}`,
+        url: url,
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -297,6 +440,7 @@ export function editPengelola(indeks) {
             const links = data.links;
             $("#lahan-pagination").html("");
             for (let i = 0; i < links.length; i++) {
+                links[i]["namaFungsi"] = "loadLahan";
                 let link = generateLink(links[i]);
                 let currPageLinks = $("#lahan-pagination").html();
                 $("#lahan-pagination").html(currPageLinks + link);
@@ -305,58 +449,147 @@ export function editPengelola(indeks) {
             $("#lahan-total").html(data.total);
             // const num_pages = data.data.length%10>0 ? data.length
             $.each(data.data, function (indeks, rt) {
-                let content_html =
-                    '<tr class="hover:bg-gray-100 dark:hover:bg-gray-600">';
-                let aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
-                                                <button type="button" class="edit-lahan block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
-                                                <button type="button" class="hapus-lahan block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
-                                            </td>`;
-                // console.log({indeks});
-                content_html = content_html + varGenerator(rt.id, "id", true);
-                content_html =
-                    content_html + varGenerator(rt.r310, "r310", true);
-                content_html =
-                    content_html + varGenerator(rt.r311, "r311", true);
-                content_html =
-                    content_html + varGenerator(rt.r312, "r312", true);
-                content_html =
-                    content_html + varGenerator(rt.r313, "r313", true);
-                content_html =
-                    content_html + varGenerator(rt.r314, "r314", true);
-                content_html =
-                    content_html + varGenerator(rt.r315, "r315", true);
-                content_html =
-                    content_html + varGenerator(rt.r316, "r316", true);
-                content_html =
-                    content_html + varGenerator(rt.r317, "r317", true);
-                content_html =
-                    content_html + varGenerator(rt.r318, "r318", true);
-                content_html =
-                    content_html + varGenerator(rt.r319, "r319", true);
-                content_html =
-                    content_html + varGenerator(rt.r320, "r320", true);
-                content_html =
-                    content_html + varGenerator(rt.r321, "r321", true);
-                content_html =
-                    content_html + varGenerator(rt.r322, "r322", true);
-                content_html =
-                    content_html + varGenerator(rt.r323, "r323", true);
-                content_html =
-                    content_html +
-                    varGenerator(rt.r324_desa, "r324_desa", true);
-                content_html =
-                    content_html +
-                    varGenerator(rt.r324_kabkot, "r324_kabkot", true);
-                content_html =
-                    content_html + varGenerator(rt.r324_kec, "r324_kec", true);
-                content_html =
-                    content_html +
-                    varGenerator(rt.r324_prov, "r324_prov", true);
-
-                content_html = content_html + aksiButton + "</tr>";
-                $("#lahan-body").append(content_html);
+                const rowLahan = tambahLahan(rt);
+                console.log(rowLahan);
+                $("#lahan-body").append(rowLahan);
                 // console.log({content_html});
             });
         },
     });
+}
+
+export function simpanLahan(token) {
+    // ambil data dari form input
+    let data = {
+        data: [],
+    };
+    const id_uup = $("#id-uup").val();
+    for (let i = 0; i < $("#lahan-body tr").length; i++) {
+        let data_i = {
+            id_uup: id_uup, // belum,
+
+            id: $("#lahan-body tr").eq(i).find(".id").val() || null,
+            r310: $("#lahan-body tr").eq(i).find(".r310").val(),
+            r311: $("#lahan-body tr").eq(i).find(".r311").val(),
+            r312: $("#lahan-body tr").eq(i).find(".r312").val(),
+            r313: $("#lahan-body tr").eq(i).find(".r313").val(),
+            r314: $("#lahan-body tr").eq(i).find(".r314").val(),
+            r315: $("#lahan-body tr").eq(i).find(".r315").val(),
+            r316: $("#lahan-body tr").eq(i).find(".r316").val(),
+            r317: $("#lahan-body tr").eq(i).find(".r317").val(),
+            r318: $("#lahan-body tr").eq(i).find(".r318").val(),
+            r319: $("#lahan-body tr").eq(i).find(".r319").val(),
+            r320: $("#lahan-body tr").eq(i).find(".r320").val(),
+            r321: $("#lahan-body tr").eq(i).find(".r321").val(),
+            r322: $("#lahan-body tr").eq(i).find(".r322").val(),
+            r323: $("#lahan-body tr").eq(i).find(".r323").val(),
+            r324_prov: $("#lahan-body tr").eq(i).find(".r324_prov").val(),
+            r324_kabkot: $("#lahan-body tr").eq(i).find(".r324_kabkot").val(),
+            r324_kec: $("#lahan-body tr").eq(i).find(".r324_kec").val(),
+            r324_desa: $("#lahan-body tr").eq(i).find(".r324_desa").val(),
+        };
+
+        data.data.push(data_i);
+    }
+
+    console.log(data);
+    // return 1;
+    // cek validasi
+
+    // kirim ke server
+    $.ajax({
+        url: "/lahan/save",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        headers: {
+            "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
+        },
+        success: function (response) {
+            console.log(response);
+            loadLahan(`/getLahan/${id_uup}`);
+        },
+    }).then(() => {
+        // show loadingtu
+    });
+}
+
+export function halamanSatuNext() {
+    // ambil data dari dom
+
+    const r107 = document.getElementById("r107").value;
+    const r108 = document.getElementById("r108").value;
+    const r109 = document.getElementById("r109").value;
+    const r201u = document.getElementById("r201u").value;
+    const r110 = document.getElementById("r110").value;
+    const r111 = document.getElementById("r111").value;
+
+    const qc_1 = $('input[name="qc-1-radio"]:checked').val();
+    const qc_2 = $('input[name="qc-2-radio"]:checked').val();
+
+    const tabel = document.getElementById("pengelola-body");
+    const id_sls = document.getElementById("idsls").value;
+    let token = document.getElementsByName("_token")[0].value;
+
+    // asign ke json
+    const ruta = {
+        idsls: id_sls,
+        nomor_bangunan: r107,
+        nurtup: r108,
+        nama_krt: r109,
+        jumlah_uup: r201u,
+        qc_1: qc_1,
+        qc_2: qc_2,
+        r110: r110,
+        r111: r111,
+        _token: token,
+    };
+
+    console.log(ruta);
+    // input ke ruta
+    return ruta;
+    $.ajax({
+        url: "/simpanRuta",
+        type: "POST",
+        dataType: "json",
+        data: ruta,
+        success: function (data) {
+            $("#id_rt").val(data.id_rt);
+            console.log(data);
+        },
+    });
+
+    // cek jumlah pengelola
+
+    tabel.innerHTML = "";
+    if (Number(r201u) > 0) {
+        console.log("masuk");
+        // generate pengelola
+        for (let i = 1; i <= Number(r201u); i++) {
+            const { r302, r303, r307, r309 } = {
+                r302: "NULL",
+                r303: "NULL",
+                r307: NaN,
+                r309: NaN,
+            };
+            const row_blank = `<tr class="pengelola-row border-b dark:border-gray-700">
+                                    <th scope="row" class="r301 px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
+                                    <td class="r302 px-4 py-3 text-left">${r302}</td>
+                                    <td class="r303 px-4 py-3 text-right">${r303}</td>
+                                    <td class="r307 px-4 py-3 text-right">${r307}</td>
+                                    <td class="r309 px-4 py-3 text-right">${r309}</td>
+                                    <td class="px-4 py-3 flex items-center justify-end">
+                                        <a href="#" value=${i} class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
+                                        <a href="#" value=${i} class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                    </td>
+                                </tr>`;
+
+            tabel.innerHTML = tabel.innerHTML + row_blank;
+            // create ajax request in jquery
+
+            $(document).on("click", ".edit-pengelola", editPengelola);
+        }
+        document.getElementById("pengelola-tab").click();
+    }
+    return 1;
 }

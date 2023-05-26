@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-screen-xl">
         <!-- Start coding here -->
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+            <div class="flex flex-col md:flex-row items-center justify-end space-y-3 md:space-y-0 md:space-x-4 p-4 py-2">
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                     <button onclick="tambahPengelola()" type="button"
@@ -27,11 +27,12 @@
                 </div>
 
             </div>
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto space-y-3 md:space-y-0 md:space-x-4 p-4 py-2">
                 <table id="pengelola-tabel"
-                    class="relative overflow-x-auto shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
+                    class="w-full relative overflow-x-auto shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th scope="col" class="px-4 py-3 text-right">id</th>
                             <th scope="col" class="px-4 py-3 text-right">R301. No. Urut UUP</th>
                             <th scope="col" class="px-4 py-3 text-left">R302. Nama Pengelola UUP</th>
                             <th scope="col" class="px-4 py-3 text-right">R303. NIK</th>

@@ -36,6 +36,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('simpanRuta', [\App\Http\Controllers\FormController::class, 'simpanRuta'])->name('form.store');
     Route::post('simpanUup', [\App\Http\Controllers\FormController::class, 'simpanUup'])->name('form.store');
     Route::post('simpanPengelola', [\App\Http\Controllers\FormController::class, 'simpanPengelola'])->name('form.store');
+    Route::post('lahan/save', [\App\Http\Controllers\FormController::class, 'simpanLahan'])->name('form.simpanLahan');
 
     //route get Disaster
     Route::get('getKec/{id_kab}', [\App\Http\Controllers\FormController::class, 'getKec'])->name('form.getKec');
@@ -46,6 +47,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
     Route::get('getPengelola/{id_rt}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
     Route::delete('pengelola/delete', [\App\Http\Controllers\FormController::class, 'deletePengelola'])->name('form.deletePengelola');
+    Route::delete('lahan/delete', [\App\Http\Controllers\FormController::class, 'deleteLahan'])->name('form.deleteLahan');
     Route::get('getLahan/{id_uup}', [\App\Http\Controllers\FormController::class, 'getLahan'])->name('form.getLahan');
     Route::get('getRtById/{id}', [\App\Http\Controllers\FormController::class, 'getRtById'])->name('form.getRtById');
     Route::get('getUupByRt/{id_rt}', [\App\Http\Controllers\FormController::class, 'getUupByRt'])->name('form.getUupByRt');

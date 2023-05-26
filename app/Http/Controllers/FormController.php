@@ -111,6 +111,13 @@ class FormController extends Controller
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
+    public function deleteLahan(Request $request)
+    {
+        $id = $request->input('id');
+        $pengelola = Pengelola::findOrFail($id);
+        $pengelola->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
     public function getLahan(Request $request, $id_uup)
     {
         $lahan = Pengelola::where('id_uup', $id_uup)->paginate(10);
@@ -152,6 +159,38 @@ class FormController extends Controller
     }
 
     public function simpanPengelola(StorePengelolaRequest $request)
+    {
+        // $this->validate($request, [
+        //     '*.id_uup' => 'required',
+        //     '*.r310' => 'required',
+        //     '*.r311' => 'required',
+        //     '*.r312' => 'required',
+        //     '*.r313' => 'required',
+        //     '*.r314' => 'required',
+        //     '*.r315' => 'required',
+        //     '*.r316' => 'required',
+        //     '*.r317' => 'required',
+        //     '*.r318' => 'required',
+        //     '*.r319' => 'required',
+        //     '*.r320' => 'required',
+        //     '*.r321' => 'required',
+        //     '*.r322' => 'required',
+        //     '*.r323' => 'required',
+        //     ['*.r324_kabkot', '*.r324_kec', '*.r324_desa' => 'required'],
+        // ]);
+        $data = $request->input('data');
+        $pengelolas = [];
+        foreach ($data as $datas) {
+            $pengelola = Pengelola::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $pengelola->id;
+            array_push($pengelolas, $id);
+        }
+        // $pengelola = Pengelola::create($request->all());
+        return response()->json([
+            'message'   => 'success',
+        ]);
+    }
+    public function simpanLahan(StorePengelolaRequest $request)
     {
         // $this->validate($request, [
         //     '*.id_uup' => 'required',
