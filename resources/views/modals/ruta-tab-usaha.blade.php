@@ -1,3 +1,10 @@
+<div class="flex justify-end space-x-4 px-4">
+    <label for="id-uup" class="flex items-center text-sm font-medium text-gray-900 dark:text-white content-center">Nomor
+        Unit
+        Usaha</label>
+    <input type="number" name="id-uup" id="id-uup" onkeypress="return false;"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+</div>
 <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab2" data-tabs-toggle="#myTab2Content"
         role="tablist">
@@ -16,6 +23,8 @@
     </ul>
 </div>
 <div id="myTab2Content">
+    {{-- Identitas --}}
+
     {{-- Tab pertanian --}}
     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pertanian" role="tabpanel"
         aria-labelledby="pertanian-tab">

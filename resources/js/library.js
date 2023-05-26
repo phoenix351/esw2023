@@ -78,8 +78,7 @@ export function deleteRt(element) {
         jumlah_uup: currentRow.find(".jumlah_uup").html(),
     };
     $("#delete-ruta-modal").show();
-    const modalBackDrop = `<div id="modal-backdrop"><div modal-backdrop class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div><div modal-backdrop class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40"></div></div>`;
-    $("body").append(modalBackDrop);
+    $("#modal-backdrop").show();
     // $('body').append(modalBackDrop);
 }
 
@@ -293,75 +292,7 @@ export function hapusLahan(element) {
     $("#id-lahan-hapus").text(id_lahan);
     $("#hapus-lahan-modal").show();
 }
-export function generateRow(key, value) {
-    return `<td scope="row" class="px-4 py-3"><input type="text" value="${value}"  name="${key}"  class="${key} only_num w-[4rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
-}
-export function tambahLahan(options) {
-    const {
-        id = "",
-        r310 = "",
-        r311 = "",
-        r312 = "",
-        r313 = "",
-        r314 = "",
-        r315 = "",
-        r316 = "",
-        r317 = "",
-        r318 = "",
-        r319 = "",
-        r320 = "",
-        r321 = "",
-        r322 = "",
-        r323 = "",
-        r324_prov = "",
-        r324_kabkot = "",
-        r324_kec = "",
-        r324_desa = "",
-    } = options;
-    if (!options.length) {
-        options = {
-            id: { value: "", length: 3, dataType: "number" },
-            r310: { value: "", length: 3, dataType: "number" },
-            r311: { value: "", length: 3, dataType: "number" },
-            r312: { value: "", length: 3, dataType: "number" },
-            r313: { value: "", length: 3, dataType: "number" },
-            r314: { value: "", length: 3, dataType: "number" },
-            r315: { value: "", length: 3, dataType: "number" },
-            r316: { value: "", length: 3, dataType: "number" },
-            r317: { value: "", length: 3, dataType: "number" },
-            r318: { value: "", length: 3, dataType: "number" },
-            r319: { value: "", length: 3, dataType: "number" },
-            r320: { value: "", length: 3, dataType: "number" },
-            r321: { value: "", length: 3, dataType: "number" },
-            r322: { value: "", length: 3, dataType: "number" },
-            r323: { value: "", length: 3, dataType: "number" },
-            r324_prov: { value: "", length: 3, dataType: "number" },
-            r324_kabkot: { value: "", length: 3, dataType: "number" },
-            r324_kec: { value: "", length: 3, dataType: "number" },
-            r324_desa: { value: "", length: 3, dataType: "number" },
-        };
-    }
-    const aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
-        <button onclick='hapusLahan(this)' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
-    </td>`;
-    let rowsGenerated = "";
-    for (let key in options) {
-        let rowGenerated = generateRow(key, options[key]);
-        rowsGenerated += rowGenerated;
-    }
-    const blank_lahan = `  <tr class="border-b dark:border-gray-700">
-    ${aksiButton}
-    ${rowsGenerated}
-    </tr>`;
-    $("#lahan-body").append(blank_lahan);
 
-    $(".only_num").keypress(function (e) {
-        //if the letter is not digit then display error and don't type anything
-        if (e.which > 57 || e.which < 48) {
-            e.preventDefault();
-        }
-    });
-}
 export function generateRowGen2(key, value, length, dataType) {
     const numOnly = dataType === "number" ? "only_num" : "";
     const textAlign = dataType !== "number" ? "left" : "right";
@@ -402,6 +333,7 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             r602: { value: "", length: 10, dataType: "text" },
             r603: { value: "", length: 3, dataType: "number" },
             r606: { value: "", length: 3, dataType: "number" },
+            r610: { value: "", length: 3, dataType: "number" },
             r614: { value: "", length: 3, dataType: "number" },
             r615: { value: "", length: 3, dataType: "number" },
             r616: { value: "", length: 3, dataType: "number" },
@@ -417,8 +349,8 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             r618: { value: "", length: 3, dataType: "number" },
         },
         lahan: {
-            id: { value: "", length: 2, dataType: "number" },
-            r310: { value: "", length: 1, dataType: "number" },
+            id: { value: "", length: 3, dataType: "number" },
+            r310: { value: "", length: 3, dataType: "number" },
             r311: { value: "", length: 3, dataType: "number" },
             r312: { value: "", length: 3, dataType: "number" },
             r313: { value: "", length: 3, dataType: "number" },
@@ -430,28 +362,27 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             r319: { value: "", length: 3, dataType: "number" },
             r320: { value: "", length: 3, dataType: "number" },
             r321: { value: "", length: 3, dataType: "number" },
-            r322: { value: "", length: 1, dataType: "number" },
-            r323: { value: "", length: 1, dataType: "number" },
-            r324_prov: { value: "", length: 2, dataType: "number" },
-            r324_kabkot: { value: "", length: 2, dataType: "number" },
-            r324_kec: { value: "", length: 2, dataType: "number" },
-            r324_desa: { value: "", length: 2, dataType: "number" },
+            r322: { value: "", length: 3, dataType: "number" },
+            r323: { value: "", length: 3, dataType: "number" },
+            r324_prov: { value: "", length: 3, dataType: "number" },
+            r324_kabkot: { value: "", length: 3, dataType: "number" },
+            r324_kec: { value: "", length: 3, dataType: "number" },
+            r324_desa: { value: "", length: 3, dataType: "number" },
         },
     };
 
-    console.log({ data: data, isTrue: data.length });
-    let dataProcessed = {};
+    let dataProcessed = dataDefault[jenis];
 
-    if (data.length) {
-        console.log("im in");
+    if (Object.keys(data).length > 0) {
+        console.log("masuk");
+        // console.log("im in");
         //assign
-
-        dataProcessed = dataDefault[jenis];
         for (let key in data) {
-            dataProcessed[key]["value"] = data[key];
+            // console.log(dataProcessed[key]);
+            if (dataProcessed.hasOwnProperty(key)) {
+                dataProcessed[key]["value"] = data[key];
+            }
         }
-    } else {
-        dataProcessed = dataDefault[jenis];
     }
 
     const jenisDict = {

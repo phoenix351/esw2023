@@ -44,24 +44,24 @@
             </div>
             <div id="myTabContent">
                 {{-- Tab Ruta --}}
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="ruta" role="tabpanel"
+                <div class="hidden px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="ruta" role="tabpanel"
                     aria-labelledby="ruta-tab">
                     @include('modals.ruta-tab-ruta')
                 </div>
                 {{-- Tab Pengelola --}}
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pengelola" role="tabpanel"
+                <div class="hidden px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="pengelola" role="tabpanel"
                     aria-labelledby="pengelola-tab">
                     @include('modals.ruta-tab-pengelola')
                 </div>
 
                 {{-- Tab Usaha --}}
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="usaha" role="tabpanel"
+                <div class="hidden px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="usaha" role="tabpanel"
                     aria-labelledby="usaha-tab" disabled>
                     @include('modals.ruta-tab-usaha')
 
 
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="peternakan" role="tabpanel"
+                <div class="hidden px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="peternakan" role="tabpanel"
                     aria-labelledby="peternakan-tab" disabled>
 
                     @include('modals.ruta-tab-peternakan')

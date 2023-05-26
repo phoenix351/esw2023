@@ -1,11 +1,3 @@
-{{-- Identitas --}}
-<div class="flex justify-start space-x-4">
-    <label for="r301_peternakan"
-        class="flex items-center text-sm font-medium text-gray-900 dark:text-white content-center">Nomor Unit
-        Usaha</label>
-    <input type="number" min="1" max="2" name="r301_peternakan" id="r301_peternakan" onkeypress="return false;"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-</div>
 {{-- Tabel A --}}
 <div class="my-4">
     <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Kerbau Potong, Kerbau Perah, Sapi Potong,
@@ -13,7 +5,7 @@
         Sapi Perah</h4>
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-        <button onclick="tambahTernak('peternakan-a-body','hapusTernak','a',{})" type="button"
+        <button onclick="tambahUsaha('peternakan-a-body','hapusTernak','a',{})" type="button"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
@@ -85,7 +77,7 @@
         Keledai</h4>
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-        <button onclick="tambahTernak('peternakan-b-body','hapusTernak','b',{})" type="button"
+        <button onclick="tambahUsaha('peternakan-b-body','hapusTernak','b',{})" type="button"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
@@ -146,7 +138,7 @@
         <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Unggas</h4>
         <div
             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-            <button onclick="tambahTernak('peternakan-c-body','hapusTernak','c',{})" type="button"
+            <button onclick="tambahUsaha('peternakan-c-body','hapusTernak','c',{})" type="button"
                 class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                 <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -214,7 +206,7 @@
     <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Lainnya</h4>
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-        <button onclick="tambahTernak('peternakan-d-body','hapusTernak','d',{})" type="button"
+        <button onclick="tambahUsaha('peternakan-d-body','hapusTernak','d',{})" type="button"
             class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
