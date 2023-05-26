@@ -8,9 +8,9 @@ use App\Http\Requests\StoreRutaRequest;
 use App\Http\Requests\StoreUupRequest;
 use App\Http\Requests\UpdateRutaRequest;
 use App\Models\MasterWilayah;
-use App\Models\Pengelola;
+use App\Models\Lahan;
 use App\Models\Rt;
-use App\Models\Uup;
+use App\Models\Pengelola;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -82,45 +82,45 @@ class FormController extends Controller
 
     public function getUupByRt(Request $request, $id_rt)
     {
-        $uup = Uup::where('id_rt', $id_rt)->get();
+        $uup = Pengelola::where('id_rt', $id_rt)->get();
         return response()->json($uup);
     }
 
     public function getUupById(Request $request, $id)
     {
-        $uup = Uup::where('id', $id)->get();
+        $uup = Pengelola::where('id', $id)->get();
         return response()->json($uup);
     }
 
-    public function getPengelolaById(Request $request, $id_uup)
+    public function getPengelolaById(Request $request, $id_pengelola)
     {
-        $pengelola = Pengelola::where('id_uup', $id_uup)->get();
+        $pengelola = Lahan::where('id_pengelola', $id_pengelola)->get();
         return response()->json($pengelola);
     }
 
     public function getPengelola(Request $request, $id_rt)
     {
-        $pengelola = Uup::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
+        $pengelola = Pengelola::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
         return response()->json($pengelola);
     }
 
     public function deletePengelola(Request $request)
     {
         $id = $request->input('id');
-        $pengelola = Uup::findOrFail($id);
+        $pengelola = Pengelola::findOrFail($id);
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
     public function deleteLahan(Request $request)
     {
         $id = $request->input('id');
-        $pengelola = Pengelola::findOrFail($id);
+        $pengelola = Lahan::findOrFail($id);
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    public function getLahan(Request $request, $id_uup)
+    public function getLahan(Request $request, $id_pengelola)
     {
-        $lahan = Pengelola::where('id_uup', $id_uup)->paginate(10);
+        $lahan = Lahan::where('id_pengelola', $id_pengelola)->paginate(10);
         return response()->json($lahan);
     }
     public function simpanRuta(StoreRutaRequest $request)
@@ -151,17 +151,17 @@ class FormController extends Controller
             'r309' => 'required',
         ]);
 
-        $uup = Uup::updateOrCreate(['id' => $request->get('id')], $request->all());
+        $uup = Pengelola::updateOrCreate(['id' => $request->get('id')], $request->all());
         return response()->json([
             'message'   => 'success',
-            'id_uup' => $uup->id,
+            'id_pengelola' => $uup->id,
         ]);
     }
 
     public function simpanPengelola(StorePengelolaRequest $request)
     {
         // $this->validate($request, [
-        //     '*.id_uup' => 'required',
+        //     '*.id_pengelola' => 'required',
         //     '*.r310' => 'required',
         //     '*.r311' => 'required',
         //     '*.r312' => 'required',
@@ -181,11 +181,11 @@ class FormController extends Controller
         $data = $request->input('data');
         $pengelolas = [];
         foreach ($data as $datas) {
-            $pengelola = Pengelola::updateOrCreate(['id' => $datas['id']], $datas);
+            $pengelola = Lahan::updateOrCreate(['id' => $datas['id']], $datas);
             $id = $pengelola->id;
             array_push($pengelolas, $id);
         }
-        // $pengelola = Pengelola::create($request->all());
+        // $pengelola = Lahan::create($request->all());
         return response()->json([
             'message'   => 'success',
         ]);
@@ -193,7 +193,7 @@ class FormController extends Controller
     public function simpanLahan(StorePengelolaRequest $request)
     {
         // $this->validate($request, [
-        //     '*.id_uup' => 'required',
+        //     '*.id_pengelola' => 'required',
         //     '*.r310' => 'required',
         //     '*.r311' => 'required',
         //     '*.r312' => 'required',
@@ -213,11 +213,11 @@ class FormController extends Controller
         $data = $request->input('data');
         $pengelolas = [];
         foreach ($data as $datas) {
-            $pengelola = Pengelola::updateOrCreate(['id' => $datas['id']], $datas);
+            $pengelola = Lahan::updateOrCreate(['id' => $datas['id']], $datas);
             $id = $pengelola->id;
             array_push($pengelolas, $id);
         }
-        // $pengelola = Pengelola::create($request->all());
+        // $pengelola = Lahan::create($request->all());
         return response()->json([
             'message'   => 'success',
         ]);
