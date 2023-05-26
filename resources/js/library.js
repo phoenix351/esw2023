@@ -312,7 +312,7 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             r607: { value: "", length: 3, dataType: "number" },
             r608: { value: "", length: 3, dataType: "number" },
             r609: { value: "", length: 3, dataType: "number" },
-            r63: { value: "", length: 3, dataType: "number" },
+            r610: { value: "", length: 3, dataType: "number" },
             r611: { value: "", length: 3, dataType: "number" },
             r612: { value: "", length: 3, dataType: "number" },
             r613: { value: "", length: 3, dataType: "number" },
