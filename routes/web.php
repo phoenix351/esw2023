@@ -33,24 +33,48 @@ Route::middleware('auth', 'verified')->group(function () {
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-    Route::post('simpanRuta', [\App\Http\Controllers\FormController::class, 'simpanRuta'])->name('form.store');
-    Route::post('simpanUup', [\App\Http\Controllers\FormController::class, 'simpanUup'])->name('form.store');
-    Route::post('simpanPengelola', [\App\Http\Controllers\FormController::class, 'simpanPengelola'])->name('form.store');
-    Route::post('lahan/save', [\App\Http\Controllers\FormController::class, 'simpanLahan'])->name('form.simpanLahan');
-
-    //route get Disaster
+    
+    //route get Filter
     Route::get('getKec/{id_kab}', [\App\Http\Controllers\FormController::class, 'getKec'])->name('form.getKec');
     Route::get('getDesa/{id_kec}', [\App\Http\Controllers\FormController::class, 'getDesa'])->name('form.getDesa');
     Route::get('getSls/{id_desa}', [\App\Http\Controllers\FormController::class, 'getSls'])->name('form.getSls');
+    
+    //RT
     Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
-
-    Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
-    Route::get('getPengelola/{id_rt}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
-    Route::delete('pengelola/delete', [\App\Http\Controllers\FormController::class, 'deletePengelola'])->name('form.deletePengelola');
-    Route::delete('lahan/delete', [\App\Http\Controllers\FormController::class, 'deleteLahan'])->name('form.deleteLahan');
-    Route::get('getLahan/{id_uup}', [\App\Http\Controllers\FormController::class, 'getLahan'])->name('form.getLahan');
     Route::get('getRtById/{id}', [\App\Http\Controllers\FormController::class, 'getRtById'])->name('form.getRtById');
-    Route::get('getUupByRt/{id_rt}', [\App\Http\Controllers\FormController::class, 'getUupByRt'])->name('form.getUupByRt');
-    Route::get('getUupById/{id}', [\App\Http\Controllers\FormController::class, 'getUupById'])->name('form.getUupById');
-    Route::get('getPengelola/{id_uup}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
+    Route::post('simpanRuta', [\App\Http\Controllers\FormController::class, 'simpanRuta'])->name('form.store');
+    
+    // Route::post('simpanLahan', [\App\Http\Controllers\FormController::class, 'simpanLahan'])->name('form.simpanLahan');
+    
+    //Pengelola
+    Route::get('getPengelola/{id_rt}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
+    Route::get('getPengelolaById/{id}', [\App\Http\Controllers\FormController::class, 'getPengelolaById'])->name('form.getPengelolaById');
+    Route::post('simpanPengelola', [\App\Http\Controllers\FormController::class, 'simpanPengelola'])->name('form.simpanPengelola');
+    Route::delete('pengelola/delete', [\App\Http\Controllers\FormController::class, 'deletePengelola'])->name('form.deletePengelola');
+    
+    //Lahan
+    Route::get('getLahan/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getLahan'])->name('form.getLahan');
+    Route::post('lahan/save', [\App\Http\Controllers\FormController::class, 'simpanLahan'])->name('form.simpanLahan');
+    Route::delete('lahan/delete', [\App\Http\Controllers\FormController::class, 'deleteLahan'])->name('form.deleteLahan');
+    
+    //TERNAK
+    //Domba
+    Route::get('getDomba/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getDomba'])->name('form.getDomba');
+    Route::post('domba/save', [\App\Http\Controllers\FormController::class, 'simpanDomba'])->name('form.simpanDomba');
+    Route::delete('domba/delete', [\App\Http\Controllers\FormController::class, 'deleteDomba'])->name('form.deleteDomba');
+    
+    //Kerbau
+    Route::get('getKerbau/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getKerbau'])->name('form.getKerbau');
+    Route::post('kerbau/save', [\App\Http\Controllers\FormController::class, 'simpanKerbau'])->name('form.simpanKerbau');
+    Route::delete('kerbau/delete', [\App\Http\Controllers\FormController::class, 'deleteKerbau'])->name('form.deleteKerbau');
+    
+    //Unggas
+    Route::get('getUnggas/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getUnggas'])->name('form.getUnggas');
+    Route::post('unggas/save', [\App\Http\Controllers\FormController::class, 'simpanUnggas'])->name('form.simpanUnggas');
+    Route::delete('unggas/delete', [\App\Http\Controllers\FormController::class, 'deleteUnggas'])->name('form.deleteUnggas');
+    
+    //TLainnya
+    Route::get('getTlainnya/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getTlainnya'])->name('form.getTlainnya');
+    Route::post('tlainnya/save', [\App\Http\Controllers\FormController::class, 'simpanTlainnya'])->name('form.simpanTlainnya');
+    Route::delete('tlainnya/delete', [\App\Http\Controllers\FormController::class, 'deleteTlainnya'])->name('form.deleteTlainnya');
 });

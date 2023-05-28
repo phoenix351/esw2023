@@ -11,6 +11,10 @@ use App\Models\MasterWilayah;
 use App\Models\Lahan;
 use App\Models\Rt;
 use App\Models\Pengelola;
+use App\Models\TernakDomba;
+use App\Models\TernakKerbau;
+use App\Models\TernakLainnya;
+use App\Models\TernakUnggas;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -51,6 +55,7 @@ class FormController extends Controller
         ]);
     }
 
+    //filter
     public function getKec(DependentDropdownRequest $request, $id_kab)
     {
         $kecamatan = MasterWilayah::where('id_kab', $id_kab)->pluck('id_kec', 'nama_kec');
@@ -68,42 +73,23 @@ class FormController extends Controller
         $sls = MasterWilayah::select('id', 'id_sls6', 'nama_sls')->where('id_desa', $id_desa)->get();
         return response()->json($sls);
     }
-    public function getRt(Request $request, $id_sls)
-    {
-        $sls = Rt::select('id', 'idsls', 'nomor_bangunan', 'nurtup', 'nama_krt', 'jumlah_uup')->where('idsls', $id_sls)->paginate(10);
-        return response()->json($sls);
-    }
+    //
 
-    public function getRtById(Request $request, $id)
-    {
-        $rt = Rt::where('id', $id)->get();
-        return response()->json($rt);
-    }
-
-    public function getUupByRt(Request $request, $id_rt)
-    {
-        $uup = Pengelola::where('id_rt', $id_rt)->get();
-        return response()->json($uup);
-    }
-
-    public function getUupById(Request $request, $id)
-    {
-        $uup = Pengelola::where('id', $id)->get();
-        return response()->json($uup);
-    }
-
-    public function getPengelolaById(Request $request, $id_pengelola)
-    {
-        $pengelola = Lahan::where('id_pengelola', $id_pengelola)->get();
-        return response()->json($pengelola);
-    }
-
+    
+    
+    //Pengelola
     public function getPengelola(Request $request, $id_rt)
     {
         $pengelola = Pengelola::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
         return response()->json($pengelola);
     }
-
+    
+    public function getPengelolaById(Request $request, $id)
+    {
+        $uup = Pengelola::where('id', $id)->get();
+        return response()->json($uup);
+    }
+    
     public function deletePengelola(Request $request)
     {
         $id = $request->input('id');
@@ -111,36 +97,8 @@ class FormController extends Controller
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    public function deleteLahan(Request $request)
-    {
-        $id = $request->input('id');
-        $pengelola = Lahan::findOrFail($id);
-        $pengelola->delete();
-        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
-    }
-    public function getLahan(Request $request, $id_pengelola)
-    {
-        $lahan = Lahan::where('id_pengelola', $id_pengelola)->paginate(10);
-        return response()->json($lahan);
-    }
-    public function simpanRuta(StoreRutaRequest $request)
-    {
-        $this->validate($request, [
-            'nomor_bangunan' => 'required',
-            'nurtup' => 'required',
-            'nama_krt' => 'required',
-            'jumlah_uup' => 'required',
-        ]);
-
-        $input_db = Rt::create($request->all());
-        return response()->json([
-            'message'   => 'success',
-            'id_rt' => $input_db->id,
-        ]);
-    }
-
-
-    public function simpanUup(StoreUupRequest $request)
+    
+    public function simpanPengelola(StoreUupRequest $request)
     {
         $this->validate($request, [
             'id_rt' => 'required',
@@ -157,59 +115,24 @@ class FormController extends Controller
             'id_pengelola' => $uup->id,
         ]);
     }
-
-    public function simpanPengelola(StorePengelolaRequest $request)
+    
+    //Lahan
+    public function getLahan(Request $request, $id_pengelola)
     {
-        // $this->validate($request, [
-        //     '*.id_pengelola' => 'required',
-        //     '*.r310' => 'required',
-        //     '*.r311' => 'required',
-        //     '*.r312' => 'required',
-        //     '*.r313' => 'required',
-        //     '*.r314' => 'required',
-        //     '*.r315' => 'required',
-        //     '*.r316' => 'required',
-        //     '*.r317' => 'required',
-        //     '*.r318' => 'required',
-        //     '*.r319' => 'required',
-        //     '*.r320' => 'required',
-        //     '*.r321' => 'required',
-        //     '*.r322' => 'required',
-        //     '*.r323' => 'required',
-        //     ['*.r324_kabkot', '*.r324_kec', '*.r324_desa' => 'required'],
-        // ]);
-        $data = $request->input('data');
-        $pengelolas = [];
-        foreach ($data as $datas) {
-            $pengelola = Lahan::updateOrCreate(['id' => $datas['id']], $datas);
-            $id = $pengelola->id;
-            array_push($pengelolas, $id);
-        }
-        // $pengelola = Lahan::create($request->all());
-        return response()->json([
-            'message'   => 'success',
-        ]);
+        $lahan = Lahan::where('id_pengelola', $id_pengelola)->paginate(10);
+        return response()->json($lahan);
     }
+
+    public function deleteLahan(Request $request)
+    {
+        $id = $request->input('id');
+        $pengelola = Lahan::findOrFail($id);
+        $pengelola->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
+    
     public function simpanLahan(StorePengelolaRequest $request)
     {
-        // $this->validate($request, [
-        //     '*.id_pengelola' => 'required',
-        //     '*.r310' => 'required',
-        //     '*.r311' => 'required',
-        //     '*.r312' => 'required',
-        //     '*.r313' => 'required',
-        //     '*.r314' => 'required',
-        //     '*.r315' => 'required',
-        //     '*.r316' => 'required',
-        //     '*.r317' => 'required',
-        //     '*.r318' => 'required',
-        //     '*.r319' => 'required',
-        //     '*.r320' => 'required',
-        //     '*.r321' => 'required',
-        //     '*.r322' => 'required',
-        //     '*.r323' => 'required',
-        //     ['*.r324_kabkot', '*.r324_kec', '*.r324_desa' => 'required'],
-        // ]);
         $data = $request->input('data');
         $pengelolas = [];
         foreach ($data as $datas) {
@@ -223,9 +146,20 @@ class FormController extends Controller
         ]);
     }
 
+    //RT
+    public function getRt(Request $request, $id_sls)
+    {
+        $sls = Rt::select('id', 'idsls', 'nomor_bangunan', 'nurtup', 'nama_krt', 'jumlah_uup')->where('idsls', $id_sls)->paginate(10);
+        return response()->json($sls);
+    }
 
+    public function getRtById(Request $request, $id)
+    {
+        $rt = Rt::where('id', $id)->get();
+        return response()->json($rt);
+    }
 
-    public function update(UpdateRutaRequest $request, Rt $rt)
+    public function simpanRuta(StoreRutaRequest $request)
     {
         $this->validate($request, [
             'nomor_bangunan' => 'required',
@@ -234,6 +168,121 @@ class FormController extends Controller
             'jumlah_uup' => 'required',
         ]);
 
-        Rt::where('id', $rt->id)->update($request->all());
+        $input_db = Rt::create($request->all());
+        return response()->json([
+            'message'   => 'success',
+            'id_rt' => $input_db->id,
+        ]);
     }
+
+    //Ternak Domba
+    public function getDomba(Request $request, $id_pengelola){
+        $domba = TernakDomba::where('id_pengelola', $id_pengelola)->get();
+        return response()->json($domba);
+    }
+
+    public function simpanDomba(Request $request) {
+        $data = $request->input('data');
+        $dombas = [];
+        foreach ($data as $datas) {
+            $domba = TernakDomba::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $domba->id;
+            array_push($dombas, $id);
+        }
+        return response()->json([
+            'message'   => 'success',
+        ]);
+    }
+
+    public function deleteDomba(Request $request)
+    {
+        $id = $request->input('id');
+        $domba = TernakDomba::findOrFail($id);
+        $domba->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
+    
+    //Ternak Kerbau
+    public function getKerbau(Request $request, $id_pengelola){
+        $kerbau = TernakKerbau::where('id_pengelola', $id_pengelola)->get();
+        return response()->json($kerbau);
+    }
+
+    public function simpanKerbau(Request $request) {
+        $data = $request->input('data');
+        $kerbaus = [];
+        foreach ($data as $datas) {
+            $kerbau = TernakKerbau::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $kerbau->id;
+            array_push($kerbaus, $id);
+        }
+        return response()->json([
+            'message'   => 'success',
+        ]);
+    }
+
+    public function deleteKerbau(Request $request)
+    {
+        $id = $request->input('id');
+        $kerbau = TernakKerbau::findOrFail($id);
+        $kerbau->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
+    
+    //Unggas
+    public function getUnggas(Request $request, $id_pengelola){
+        $unggas = TernakUnggas::where('id_pengelola', $id_pengelola)->get();
+        return response()->json($unggas);
+    }
+
+    public function simpanUnggas(Request $request) {
+        $data = $request->input('data');
+        $unggass = [];
+        foreach ($data as $datas) {
+            $unggas = TernakUnggas::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $unggas->id;
+            array_push($unggass, $id);
+        }
+        return response()->json([
+            'message'   => 'success',
+        ]);
+    }
+
+    public function deleteUnggas(Request $request)
+    {
+        $id = $request->input('id');
+        $unggas = TernakUnggas::findOrFail($id);
+        $unggas->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
+    
+    //Ternak Lainnya
+    public function getTlainnya(Request $request, $id_pengelola){
+        $tlainnya = TernakLainnya::where('id_pengelola', $id_pengelola)->get();
+        return response()->json($tlainnya);
+    }
+
+    public function simpanTlainnya(Request $request) {
+        $data = $request->input('data');
+        $tlainnyas = [];
+        foreach ($data as $datas) {
+            $tlainnya = TernakLainnya::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $tlainnya->id;
+            array_push($tlainnyas, $id);
+        }
+        return response()->json([
+            'message'   => 'success',
+        ]);
+    }
+
+    public function deleteTlainnya(Request $request)
+    {
+        $id = $request->input('id');
+        $tlainnya = TernakLainnya::findOrFail($id);
+        $tlainnya->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
+
+
+   
 }

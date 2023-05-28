@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('ternak_domba', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_pengelola');
             $table->string('r602',20);
             $table->string('r603',20);
             $table->string('r606',20);
