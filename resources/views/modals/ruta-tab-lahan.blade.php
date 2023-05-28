@@ -1,7 +1,6 @@
-<form action="#">
+<form action="#" id="form-pengelola">
+    @csrf
     <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
-
-        <input type="text" name="csrf-pengelola" id="csrf-pengelola" value="{{ csrf_token() }}" class="hidden">
         <div>
             <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
             <input type="number" name="id_rt" id="id_rt"
@@ -39,97 +38,97 @@
         </div>
         <div>
             <label for="1004a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1004a</label>
-            <input type="number" min="1" max="2" name="1004a" id="1004a"
+            <input type="number" min="1" max="2" name="r1004a" id="1004a"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1006a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006a</label>
-            <input type="number" min="1" max="2" name="1006a" id="1006a"
+            <input type="number" min="1" max="2" name="r1006a" id="1006a"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1006b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006b</label>
-            <input type="number" min="1" max="2" name="1006b" id="1006b"
+            <input type="number" min="1" max="2" name="r1006b" id="1006b"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1006c" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006c</label>
-            <input type="number" min="1" max="2" name="1006c" id="1006c"
+            <input type="number" min="1" max="2" name="r1006c" id="1006c"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010a</label>
-            <input type="number" min="1" max="2" name="1010a" id="1010a"
+            <input type="number" min="1" max="2" name="r1010a" id="1010a"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010b1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b1</label>
-            <input type="number" min="1" max="2" name="1010b1" id="1010b1"
+            <input type="number" min="1" max="2" name="r1010b1" id="1010b1"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010b2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b2</label>
-            <input type="number" min="1" max="2" name="1010b2" id="1010b2"
+            <input type="number" min="1" max="2" name="r1010b2" id="1010b2"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010b3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b3</label>
-            <input type="number" min="1" max="2" name="1010b3" id="1010b3"
+            <input type="number" min="1" max="2" name="r1010b3" id="1010b3"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010b4" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b4</label>
-            <input type="number" min="1" max="2" name="1010b4" id="1010b4"
+            <input type="number" min="1" max="2" name="r1010b4" id="1010b4"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010c1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c1</label>
-            <input type="number" min="1" max="2" name="1010c1" id="1010c1"
+            <input type="number" min="1" max="2" name="r1010c1" id="1010c1"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010c2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c2</label>
-            <input type="number" min="1" max="2" name="1010c2" id="1010c2"
+            <input type="number" min="1" max="2" name="r1010c2" id="1010c2"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010c3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c3</label>
-            <input type="number" min="1" max="2" name="1010c3" id="1010c3"
+            <input type="number" min="1" max="2" name="r1010c3" id="1010c3"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010c4" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c4</label>
-            <input type="number" min="1" max="2" name="1010c4" id="1010c4"
+            <input type="number" min="1" max="2" name="r1010c4" id="1010c4"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1010c5" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c5</label>
-            <input type="number" min="1" max="2" name="1010c5" id="1010c5"
+            <input type="number" min="1" max="2" name="r1010c5" id="1010c5"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1011a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1011a</label>
-            <input type="number" min="1" max="2" name="1011a" id="1011a"
+            <input type="number" min="1" max="2" name="r1011a" id="1011a"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div>
             <label for="1011b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1011b</label>
-            <input type="number" min="1" max="2" name="1011b" id="1011b"
+            <input type="number" min="1" max="2" name="r1011b" id="1011b"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>

@@ -138,7 +138,7 @@
 
     @include('modals.ruta')
     @include('modals.edit_ruta')
-    @include('modals.delete_ruta')
+    @include('modals.ruta-hapus')
     @include('modals.pengelola-hapus')
     @include('modals.lahan-hapus')
     @include('modals.ternak-hapus')
@@ -148,11 +148,10 @@
             // Initialization for ES Users
 
             $('#edit-ruta-modal').hide();
-            $('#delete-ruta-modal').hide();
+            $('#hapus-ruta-modal').hide();
             $('#hapus-pengelola-modal').hide();
             $('#hapus-lahan-modal').hide();
             $('#hapus-ternak-modal').hide();
-
 
 
             const modalBackDrop =
@@ -279,8 +278,9 @@
             $('#lahan-submit').click(simpanLahan);
 
             // fungsi simpan ruta dan generate pengelola
-            document.getElementById("halaman-1-next").addEventListener("click", halamanSatuNext);
-            loadRt('getRt/12');
+            document.getElementById("halaman-1-next").addEventListener("click", (e) => {
+                halamanSatuNext(e)
+            });
             setTimeout(() => {
                 $('#content').show();
                 $('#splash-screen').hide();

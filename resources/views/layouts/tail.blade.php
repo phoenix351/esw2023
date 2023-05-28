@@ -10,6 +10,7 @@
     {{-- <meta name="generator" content="Hugo 0.58.2"> --}}
     {{-- <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/authentication/sign-in/"> --}}
 
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" /> --}}
 

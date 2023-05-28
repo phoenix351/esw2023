@@ -75,21 +75,21 @@ class FormController extends Controller
     }
     //
 
-    
-    
+
+
     //Pengelola
     public function getPengelola(Request $request, $id_rt)
     {
         $pengelola = Pengelola::select('id', 'r301', 'r302', 'r303', 'r307', 'r309')->where('id_rt', $id_rt)->paginate(10);
         return response()->json($pengelola);
     }
-    
+
     public function getPengelolaById(Request $request, $id)
     {
         $uup = Pengelola::where('id', $id)->get();
         return response()->json($uup);
     }
-    
+
     public function deletePengelola(Request $request)
     {
         $id = $request->input('id');
@@ -97,7 +97,7 @@ class FormController extends Controller
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    
+
     public function simpanPengelola(StoreUupRequest $request)
     {
         $this->validate($request, [
@@ -115,7 +115,7 @@ class FormController extends Controller
             'id_pengelola' => $uup->id,
         ]);
     }
-    
+
     //Lahan
     public function getLahan(Request $request, $id_pengelola)
     {
@@ -130,7 +130,7 @@ class FormController extends Controller
         $pengelola->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    
+
     public function simpanLahan(StorePengelolaRequest $request)
     {
         $data = $request->input('data');
@@ -168,20 +168,29 @@ class FormController extends Controller
             'jumlah_uup' => 'required',
         ]);
 
-        $input_db = Rt::create($request->all());
+        $input_db = Rt::updateOrCreate(['id' => $request->input('id')], $request->all());
         return response()->json([
             'message'   => 'success',
             'id_rt' => $input_db->id,
         ]);
     }
+    public function deleteRt(Request $request)
+    {
+        $id = $request->input('id');
+        $Rt = Rt::findOrFail($id);
+        $Rt->delete();
+        return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
+    }
 
     //Ternak Domba
-    public function getDomba(Request $request, $id_pengelola){
-        $domba = TernakDomba::where('id_pengelola', $id_pengelola)->get();
+    public function getDomba(Request $request, $id_pengelola)
+    {
+        $domba = TernakDomba::where('id_pengelola', $id_pengelola)->paginate(10);
         return response()->json($domba);
     }
 
-    public function simpanDomba(Request $request) {
+    public function simpanDomba(Request $request)
+    {
         $data = $request->input('data');
         $dombas = [];
         foreach ($data as $datas) {
@@ -201,14 +210,16 @@ class FormController extends Controller
         $domba->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    
+
     //Ternak Kerbau
-    public function getKerbau(Request $request, $id_pengelola){
-        $kerbau = TernakKerbau::where('id_pengelola', $id_pengelola)->get();
+    public function getKerbau(Request $request, $id_pengelola)
+    {
+        $kerbau = TernakKerbau::where('id_pengelola', $id_pengelola)->paginate(10);
         return response()->json($kerbau);
     }
 
-    public function simpanKerbau(Request $request) {
+    public function simpanKerbau(Request $request)
+    {
         $data = $request->input('data');
         $kerbaus = [];
         foreach ($data as $datas) {
@@ -228,14 +239,16 @@ class FormController extends Controller
         $kerbau->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    
+
     //Unggas
-    public function getUnggas(Request $request, $id_pengelola){
-        $unggas = TernakUnggas::where('id_pengelola', $id_pengelola)->get();
+    public function getUnggas(Request $request, $id_pengelola)
+    {
+        $unggas = TernakUnggas::where('id_pengelola', $id_pengelola)->paginate(10);
         return response()->json($unggas);
     }
 
-    public function simpanUnggas(Request $request) {
+    public function simpanUnggas(Request $request)
+    {
         $data = $request->input('data');
         $unggass = [];
         foreach ($data as $datas) {
@@ -255,14 +268,16 @@ class FormController extends Controller
         $unggas->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-    
+
     //Ternak Lainnya
-    public function getTlainnya(Request $request, $id_pengelola){
-        $tlainnya = TernakLainnya::where('id_pengelola', $id_pengelola)->get();
+    public function getTlainnya(Request $request, $id_pengelola)
+    {
+        $tlainnya = TernakLainnya::where('id_pengelola', $id_pengelola)->paginate(10);
         return response()->json($tlainnya);
     }
 
-    public function simpanTlainnya(Request $request) {
+    public function simpanTlainnya(Request $request)
+    {
         $data = $request->input('data');
         $tlainnyas = [];
         foreach ($data as $datas) {
@@ -282,7 +297,4 @@ class FormController extends Controller
         $tlainnya->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
-
-
-   
 }

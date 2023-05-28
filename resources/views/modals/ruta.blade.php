@@ -8,7 +8,7 @@
                 <h3 id="modal-title" class="modal-title text-lg font-semibold text-gray-900 dark:text-white"></h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    onclick="$('#add-ruta-modal').hide();$('#modal-backdrop').hide();">
+                    onclick="$('#add-ruta-modal').hide();$('#modal-backdrop').hide();loadRt(`getRt/${$('#idsls').val()}`)">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"

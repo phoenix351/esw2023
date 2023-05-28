@@ -32,15 +32,16 @@ export function loadRt(url) {
                     '<tr class="hover:bg-gray-100 dark:hover:bg-gray-600">';
                 let aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
                                             <button type="button" onclick="editRt(${indeks})" class="edit-rt block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
-                                            <button onclick="deleteRt(${indeks})" class="hapus-rt block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                            <button onclick="deleteRt(${rt.nurtup},${rt.id})" class="hapus-rt block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
                                         </td>`;
                 // console.log({indeks});
                 content_html = content_html + varGenerator(rt.id, "id", true);
                 content_html =
+                    content_html + varGenerator(rt.nurtup, "nurtup", true);
+                content_html =
                     content_html +
                     varGenerator(rt.nomor_bangunan, "nomor_bangunan", true);
-                content_html =
-                    content_html + varGenerator(rt.nurtup, "nurtup", true);
+
                 content_html =
                     content_html + varGenerator(rt.nama_krt, "nama_krt", false);
                 content_html =
@@ -68,18 +69,39 @@ export function copyValue(e) {
     document.getElementById("email").value = e.value;
 }
 
-export function deleteRt(element) {
-    const currentRow = $("#rt-body tr").eq(Number(element));
-    const data = {
-        id: currentRow.find(".id").html(),
-        nurtup: currentRow.find(".nurtup").html(),
-        nomor_bangunan: currentRow.find(".nomor_bangunan").html(),
-        nama_krt: currentRow.find(".nama_krt").html(),
-        jumlah_uup: currentRow.find(".jumlah_uup").html(),
-    };
-    $("#delete-ruta-modal").show();
+export function deleteRt(nurtup, id) {
+    // const currentRow = $("#rt-body tr").eq(Number(element));
+    // const data = {
+    //     id: currentRow.find(".id").html(),
+    //     nurtup: currentRow.find(".nurtup").html(),
+    //     nomor_bangunan: currentRow.find(".nomor_bangunan").html(),
+    //     nama_krt: currentRow.find(".nama_krt").html(),
+    //     jumlah_uup: currentRow.find(".jumlah_uup").html(),
+    // };
+    $("#id-rt-hapus").text(id);
+    $("#nurtup-hapus").text(nurtup);
+    $("#hapus-ruta-modal").show();
     $("#modal-backdrop").show();
     // $('body').append(modalBackDrop);
+}
+
+export function hapusRtSubmit(id, token) {
+    $.ajax({
+        url: `ruta/delete`,
+        type: "DELETE",
+        dataType: "json",
+        data: { id: id },
+        headers: {
+            "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
+        },
+        success: function (response) {
+            // console.log(response);
+            // load ternak
+            const idsls = $("#idsls").val();
+            loadRt(`getRt/${idsls}`);
+            $("#hapus-ruta-modal").hide();
+        },
+    });
 }
 
 export function editRt(element) {
@@ -93,10 +115,23 @@ export function editRt(element) {
     };
 
     $("#id_rt").val(data.id);
-    $("#r107").val(data.nomor_bangunan);
-    $("#r108").val(data.nurtup);
-    $("#r109").val(data.nama_krt);
-    $("#r201u").val(data.jumlah_uup);
+    // $("#r107").val(data.nomor_bangunan);
+    // $("#r108").val(data.nurtup);
+    // $("#r109").val(data.nama_krt);
+    // $("#r201u").val(data.jumlah_uup);
+
+    // fetch and add data ruta
+    $.ajax({
+        url: `getRtById/${data.id}`,
+        type: "GET",
+        dataType: "json",
+        success: function (dataRt) {
+            if (dataRt.length) {
+                setFormValue("form-ruta", dataRt[0]);
+            }
+            console.log(dataRt);
+        },
+    });
 
     // fetch and add data pengelola
     const url = `/getPengelola/${data.id}`;
@@ -156,39 +191,22 @@ export function loadPengelola(url) {
 
 export function simpanPengelola(e) {
     e.preventDefault();
+    if (!document.getElementById("form-pengelola").reportValidity()) {
+        return false;
+    }
 
     const id = document.getElementById("id-uup").value;
-    const r301 = document.getElementById("r301").value;
-    const id_rt = document.getElementById("id_rt").value;
-    const r302 = document.getElementById("r302").value;
-    const r303 = document.getElementById("r303").value;
-    const r307 = document.getElementById("r307").value;
-    const r309 = document.getElementById("r309").value;
-
-    // cek validasi
-
-    // let token = document.getElementsByName('_token')[0].value;
-
-    const uup = {
-        id,
-        r301,
-        r302,
-        r303,
-        r307,
-        r309,
-    };
-    uup["_token"] = $("#csrf-pengelola").val();
-    uup["id_rt"] = $("#id_rt").val();
-    // console.log(uup);
-
+    let data = getFormValue("form-pengelola");
+    data["id"] = id;
     $.ajax({
-        url: "/simpanUup",
+        url: "/simpanPengelola",
         type: "POST",
         dataType: "json",
-        data: uup,
+        data: data,
         success: function (data) {
             // load pengelola
-            loadPengelola(`/getPengelola/${id_rt}`);
+            loadPengelola(`/getPengelola/${$("#id_rt").val()}`);
+            $("#id-uup").val(data.id_pengelola);
         },
     });
 }
@@ -393,7 +411,7 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     };
 
     const aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
-        <button onclick='${fungsiHapus}(this,"${jenisDict[jenis]}")' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+        <button onclick='${fungsiHapus}(this,"${jenis}")' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
     </td>`;
     let rowsGenerated = "";
     for (let key in dataProcessed) {
@@ -422,6 +440,7 @@ export function simpanTernak(jenis, token) {
     //show loading
 
     const table_inputs = $(`#peternakan-${jenis}-body`).find("tr");
+    const id_pengelola = $("#id-uup").val();
     let data = [];
     for (let i = 0; i < table_inputs.length; i++) {
         let row_inputs = table_inputs.eq(i).find("input");
@@ -430,19 +449,26 @@ export function simpanTernak(jenis, token) {
             let value = row_inputs.eq(j).val();
             let key = row_inputs.eq(j).attr("class").split(" ")[0];
             rowData[key] = value;
+            rowData["id_pengelola"] = id_pengelola;
         }
         data.push(rowData);
     }
 
     // define url
-    const url = `ternak/${jenis}/save`;
+    const jenisUrl = {
+        a: "kerbau",
+        b: "domba",
+        c: "unggas",
+        d: "lainnya",
+    };
+    const url = `${jenisUrl[jenis]}/save`;
 
     // send ajax request
     $.ajax({
         url: url,
         type: "POST",
         dataType: "json",
-        data: data,
+        data: { data: data },
         headers: {
             "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
         },
@@ -450,11 +476,23 @@ export function simpanTernak(jenis, token) {
             console.log(response);
             // load pengelola
             const id_uup = $("#id-uup").val();
-            loadTernak(`/getTernak-${jenis}/${id_uup}`);
+            loadTernak(
+                `/get${capitalizeWord(jenisUrl[jenis])}/${id_uup}`,
+                jenis
+            );
         },
     }).then(() => {
         // hide loading
     });
+}
+export function capitalizeWord(word) {
+    const firstLetter = word.charAt(0);
+
+    const firstLetterCap = firstLetter.toUpperCase();
+
+    const remainingLetters = word.slice(1);
+
+    return firstLetterCap + remainingLetters;
 }
 export function hapusTernak(element, jenis) {
     const id_ternak = $(element.closest("tr")).find("input.id").val();
@@ -463,13 +501,20 @@ export function hapusTernak(element, jenis) {
     $("#hapus-ternak-modal").show();
 }
 
-export function hapusTernakSubmit(indeks, token) {
+export function hapusTernakSubmit(indeks, token, jenis) {
     // show loading
 
     // delete in db is any
+    const jenisUrl = {
+        a: "kerbau",
+        b: "domba",
+        c: "unggas",
+        d: "lainnya",
+    };
+    let jenisX = jenisUrl[jenis];
     if (indeks > 0) {
         $.ajax({
-            url: "/ternak/delete",
+            url: `${jenisX}/delete`,
             type: "DELETE",
             dataType: "json",
             data: { id: indeks },
@@ -479,11 +524,10 @@ export function hapusTernakSubmit(indeks, token) {
             success: function (response) {
                 // console.log(response);
                 // load ternak
-                const id_rt = $("#id_rt").val();
-                loadPengelola(`/getTernak/${id_rt}`);
+                const id_uup = $("#id-uup").val();
+                loadTernak(`get${capitalizeWord(jenisX)}/${id_uup}`, jenis);
+                $("#hapus-ternak-modal").hide();
             },
-        }).then(() => {
-            // hide loading
         });
     }
 
@@ -565,6 +609,10 @@ export function editPengelola(indeks) {
     // ambil data lahan berdasarkan id pengelola
     const url = `/getLahan/${id_uup}`;
     loadLahan(url);
+    loadTernak(`getKerbau/${id_uup}`, "a");
+    loadTernak(`getDomba/${id_uup}`, "b");
+    loadTernak(`getUnggas/${id_uup}`, "c");
+    loadTernak(`getLainnya/${id_uup}`, "d");
 }
 
 export function loadLahan(url) {
@@ -608,8 +656,8 @@ export function loadTernak(url, jenis) {
         dataType: "json",
         success: function (data) {
             const idPagination = `#peternakan-${jenis}-pagination`;
-            const idTable = `#peternakan-${jenis}-body`;
-            $().html("");
+            const idTable = `peternakan-${jenis}-body`;
+            $("#" + idTable).html("");
             $(idPagination).html("");
 
             const links = data.links;
@@ -633,8 +681,6 @@ export function loadTernak(url, jenis) {
                 console.log(rowTernak);
                 $(idTable).append(rowTernak);
                 // console.log({content_html});
-            }).then(() => {
-                //hide loading
             });
         },
     });
@@ -648,7 +694,7 @@ export function simpanLahan(token) {
     const id_uup = $("#id-uup").val();
     for (let i = 0; i < $("#lahan-body tr").length; i++) {
         let data_i = {
-            id_uup: id_uup, // belum,
+            id_pengelola: id_uup, // belum,
 
             id: $("#lahan-body tr").eq(i).find(".id").val() || null,
             r310: $("#lahan-body tr").eq(i).find(".r310").val(),
@@ -696,40 +742,22 @@ export function simpanLahan(token) {
     });
 }
 
-export function halamanSatuNext() {
-    // ambil data dari dom
-
-    const r107 = document.getElementById("r107").value;
-    const r108 = document.getElementById("r108").value;
-    const r109 = document.getElementById("r109").value;
-    const r201u = document.getElementById("r201u").value;
-    const r110 = document.getElementById("r110").value;
-    const r111 = document.getElementById("r111").value;
-
-    const qc_1 = $('input[name="qc-1-radio"]:checked').val();
-    const qc_2 = $('input[name="qc-2-radio"]:checked').val();
+export function halamanSatuNext(e) {
+    $("#loader-hal-1").show();
+    $("#icon-hal-1").hide();
+    e.preventDefault();
+    if (!document.getElementById("form-ruta").reportValidity()) {
+        return 0;
+    }
 
     const tabel = document.getElementById("pengelola-body");
     const id_sls = document.getElementById("idsls").value;
     let token = document.getElementsByName("_token")[0].value;
 
-    // asign ke json
-    const ruta = {
-        idsls: id_sls,
-        nomor_bangunan: r107,
-        nurtup: r108,
-        nama_krt: r109,
-        jumlah_uup: r201u,
-        qc_1: qc_1,
-        qc_2: qc_2,
-        r110: r110,
-        r111: r111,
-        _token: token,
-    };
+    const ruta = getFormValue("form-ruta");
 
-    console.log(ruta);
     // input ke ruta
-    return ruta;
+
     $.ajax({
         url: "/simpanRuta",
         type: "POST",
@@ -739,39 +767,46 @@ export function halamanSatuNext() {
             $("#id_rt").val(data.id_rt);
             console.log(data);
         },
+    }).then(() => {
+        $("#loader-hal-1").hide();
+        $("#icon-hal-1").show();
+        document.getElementById("pengelola-tab").click();
     });
 
     // cek jumlah pengelola
 
-    tabel.innerHTML = "";
-    if (Number(r201u) > 0) {
-        console.log("masuk");
-        // generate pengelola
-        for (let i = 1; i <= Number(r201u); i++) {
-            const { r302, r303, r307, r309 } = {
-                r302: "NULL",
-                r303: "NULL",
-                r307: NaN,
-                r309: NaN,
-            };
-            const row_blank = `<tr class="pengelola-row border-b dark:border-gray-700">
-                                    <th scope="row" class="r301 px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">${i}</th>
-                                    <td class="r302 px-4 py-3 text-left">${r302}</td>
-                                    <td class="r303 px-4 py-3 text-right">${r303}</td>
-                                    <td class="r307 px-4 py-3 text-right">${r307}</td>
-                                    <td class="r309 px-4 py-3 text-right">${r309}</td>
-                                    <td class="px-4 py-3 flex items-center justify-end">
-                                        <a href="#" value=${i} class="edit-pengelola block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >Edit</a>
-                                        <a href="#" value=${i} class="delete-pengelola block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                    </td>
-                                </tr>`;
-
-            tabel.innerHTML = tabel.innerHTML + row_blank;
-            // create ajax request in jquery
-
-            $(document).on("click", ".edit-pengelola", editPengelola);
-        }
-        document.getElementById("pengelola-tab").click();
-    }
     return 1;
+}
+
+export function getFormValue(idForm) {
+    const formInputs = $(`#${idForm} input`);
+    let data = {};
+
+    for (let i = 0; i < formInputs.length; i++) {
+        let key = formInputs.eq(i).attr("name");
+        let value = formInputs.eq(i).val();
+        // console.log({ key, value });
+        data[key] = value;
+    }
+    return data;
+}
+export function setFormValue(idForm, data) {
+    const formInputs = $(`#${idForm} input`);
+
+    for (let i = 0; i < formInputs.length; i++) {
+        let key = formInputs.eq(i).attr("name");
+        // set
+        if (data.hasOwnProperty(key)) {
+            let input = $(`#${idForm} input[name="${key}"]`);
+            console.log(input.attr("type") === "radio");
+            if (input.attr("type") === "radio") {
+                $(`#${idForm} input[name="${key}"][value="${data[key]}"]`).prop(
+                    "checked",
+                    true
+                );
+            } else {
+                input.val(data[key]);
+            }
+        }
+    }
 }
