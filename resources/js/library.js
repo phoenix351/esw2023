@@ -600,6 +600,45 @@ export function loadLahan(url) {
         },
     });
 }
+export function loadTernak(url, jenis) {
+    // show loading
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            const idPagination = `#peternakan-${jenis}-pagination`;
+            const idTable = `#peternakan-${jenis}-body`;
+            $().html("");
+            $(idPagination).html("");
+
+            const links = data.links;
+            for (let i = 0; i < links.length; i++) {
+                links[i]["namaFungsi"] = "loadTernak";
+                let link = generateLink(links[i]);
+                let currPageLinks = $(idPagination).html();
+                $(idPagination).html(currPageLinks + link);
+            }
+
+            $(`#peternakan-${jenis}-showing`).html(data.from + " - " + data.to);
+            $(`#peternakan-${jenis}-total`).html(data.total);
+            // const num_pages = data.data.length%10>0 ? data.length
+            $.each(data.data, function (indeks, rt) {
+                const rowTernak = tambahUsaha(
+                    idTable,
+                    "hapusTernak",
+                    jenis,
+                    rt
+                );
+                console.log(rowTernak);
+                $(idTable).append(rowTernak);
+                // console.log({content_html});
+            }).then(() => {
+                //hide loading
+            });
+        },
+    });
+}
 
 export function simpanLahan(token) {
     // ambil data dari form input

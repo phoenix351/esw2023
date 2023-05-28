@@ -1,4 +1,4 @@
-<footer class="mt-auto w-full p-4 bg-white sm:p-6 dark:bg-gray-800">
+<footer class="hidden mt-auto w-full p-4 bg-white sm:p-6 dark:bg-gray-800">
     <div class="mx-auto max-w-screen-xl">
 
 

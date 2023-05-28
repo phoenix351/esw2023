@@ -14,13 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login', ['page' => 'login']);
-});
+
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', function () {
+    return view('login', ['page' => 'login']);
+})->name('login');;
+// Route::get('/', function () {
+//     return view('login', ['page' => 'login']);
+// })->name('login');;
+
+Route::get('logout', function () {
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
+
 
 
 Route::middleware('auth', 'verified')->group(function () {
@@ -29,7 +41,6 @@ Route::middleware('auth', 'verified')->group(function () {
     //trial
     Route::get('entri-trial', [\App\Http\Controllers\FormController::class, 'entri'])->name('form.entri');
     // Route::resource('form', FormController::class);
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -42,6 +53,7 @@ Route::middleware('auth', 'verified')->group(function () {
     //RT
     Route::get('getRt/{id_sls}', [\App\Http\Controllers\FormController::class, 'getRt'])->name('form.getRt');
     Route::get('getRtById/{id}', [\App\Http\Controllers\FormController::class, 'getRtById'])->name('form.getRtById');
+<<<<<<< Updated upstream
     Route::post('simpanRuta', [\App\Http\Controllers\FormController::class, 'simpanRuta'])->name('form.store');
     
     // Route::post('simpanLahan', [\App\Http\Controllers\FormController::class, 'simpanLahan'])->name('form.simpanLahan');
@@ -78,3 +90,9 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('tlainnya/save', [\App\Http\Controllers\FormController::class, 'simpanTlainnya'])->name('form.simpanTlainnya');
     Route::delete('tlainnya/delete', [\App\Http\Controllers\FormController::class, 'deleteTlainnya'])->name('form.deleteTlainnya');
 });
+=======
+    Route::get('getUupByRt/{id_rt}', [\App\Http\Controllers\FormController::class, 'getUupByRt'])->name('form.getUupByRt');
+    Route::get('getUupById/{id}', [\App\Http\Controllers\FormController::class, 'getUupById'])->name('form.getUupById');
+    Route::get('getPengelola/{id_uup}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
+});
+>>>>>>> Stashed changes
