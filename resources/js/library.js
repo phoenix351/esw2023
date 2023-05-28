@@ -312,7 +312,7 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             r607: { value: "", length: 3, dataType: "number" },
             r608: { value: "", length: 3, dataType: "number" },
             r609: { value: "", length: 3, dataType: "number" },
-            r63: { value: "", length: 3, dataType: "number" },
+            r610: { value: "", length: 3, dataType: "number" },
             r611: { value: "", length: 3, dataType: "number" },
             r612: { value: "", length: 3, dataType: "number" },
             r613: { value: "", length: 3, dataType: "number" },
@@ -418,7 +418,9 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
         }
     });
 }
-export function simpanTernak(jenis) {
+export function simpanTernak(jenis, token) {
+    //show loading
+
     const table_inputs = $(`#peternakan-${jenis}-body`).find("tr");
     let data = [];
     for (let i = 0; i < table_inputs.length; i++) {
@@ -431,7 +433,28 @@ export function simpanTernak(jenis) {
         }
         data.push(rowData);
     }
-    console.log(data);
+
+    // define url
+    const url = `ternak/${jenis}/save`;
+
+    // send ajax request
+    $.ajax({
+        url: url,
+        type: "POST",
+        dataType: "json",
+        data: data,
+        headers: {
+            "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
+        },
+        success: function (response) {
+            console.log(response);
+            // load pengelola
+            const id_uup = $("#id-uup").val();
+            loadTernak(`/getTernak-${jenis}/${id_uup}`);
+        },
+    }).then(() => {
+        // hide loading
+    });
 }
 export function hapusTernak(element, jenis) {
     const id_ternak = $(element.closest("tr")).find("input.id").val();
@@ -455,9 +478,9 @@ export function hapusTernakSubmit(indeks, token) {
             },
             success: function (response) {
                 // console.log(response);
-                // load pengelola
+                // load ternak
                 const id_rt = $("#id_rt").val();
-                loadPengelola(`/getPengelola/${id_rt}`);
+                loadPengelola(`/getTernak/${id_rt}`);
             },
         }).then(() => {
             // hide loading
@@ -466,8 +489,6 @@ export function hapusTernakSubmit(indeks, token) {
 
     // done
     $("#hapus-pengelola-modal").hide();
-
-    return row;
 }
 export function hapusPengelola(indeks, token) {
     // show loading

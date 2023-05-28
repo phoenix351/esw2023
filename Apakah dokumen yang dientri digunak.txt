@@ -6,7 +6,7 @@ jumat  26 mei dapat sampel petugas
 
 31 mei Demo
 
-Tambahan Ruta r110, r111
+Tambahan di blok Ruta r110, r111
 
 Tambahkan ( Nomor terbesar di 215 )
 
