@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,8 +94,13 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('getLainnya/{id_pengelola}', [\App\Http\Controllers\FormController::class, 'getTlainnya'])->name('form.getTlainnya');
     Route::post('lainnya/save', [\App\Http\Controllers\FormController::class, 'simpanTlainnya'])->name('form.simpanTlainnya');
     Route::delete('lainnya/delete', [\App\Http\Controllers\FormController::class, 'deleteTlainnya'])->name('form.deleteTlainnya');
-
+    
     Route::get('getUupByRt/{id_rt}', [\App\Http\Controllers\FormController::class, 'getUupByRt'])->name('form.getUupByRt');
     Route::get('getUupById/{id}', [\App\Http\Controllers\FormController::class, 'getUupById'])->name('form.getUupById');
     Route::get('getPengelola/{id_uup}', [\App\Http\Controllers\FormController::class, 'getPengelola'])->name('form.getPengelola');
+    
+    //Lsatu menyusahkan
+    Route::get('getLsatu/{id_sls}', [\App\Http\Controllers\FormController::class, 'getLsatu'])->name('form.getLsatu');
+    Route::post('simpanLsatu', [\App\Http\Controllers\FormController::class, 'simpanLsatu'])->name('form.simpanLsatu');
+    
 });

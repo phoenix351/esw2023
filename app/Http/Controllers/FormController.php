@@ -297,4 +297,23 @@ class FormController extends Controller
         $tlainnya->delete();
         return response()->json(['message' => 'Data deleted successfully', 'id' => $id]);
     }
+
+    //L1
+    public function getLsatu($id_sls){
+        $sls = MasterWilayah::select('id', 'id_sls6', 'nama_sls', 'r303', 'r305')->where('id', $id_sls)->get();
+        return response()->json($sls);   
+    }
+
+    public function simpanLsatu(Request $request){
+        $data = $request->input('data');
+        $Lsatu = [];
+        foreach ($data as $datas){
+            $sls = MasterWilayah::updateOrCreate(['id' => $datas['id']], $datas);
+            $id = $sls->id;
+            array_push($Lsatu, $id); 
+        }
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
 }
