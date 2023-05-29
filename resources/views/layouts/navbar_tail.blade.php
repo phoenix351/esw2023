@@ -5,7 +5,6 @@
                 <button id="toggleSidebar" aria-expanded="true" aria-controls="sidebar"
                     class="hidden p-2 mr-3 text-gray-600 rounded cursor-pointer lg:inline hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                             clip-rule="evenodd"></path>
@@ -28,7 +27,7 @@
                     <span class="sr-only">Toggle sidebar</span>
                 </button>
                 <a href="{{ url('/') }}" class="flex mr-4">
-                    <img src="/images/Mesa de trabajo 1.png" class="mr-3 h-8" alt="FlowBite Logo" />
+                    <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" alt="FlowBite Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">EWS ST2023</span>
                 </a>
 
@@ -234,9 +233,9 @@
                     id="dropdown">
                     <div class="py-3 px-4">
                         <span
-                            class="block text-sm font-semibold text-gray-900 dark:text-white">{{ auth()->user()->name }}</span>
+                            class="block text-sm font-semibold text-gray-900 dark:text-white">{{ auth()->user()->name ?? 'Anonim' }}</span>
                         <span class="block text-sm font-light text-gray-500 truncate dark:text-gray-400">NIK :
-                            {{ auth()->user()->nik }}</span>
+                            {{ auth()->user()->nik ?? '0000000000000000'}}</span>
                     </div>
                     <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                         <li>

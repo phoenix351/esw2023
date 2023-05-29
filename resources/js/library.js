@@ -6,13 +6,17 @@ export function generateTableRows(table, rows) {
 }
 
 export function loadRt(url) {
-    // load
+    // show the skeleton table
+    $("#rt-body").html("");
+
+    $("#ruta-loading").show();
+    $("#ruta-empty").hide();
+
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         success: function (data) {
-            $("#rt-body").html("");
             const links = data.links;
             $("#pagination").html("");
             for (let i = 0; i < links.length; i++) {
@@ -26,6 +30,13 @@ export function loadRt(url) {
             $("#total").html(data.total);
 
             // const num_pages = data.data.length%10>0 ? data.length
+            if (data.data.length < 1) {
+                $("#ruta-empty").show();
+
+                return 0;
+            } else {
+                $("#ruta-empty").hide();
+            }
 
             $.each(data.data, function (indeks, rt) {
                 let content_html =
@@ -50,13 +61,16 @@ export function loadRt(url) {
 
                 content_html = content_html + aksiButton + "</tr>";
                 $("#rt-body").append(content_html);
-
-                console.log({
-                    content_html,
-                });
             });
         },
-    });
+    })
+        .done(() => {
+            $("#ruta-loading").hide();
+        })
+        .fail(() => {
+            $("#ruta-empty").show();
+            $("#ruta-loading").hide();
+        });
 }
 
 export function getKec() {
@@ -121,6 +135,9 @@ export function editRt(element) {
     // $("#r201u").val(data.jumlah_uup);
 
     // fetch and add data ruta
+    $("#form-ruta-loading").show();
+    $("#form-ruta").hide();
+
     $.ajax({
         url: `getRtById/${data.id}`,
         type: "GET",
@@ -128,10 +145,19 @@ export function editRt(element) {
         success: function (dataRt) {
             if (dataRt.length) {
                 setFormValue("form-ruta", dataRt[0]);
+                return 0;
             }
-            console.log(dataRt);
+            setFormValue("form-ruta", {});
         },
-    });
+    })
+        .done(() => {
+            $("#form-ruta").show();
+            $("#form-ruta-loading").hide();
+        })
+        .fail(() => {
+            $("#form-ruta").show();
+            $("form-ruta-loading").hide();
+        });
 
     // fetch and add data pengelola
     const url = `/getPengelola/${data.id}`;
@@ -195,9 +221,13 @@ export function simpanPengelola(e) {
         return false;
     }
 
+    $("#pengelola-loader").show();
+    $("#pengelola-icon").hide();
+
     const id = document.getElementById("id-uup").value;
     let data = getFormValue("form-pengelola");
     data["id"] = id;
+    data["r301"] = $("#usaha-r301").val();
     $.ajax({
         url: "/simpanPengelola",
         type: "POST",
@@ -208,7 +238,15 @@ export function simpanPengelola(e) {
             loadPengelola(`/getPengelola/${$("#id_rt").val()}`);
             $("#id-uup").val(data.id_pengelola);
         },
-    });
+    })
+        .done(() => {
+            $("#pengelola-loader").hide();
+            $("#pengelola-icon").show();
+        })
+        .fail(() => {
+            $("#pengelola-loader").hide();
+            $("#pengelola-icon").show();
+        });
 }
 
 export function backPages(currentPages) {
@@ -315,7 +353,7 @@ export function generateRowGen2(key, value, length, dataType) {
     const numOnly = dataType === "number" ? "only_num" : "";
     const textAlign = dataType !== "number" ? "left" : "right";
 
-    return `<td scope="row" class="px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
+    return `<td scope="row" class="${key} px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
 }
 export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     // console.log(data);
@@ -438,6 +476,8 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
 }
 export function simpanTernak(jenis, token) {
     //show loading
+    $(`#peternakan-${jenis}-loader`).show();
+    $(`#peternakan-${jenis}-icon`).hide();
 
     const table_inputs = $(`#peternakan-${jenis}-body`).find("tr");
     const id_pengelola = $("#id-uup").val();
@@ -481,9 +521,16 @@ export function simpanTernak(jenis, token) {
                 jenis
             );
         },
-    }).then(() => {
-        // hide loading
-    });
+    })
+        .done(() => {
+            $(`#peternakan-${jenis}-loader`).hide();
+            $(`#peternakan-${jenis}-icon`).show();
+            // hide loading
+        })
+        .fail(() => {
+            $(`#peternakan-${jenis}-loader`).hide();
+            $(`#peternakan-${jenis}-icon`).show();
+        });
 }
 export function capitalizeWord(word) {
     const firstLetter = word.charAt(0);
@@ -526,13 +573,12 @@ export function hapusTernakSubmit(indeks, token, jenis) {
                 // load ternak
                 const id_uup = $("#id-uup").val();
                 loadTernak(`get${capitalizeWord(jenisX)}/${id_uup}`, jenis);
-                $("#hapus-ternak-modal").hide();
             },
         });
     }
 
     // done
-    $("#hapus-pengelola-modal").hide();
+    $("#hapus-ternak-modal").hide();
 }
 export function hapusPengelola(indeks, token) {
     // show loading
@@ -593,7 +639,13 @@ export function hapusLahanSubmit(indeks, token) {
     return 1;
 }
 
-export function editPengelola(indeks) {
+export async function editPengelola(indeks) {
+    $("#usaha-tab").prop("disabled", false);
+    $("#usaha-tab").click();
+    $("#usaha-tab").prop("disabled", true);
+    // show loading
+    $(".usaha-loading").show();
+    $(".usaha-data").hide();
     const row = $("#pengelola-body tr").eq(indeks);
     localStorage.setItem("pengelola-indeks", indeks);
     const r301 = row.find(".r301").html();
@@ -601,30 +653,57 @@ export function editPengelola(indeks) {
     const id_uup = row.find(".id").html();
     // $('#r301').val("3");
     $("#id-uup").val(id_uup);
+    $("#usaha-r301").val(r301);
     console.log({
         r301,
         id,
     });
 
     // ambil data lahan berdasarkan id pengelola
+    const urlPengelola = `getPengelolaById/${id_uup}`;
+    $.ajax({
+        url: urlPengelola,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            if (data.length < 1) {
+                return 0;
+            }
+            setFormValue("form-pengelola", data[0]);
+        },
+    });
+
     const url = `/getLahan/${id_uup}`;
-    loadLahan(url);
-    loadTernak(`getKerbau/${id_uup}`, "a");
-    loadTernak(`getDomba/${id_uup}`, "b");
-    loadTernak(`getUnggas/${id_uup}`, "c");
-    loadTernak(`getLainnya/${id_uup}`, "d");
+    await loadLahan(url);
+    await loadTernak(`getKerbau/${id_uup}`, "a");
+    await loadTernak(`getDomba/${id_uup}`, "b");
+    await loadTernak(`getUnggas/${id_uup}`, "c");
+    await loadTernak(`getLainnya/${id_uup}`, "d");
+
+    $(".usaha-loading").hide();
+    $(".usaha-data").show();
 }
 
 export function loadLahan(url) {
+    $("#lahan-loading").show();
+    $("#lahan-body").html("");
+
+    $("#lahan-body").hide();
+    $("#lahan-pagination").html("");
+
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         success: function (data) {
-            $("#lahan-body").html("");
-
             const links = data.links;
-            $("#lahan-pagination").html("");
+            if (data.links.length > 0) {
+                $("#lahan-empty").hide();
+            } else {
+                $("#lahan-empty").show();
+            }
+
             for (let i = 0; i < links.length; i++) {
                 links[i]["namaFungsi"] = "loadLahan";
                 let link = generateLink(links[i]);
@@ -646,21 +725,39 @@ export function loadLahan(url) {
                 // console.log({content_html});
             });
         },
-    });
+    })
+        .done(() => {
+            $("#lahan-loading").hide();
+            $("#lahan-body").show();
+        })
+        .fail(() => {
+            $("#lahan-loading").hide();
+            $("#lahan-body").show();
+        });
 }
 export function loadTernak(url, jenis) {
     // show loading
+    const idTable = `peternakan-${jenis}-body`;
+    const idLoading = `peternakan-${jenis}-loading`;
+    const idEmpty = `peternakan-${jenis}-empty`;
+
+    $(`#${idTable}`).hide();
+    $(`#${idLoading}`).show();
+
+    const idPagination = `#peternakan-${jenis}-pagination`;
+    $("#" + idTable).html("");
+    $(idPagination).html("");
+
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         success: function (data) {
-            const idPagination = `#peternakan-${jenis}-pagination`;
-            const idTable = `peternakan-${jenis}-body`;
-            $("#" + idTable).html("");
-            $(idPagination).html("");
-
             const links = data.links;
+            if (data.links.length > 0) {
+                $(`#${idEmpty}`).hide();
+            } else {
+            }
             for (let i = 0; i < links.length; i++) {
                 links[i]["namaFungsi"] = "loadTernak";
                 let link = generateLink(links[i]);
@@ -683,41 +780,61 @@ export function loadTernak(url, jenis) {
                 // console.log({content_html});
             });
         },
+    }).done(() => {
+        $(`#${idTable}`).show();
+        $(`#${idLoading}`).hide();
     });
 }
 
 export function simpanLahan(token) {
+    // show loading
+    $("#lahan-icon").hide();
+    $("#lahan-loader").show();
     // ambil data dari form input
-    let data = {
-        data: [],
-    };
+    // let data = {
+    //     data: [],
+    // };
     const id_uup = $("#id-uup").val();
-    for (let i = 0; i < $("#lahan-body tr").length; i++) {
-        let data_i = {
-            id_pengelola: id_uup, // belum,
+    // for (let i = 0; i < $("#lahan-body tr").length; i++) {
+    //     let data_i = {
+    //         id_pengelola: id_uup, // belum,
 
-            id: $("#lahan-body tr").eq(i).find(".id").val() || null,
-            r310: $("#lahan-body tr").eq(i).find(".r310").val(),
-            r311: $("#lahan-body tr").eq(i).find(".r311").val(),
-            r312: $("#lahan-body tr").eq(i).find(".r312").val(),
-            r313: $("#lahan-body tr").eq(i).find(".r313").val(),
-            r314: $("#lahan-body tr").eq(i).find(".r314").val(),
-            r315: $("#lahan-body tr").eq(i).find(".r315").val(),
-            r316: $("#lahan-body tr").eq(i).find(".r316").val(),
-            r317: $("#lahan-body tr").eq(i).find(".r317").val(),
-            r318: $("#lahan-body tr").eq(i).find(".r318").val(),
-            r319: $("#lahan-body tr").eq(i).find(".r319").val(),
-            r320: $("#lahan-body tr").eq(i).find(".r320").val(),
-            r321: $("#lahan-body tr").eq(i).find(".r321").val(),
-            r322: $("#lahan-body tr").eq(i).find(".r322").val(),
-            r323: $("#lahan-body tr").eq(i).find(".r323").val(),
-            r324_prov: $("#lahan-body tr").eq(i).find(".r324_prov").val(),
-            r324_kabkot: $("#lahan-body tr").eq(i).find(".r324_kabkot").val(),
-            r324_kec: $("#lahan-body tr").eq(i).find(".r324_kec").val(),
-            r324_desa: $("#lahan-body tr").eq(i).find(".r324_desa").val(),
-        };
+    //         id: $("#lahan-body tr").eq(i).find(".id").val() || null,
+    //         r310: $("#lahan-body tr").eq(i).find(".r310").val(),
+    //         r311: $("#lahan-body tr").eq(i).find(".r311").val(),
+    //         r312: $("#lahan-body tr").eq(i).find(".r312").val(),
+    //         r313: $("#lahan-body tr").eq(i).find(".r313").val(),
+    //         r314: $("#lahan-body tr").eq(i).find(".r314").val(),
+    //         r315: $("#lahan-body tr").eq(i).find(".r315").val(),
+    //         r316: $("#lahan-body tr").eq(i).find(".r316").val(),
+    //         r317: $("#lahan-body tr").eq(i).find(".r317").val(),
+    //         r318: $("#lahan-body tr").eq(i).find(".r318").val(),
+    //         r319: $("#lahan-body tr").eq(i).find(".r319").val(),
+    //         r320: $("#lahan-body tr").eq(i).find(".r320").val(),
+    //         r321: $("#lahan-body tr").eq(i).find(".r321").val(),
+    //         r322: $("#lahan-body tr").eq(i).find(".r322").val(),
+    //         r323: $("#lahan-body tr").eq(i).find(".r323").val(),
+    //         r324_prov: $("#lahan-body tr").eq(i).find(".r324_prov").val(),
+    //         r324_kabkot: $("#lahan-body tr").eq(i).find(".r324_kabkot").val(),
+    //         r324_kec: $("#lahan-body tr").eq(i).find(".r324_kec").val(),
+    //         r324_desa: $("#lahan-body tr").eq(i).find(".r324_desa").val(),
+    //     };
 
-        data.data.push(data_i);
+    //     data.data.push(data_i);
+    // }
+    const table_inputs = $(`#lahan-body`).find("tr");
+    const id_pengelola = $("#id-uup").val();
+    let data = [];
+    for (let i = 0; i < table_inputs.length; i++) {
+        let row_inputs = table_inputs.eq(i).find("input");
+        let rowData = {};
+        for (let j = 0; j < row_inputs.length; j++) {
+            let value = row_inputs.eq(j).val();
+            let key = row_inputs.eq(j).attr("class").split(" ")[0];
+            rowData[key] = value;
+            rowData["id_pengelola"] = id_pengelola;
+        }
+        data.push(rowData);
     }
 
     console.log(data);
@@ -729,24 +846,34 @@ export function simpanLahan(token) {
         url: "/lahan/save",
         type: "POST",
         dataType: "json",
-        data: data,
+        data: { data: data },
         headers: {
             "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
         },
         success: function (response) {
-            console.log(response);
             loadLahan(`/getLahan/${id_uup}`);
         },
-    }).then(() => {
-        // show loadingtu
-    });
+    })
+        .done(() => {
+            $("#lahan-icon").show();
+            $("#lahan-loader").hide();
+            // show loadingtu
+        })
+        .fail(() => {
+            $("#lahan-icon").show();
+            $("#lahan-loader").hide();
+        });
 }
 
 export function halamanSatuNext(e) {
     $("#loader-hal-1").show();
     $("#icon-hal-1").hide();
+
+    $(e.target).closest("button").attr("disabled", true);
+
     e.preventDefault();
     if (!document.getElementById("form-ruta").reportValidity()) {
+        $(e.target).closest("button").attr("disabled", false);
         return 0;
     }
 
@@ -767,11 +894,21 @@ export function halamanSatuNext(e) {
             $("#id_rt").val(data.id_rt);
             console.log(data);
         },
-    }).then(() => {
-        $("#loader-hal-1").hide();
-        $("#icon-hal-1").show();
-        document.getElementById("pengelola-tab").click();
-    });
+    })
+        .then(() => {
+            document.getElementById("pengelola-tab").click();
+        })
+        .done(() => {
+            $(e.target).closest("button").attr("disabled", false);
+            $("#loader-hal-1").hide();
+            $("#icon-hal-1").show();
+            document.getElementById("pengelola-tab").click();
+        })
+        .fail(() => {
+            $(e.target).closest("button").attr("disabled", false);
+            $("#loader-hal-1").hide();
+            $("#icon-hal-1").show();
+        });
 
     // cek jumlah pengelola
 
@@ -809,4 +946,59 @@ export function setFormValue(idForm, data) {
             }
         }
     }
+}
+
+export function simpanL1(e) {
+    $("#l1-icon").hide();
+    $("#l1-loader").show();
+    e.preventDefault();
+    if (!document.getElementById("form-l1").reportValidity()) {
+        return false;
+    }
+    let data = getFormValue("form-l1");
+
+    $.ajax({
+        url: "/l1/save",
+        type: "POST",
+        dataType: "json",
+        data: { data: data },
+        headers: {
+            "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
+        },
+        success: function (response) {
+            $('#form-l1 input[name="id"]').val(response.id);
+        },
+    })
+        .done(() => {
+            $("#l1-icon").show();
+            $("#l1-loader").hide();
+            // show loadingtu
+        })
+        .fail(() => {
+            $("#l1-icon").show();
+            $("#l1-loader").hide();
+        });
+}
+export function loadL1(idsls) {
+    $("#form-l1-loading").show();
+    $("#form-l1").hide();
+
+    const url = "getL1/" + idsls;
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log({ data });
+            if (Object.keys(data[0]).length > 0) {
+                setFormValue("form-l1", data[0]);
+            }
+
+            $("#form-l1-loading").hide();
+            $("#form-l1").show();
+        },
+    }).fail(() => {
+        $("#form-l1-loading").hide();
+        $("#form-l1").show();
+    });
 }

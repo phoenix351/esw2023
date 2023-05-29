@@ -78,6 +78,7 @@
 
                     <!-- Start coding here -->
                     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+
                         <div
                             class="flex flex-col md:flex-row items-center justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
 
@@ -92,6 +93,17 @@
                                     </svg>
                                     Tambah Ruta UP
                                 </button>
+                                <button onclick="openModal('#l1-modal');loadL1($('#idsls').val());" type="button"
+                                    class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="h-3.5 w-3.5 mr-2">
+                                        <path
+                                            d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                                    </svg>
+
+                                    Entri L1
+                                </button>
                             </div>
                         </div>
 
@@ -100,7 +112,7 @@
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3 text-right">id</th>
+                                        <th scope="col" class="id px-4 py-3 text-right">id</th>
                                         <th scope="col" class="px-4 py-3 text-right">Nomor URTUP</th>
                                         <th scope="col" class="px-4 py-3 text-right">Nomor Bangunan</th>
                                         <th scope="col" class="px-4 py-3">Nama Kepala Keluarga</th>
@@ -113,7 +125,84 @@
                                 <tbody id="rt-body">
 
                                 </tbody>
+
+
                             </table>
+
+                            <!-- <div class="loader z-50">Loading...</div> -->
+                            <div id="ruta-empty" class="">
+                                <div class="z-50 relative flex flex-col justify-center items-center">
+                                    <img class="w-52" src="{{ 'images/Mesa de trabajo Cabemoane.png' }}"
+                                        alt="" />
+                                </div>
+                                <p class="text-center font-semibold text-gray-400 dark:text-gray-500 ">Data tidak ditemukan
+                                </p>
+                            </div>
+                            <div id="ruta-loading" class="hidden flex items-center justify-center flex-col">
+                                <!-- <div class="loader z-50">Loading...</div> -->
+                                <div>
+                                    <!-- ... -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        style="margin: auto; background: none; display: block; shape-rendering: auto;"
+                                        width="204px" height="204px" viewBox="0 0 100 100"
+                                        preserveAspectRatio="xMidYMid">
+                                        <circle cx="84" cy="50" r="10" fill="#e6261f">
+                                            <animate attributeName="r" repeatCount="indefinite" dur="0.5s"
+                                                calcMode="spline" keyTimes="0;1" values="6;0" keySplines="0 0.5 0.5 1"
+                                                begin="0s" />
+                                            <animate attributeName="fill" repeatCount="indefinite" dur="2s"
+                                                calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1"
+                                                values="#e6261f;#a3e048;#f7d038;#eb7532;#e6261f" begin="0s" />
+                                        </circle>
+                                        <circle cx="16" cy="50" r="10" fill="#e6261f">
+                                            <animate attributeName="r" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="0s" />
+                                            <animate attributeName="cx" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="0s" />
+                                        </circle>
+                                        <circle cx="50" cy="50" r="10" fill="#eb7532">
+                                            <animate attributeName="r" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-0.5s" />
+                                            <animate attributeName="cx" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-0.5s" />
+                                        </circle>
+                                        <circle cx="84" cy="50" r="10" fill="#f7d038">
+                                            <animate attributeName="r" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-1s" />
+                                            <animate attributeName="cx" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-1s" />
+                                        </circle>
+                                        <circle cx="16" cy="50" r="10" fill="#a3e048">
+                                            <animate attributeName="r" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-1.5s" />
+                                            <animate attributeName="cx" repeatCount="indefinite" dur="2s"
+                                                calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                                                keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+                                                begin="-1.5s" />
+                                        </circle>
+                                        <!-- [ldio] generated by https://loading.io/ -->
+                                    </svg>
+
+                                </div>
+                                <p class="text-center font-semibold text-gray-400 dark:text-gray-500">Memuat Data...</p>
+
+                            </div>
+
+
                         </div>
 
                         <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
@@ -142,16 +231,23 @@
     @include('modals.pengelola-hapus')
     @include('modals.lahan-hapus')
     @include('modals.ternak-hapus')
+    @include('modals.l1')
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Initialization for ES Users
+            $('#l1-submit').click((e) => {
+                simpanL1(e);
+            });
 
             $('#edit-ruta-modal').hide();
             $('#hapus-ruta-modal').hide();
             $('#hapus-pengelola-modal').hide();
             $('#hapus-lahan-modal').hide();
             $('#hapus-ternak-modal').hide();
+            // $('#rt-body').append($('#empty-container').html());
+            $('#l1-modal').hide();
+
 
 
             const modalBackDrop =
@@ -163,8 +259,7 @@
                 var id_kab = $(this).val()
                 if (id_kab) {
                     $.ajax({
-                        url: 'https:/monitoringbps.com/ews2023/public' +
-                            '/getKec/' + id_kab,
+                        url: 'getKec/' + id_kab,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -191,8 +286,7 @@
                 var id_kec = $(this).val()
                 if (id_kec) {
                     $.ajax({
-                        url: 'https:/monitoringbps.com/ews2023/public' +
-                            '/getDesa/' + id_kec,
+                        url: 'getDesa/' + id_kec,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -216,8 +310,7 @@
                 var id_desa = $(this).val()
                 if (id_desa) {
                     $.ajax({
-                        url: 'https:/monitoringbps.com/ews2023/public' +
-                            '/getSls/' + id_desa,
+                        url: 'getSls/' + id_desa,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -254,25 +347,25 @@
                 }
             });
 
-            $(document).on('click', '.edit-pengelola', function() {
-                let id = $(this).closest('tr').find('.id').text();
-                let r301 = $(this).closest('tr').find('.r301').text();
-                let r302 = $(this).closest('tr').find('.r302').text();
-                let r303 = $(this).closest('tr').find('.r303').text();
-                let r307 = $(this).closest('tr').find('.r307').text();
-                let r309 = $(this).closest('tr').find('.r309').text();
+            // $(document).on('click', '.edit-pengelola', function() {
+            //     let id = $(this).closest('tr').find('.id').text();
+            //     // let r301 = $(this).closest('tr').find('.r301').text();
+            //     // let r302 = $(this).closest('tr').find('.r302').text();
+            //     // let r303 = $(this).closest('tr').find('.r303').text();
+            //     // let r307 = $(this).closest('tr').find('.r307').text();
+            //     // let r309 = $(this).closest('tr').find('.r309').text();
 
-                $('#r301').val(r301);
-                $('#r302').val(r302);
-                $('#r303').val(r303);
-                $('#r307').val(r307);
-                $('#r309').val(r309);
-                // open tabs
-                $('#usaha-tab').prop('disabled', false);
-                $('#usaha-tab').click();
-                $('#usaha-tab').prop('disabled', true);
+            //     // $('#r301').val(r301);
+            //     // $('#r302').val(r302);
+            //     // $('#r303').val(r303);
+            //     // $('#r307').val(r307);
+            //     // $('#r309').val(r309);
+            //     // open tabs
+            //     $('#usaha-tab').prop('disabled', false);
+            //     $('#usaha-tab').click();
+            //     $('#usaha-tab').prop('disabled', true);
 
-            });
+            // });
 
             $('#usaha-tab').prop('disabled', true);
 
@@ -284,10 +377,12 @@
             document.getElementById("halaman-1-next").addEventListener("click", (e) => {
                 halamanSatuNext(e)
             });
+            // loadRt('getRt/2')
             setTimeout(() => {
                 $('#content').show();
                 $('#splash-screen').hide();
             }, 1000);
+            $('.id').hide();
         });
     </script>
 @endsection

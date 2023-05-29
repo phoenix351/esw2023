@@ -2,9 +2,15 @@
     @csrf
     <div class="grid xs:grid-cols-1 md:grid-cols-4 gap-4 mb-4">
         <div>
+            <label for="idsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID SLS</label>
+            <input required type="number" min="1" onkeypress="return false" name="idsls" id="idsls"
+                class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                required="">
+        </div>
+        <div class="id">
             <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID
                 Ruta</label>
-            <input required type="text" name="id" id="id-ruta"
+            <input type="text" name="id" id="id-ruta"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
         </div>
         <div>
@@ -50,12 +56,6 @@
                 class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
-        <div class="hidden">
-            <label for="idsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID SLS</label>
-            <input required type="number" min="1" name="idsls" id="idsls"
-                class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
         <div>
             <label for="qc1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apakah termasuk
                 QC ?
@@ -93,8 +93,8 @@
         data-tabs-target="#pengelola" role="tab" aria-controls="pengelola" aria-selected="false">
         Berikutnya
         <svg id="loader-hal-1" aria-hidden="true"
-            class="hidden w-5 h-5 mr-2 ml-1 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            class="hidden w-5 h-5 mr-1 ml-2 text-white animate-spin fill-blue-600" viewBox="0 0 100 101"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                 fill="currentColor" />
@@ -111,3 +111,55 @@
         </svg>
     </button>
 </form>
+<div id="form-ruta-loading" class="hidden flex items-center justify-center flex-col">
+    <!-- <div class="loader z-50">Loading...</div> -->
+    <div>
+        <!-- ... -->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="margin: auto; background: none; display: block; shape-rendering: auto;" width="204px"
+            height="204px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="84" cy="50" r="10" fill="#e6261f">
+                <animate attributeName="r" repeatCount="indefinite" dur="0.5s" calcMode="spline" keyTimes="0;1"
+                    values="6;0" keySplines="0 0.5 0.5 1" begin="0s" />
+                <animate attributeName="fill" repeatCount="indefinite" dur="2s" calcMode="discrete"
+                    keyTimes="0;0.25;0.5;0.75;1" values="#e6261f;#a3e048;#f7d038;#eb7532;#e6261f" begin="0s" />
+            </circle>
+            <circle cx="16" cy="50" r="10" fill="#e6261f">
+                <animate attributeName="r" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s" />
+                <animate attributeName="cx" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s" />
+            </circle>
+            <circle cx="50" cy="50" r="10" fill="#eb7532">
+                <animate attributeName="r" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.5s" />
+                <animate attributeName="cx" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.5s" />
+            </circle>
+            <circle cx="84" cy="50" r="10" fill="#f7d038">
+                <animate attributeName="r" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1s" />
+                <animate attributeName="cx" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1s" />
+            </circle>
+            <circle cx="16" cy="50" r="10" fill="#a3e048">
+                <animate attributeName="r" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="0;0;6;6;6"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.5s" />
+                <animate attributeName="cx" repeatCount="indefinite" dur="2s" calcMode="spline"
+                    keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84"
+                    keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.5s" />
+            </circle>
+            <!-- [ldio] generated by https://loading.io/ -->
+        </svg>
+
+    </div>
+    <p class="text-center font-semibold text-gray-400 dark:text-gray-500">Memuat Data...</p>
+
+</div>

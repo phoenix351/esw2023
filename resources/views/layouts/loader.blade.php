@@ -97,33 +97,86 @@
     }
 
     .jiggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: shake 1s infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: rotateImage 2s infinite;
+    }
+
+    .empty {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .empty:hover {
+        transform-origin: center center;
+        animation-name: rotateImage;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+    }
+
+    @keyframes rotateImage {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(-50deg);
+        }
+
+        50% {
+            transform: rotate(0deg);
+        }
+
+        75% {
+            transform: rotate(50deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
     }
 
     @keyframes shake {
-    0% {
-        transform: translateX(-5px);
-    }
-    50% {
-        transform: translateX(5px);
-    }
-    100% {
-        transform: translateX(-5px);
-    }
+        0% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(50deg);
+        }
+
+        50% {
+            transform: rotate(0deg);
+        }
+
+        75% {
+            transform: rotate(-50deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
     }
 
     .smol {
-        width: 100px;
+
         height: auto;
     }
-
 </style>
 <div id="splash-screen" class="w-screen h-screen flex justify-center items-center absolute z-50 bg-gray-900">
     <!-- <div class="loader z-50">Loading...</div> -->
     <div class="jiggle z-50">
-        <img class = "smol" src = "/images/Mesa de trabajo 1.png" alt="" />
+        <img class="w-30" src="{{ 'images/Mesa de trabajo 1.png' }}" alt="" />
+    </div>
+</div>
+<div id="empty-container" class="hidden">
+    <!-- <div class="loader z-50">Loading...</div> -->
+    <div class="empty z-50">
+        <img class="w-52" src="{{ 'images/Mesa de trabajo Cabemoane.png' }}" alt="" />
     </div>
 </div>
