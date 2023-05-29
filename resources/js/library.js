@@ -668,6 +668,7 @@ export async function editPengelola(indeks) {
         success: function (data) {
             console.log(data);
             if (data.length < 1) {
+                setFormValue("form-pengelola", {});
                 return 0;
             }
             setFormValue("form-pengelola", data[0]);
@@ -929,8 +930,24 @@ export function getFormValue(idForm) {
 }
 export function setFormValue(idForm, data) {
     const formInputs = $(`#${idForm} input`);
+    if (Object.keys(data).length < 1) {
+        console.log("masukkkkkk");
+        for (let i = 0; i < formInputs.length; i++) {
+            let key = formInputs.eq(i).attr("name");
+            // set
+
+            if (key !== "_token" && key !== "id_rt") {
+                console.log({ key });
+
+                let input = $(`#${idForm} input[name="${key}"]`);
+                input.val("");
+            }
+        }
+        return false;
+    }
 
     for (let i = 0; i < formInputs.length; i++) {
+        console.log("masukk2");
         let key = formInputs.eq(i).attr("name");
         // set
         if (data.hasOwnProperty(key)) {
