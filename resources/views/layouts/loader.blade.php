@@ -95,7 +95,35 @@
             transform: rotate(360deg);
         }
     }
+
+    .jiggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: shake 1s infinite;
+    }
+
+    @keyframes shake {
+    0% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(-5px);
+    }
+    }
+
+    .smol {
+        width: 100px;
+        height: auto;
+    }
+
 </style>
 <div id="splash-screen" class="w-screen h-screen flex justify-center items-center absolute z-50 bg-gray-900">
-    <div class="loader z-50">Loading...</div>
+    <!-- <div class="loader z-50">Loading...</div> -->
+    <div class="jiggle z-50">
+        <img class = "smol" src = "/images/Mesa de trabajo 1.png" alt="" />
+    </div>
 </div>
