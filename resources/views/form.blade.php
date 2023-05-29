@@ -163,7 +163,8 @@
                 var id_kab = $(this).val()
                 if (id_kab) {
                     $.ajax({
-                        url: '/getKec/' + id_kab,
+                        url: 'https:/monitoringbps.com/ews2023/public' +
+                            '/getKec/' + id_kab,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -190,7 +191,8 @@
                 var id_kec = $(this).val()
                 if (id_kec) {
                     $.ajax({
-                        url: '/getDesa/' + id_kec,
+                        url: 'https:/monitoringbps.com/ews2023/public' +
+                            '/getDesa/' + id_kec,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -214,7 +216,8 @@
                 var id_desa = $(this).val()
                 if (id_desa) {
                     $.ajax({
-                        url: '/getSls/' + id_desa,
+                        url: 'https:/monitoringbps.com/ews2023/public' +
+                            '/getSls/' + id_desa,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
