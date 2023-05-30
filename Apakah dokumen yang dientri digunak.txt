@@ -19,9 +19,3 @@ di blok unit usaha
 	1006
 	1010a-c 
 	1011a-b
-
-
-
-issu 
-
-delete sudah bisa tetapi belum bisa delete di row html nya
