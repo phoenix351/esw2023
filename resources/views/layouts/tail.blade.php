@@ -22,7 +22,7 @@
 
 
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/icon.png') }}">
 
     <title>{{ $page }}</title>
     <script>

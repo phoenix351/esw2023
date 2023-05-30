@@ -164,15 +164,18 @@
     }
 
     .smol {
-
+        width: 150px;
         height: auto;
     }
 </style>
-<div id="splash-screen" class="w-screen h-screen flex justify-center items-center absolute z-50 bg-gray-900">
+<div id="splash-screen" class="w-screen h-screen flex flex-col justify-center items-center absolute z-50">
     <!-- <div class="loader z-50">Loading...</div> -->
     <div class="jiggle z-50">
-        <img class="w-30" src="{{ 'images/Mesa de trabajo 1.png' }}" alt="" />
+        <img class="smol" src="{{ 'images/Mesa de trabajo 1.png' }}" alt="" />
+
     </div>
+    <p class="text-center font-semibold text-gray-400 dark:text-gray-500 mt-4">Memuat Halaman...
+    </p>
 </div>
 <div id="empty-container" class="hidden">
     <!-- <div class="loader z-50">Loading...</div> -->

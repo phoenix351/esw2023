@@ -1,14 +1,14 @@
 <form action="#" id="form-ruta">
     @csrf
     <div class="grid xs:grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-        <div>
+        <div class="id">
             <label for="idsls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID SLS</label>
             <input required type="number" min="1" onkeypress="return false" name="idsls" id="idsls"
                 class="w-[4rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required="">
         </div>
         <div class="id">
-            <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID
+            <label for="id" class="id block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID
                 Ruta</label>
             <input type="text" name="id" id="id-ruta"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">

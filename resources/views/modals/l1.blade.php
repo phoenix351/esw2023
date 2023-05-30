@@ -85,19 +85,17 @@
                     </div>
                     <div>
                         <label for="r303"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
-                            Urut
-                            Bangunan</label>
-                        <input required type="number" min="1" name="r303"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R303. Jumlah rumah
+                            tangga hasil pemutakhiran</label>
+                        <input required type="number" min="0" name="r303"
                             class="w-[5rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             required="">
                     </div>
                     <div>
                         <label for="r305"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
-                            Urut
-                            Bangunan</label>
-                        <input required type="number" min="1" name="r305"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">305. Jumlah pengelola
+                            unit usaha pertanian peroranga</label>
+                        <input required type="number" min="0" name="r305"
                             class="w-[5rem] text-right bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             required="">
                     </div>

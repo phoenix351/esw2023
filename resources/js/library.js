@@ -281,9 +281,9 @@ export function closeModal(idSelector) {
 }
 
 export function varGenerator(nilaiVar, namaVar, isNum) {
-    return `<td class="${namaVar} ${namaVar == "id" ? "" : ""} px-4 py-3 text-${
-        isNum ? "right" : "left"
-    }">${nilaiVar}</td>`;
+    return `<td class="${namaVar} ${
+        namaVar == "id" ? "id hidden" : ""
+    } px-4 py-3 text-${isNum ? "right" : "left"}">${nilaiVar}</td>`;
     return `<td class="${namaVar} ${
         namaVar == "id" ? "hidden" : ""
     } px-4 py-3 text-${isNum ? "right" : "left"}">${nilaiVar}</td>`;
@@ -353,7 +353,9 @@ export function generateRowGen2(key, value, length, dataType) {
     const numOnly = dataType === "number" ? "only_num" : "";
     const textAlign = dataType !== "number" ? "left" : "right";
 
-    return `<td scope="row" class="${key} px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
+    return `<td scope="row" class="${
+        key == "id" ? "id hidden" : key
+    } px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
 }
 export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     // console.log(data);
@@ -883,6 +885,7 @@ export function halamanSatuNext(e) {
     let token = document.getElementsByName("_token")[0].value;
 
     const ruta = getFormValue("form-ruta");
+    console.log({ ruta });
 
     // input ke ruta
 
@@ -893,7 +896,7 @@ export function halamanSatuNext(e) {
         data: ruta,
         success: function (data) {
             $("#id_rt").val(data.id_rt);
-            console.log(data);
+            // console.log(data);
         },
     })
         .then(() => {
@@ -923,11 +926,18 @@ export function getFormValue(idForm) {
     for (let i = 0; i < formInputs.length; i++) {
         let key = formInputs.eq(i).attr("name");
         let value = formInputs.eq(i).val();
+        if (
+            formInputs.eq(i).attr("type") === "radio" &&
+            formInputs.eq(i).prop("checked") === false
+        ) {
+            continue;
+        }
         // console.log({ key, value });
         data[key] = value;
     }
     return data;
 }
+
 export function setFormValue(idForm, data) {
     const formInputs = $(`#${idForm} input`);
     if (Object.keys(data).length < 1) {
@@ -936,10 +946,14 @@ export function setFormValue(idForm, data) {
             let key = formInputs.eq(i).attr("name");
             // set
 
-            if (key !== "_token" && key !== "id_rt") {
-                console.log({ key });
+            if (key !== "_token" && key !== "id_rt" && key !== "idsls") {
+                // console.log({ key });
 
                 let input = $(`#${idForm} input[name="${key}"]`);
+                if (input.attr("type") === "radio") {
+                    $(`#form-ruta input[name=${key}]`).prop("checked", false);
+                    continue;
+                }
                 input.val("");
             }
         }
@@ -947,17 +961,15 @@ export function setFormValue(idForm, data) {
     }
 
     for (let i = 0; i < formInputs.length; i++) {
-        console.log("masukk2");
+        // console.log("masukk2");
         let key = formInputs.eq(i).attr("name");
         // set
         if (data.hasOwnProperty(key)) {
             let input = $(`#${idForm} input[name="${key}"]`);
-            console.log(input.attr("type") === "radio");
             if (input.attr("type") === "radio") {
-                $(`#${idForm} input[name="${key}"][value="${data[key]}"]`).prop(
-                    "checked",
-                    true
-                );
+                const nama_form_radio = `#${idForm} input[name="${key}"][value="${data[key]}"]`;
+                console.log({ nama_form_radio });
+                $(nama_form_radio).prop("checked", true);
             } else {
                 input.val(data[key]);
             }
@@ -970,6 +982,8 @@ export function simpanL1(e) {
     $("#l1-loader").show();
     e.preventDefault();
     if (!document.getElementById("form-l1").reportValidity()) {
+        $("#l1-icon").show();
+        $("#l1-loader").hide();
         return false;
     }
     let data = getFormValue("form-l1");
@@ -978,10 +992,7 @@ export function simpanL1(e) {
         url: "/l1/save",
         type: "POST",
         dataType: "json",
-        data: { data: data },
-        headers: {
-            "X-CSRF-TOKEN": token, // Add CSRF token for Laravel security
-        },
+        data: data,
         success: function (response) {
             $('#form-l1 input[name="id"]').val(response.id);
         },

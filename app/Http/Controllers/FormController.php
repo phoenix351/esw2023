@@ -299,21 +299,20 @@ class FormController extends Controller
     }
 
     //L1
-    public function getLsatu($id_sls){
+    public function getLsatu($id_sls)
+    {
         $sls = MasterWilayah::select('id', 'id_sls6', 'nama_sls', 'r303', 'r305')->where('id', $id_sls)->get();
-        return response()->json($sls);   
+        return response()->json($sls);
     }
 
-    public function simpanLsatu(Request $request){
-        $data = $request->input('data');
-        $Lsatu = [];
-        foreach ($data as $datas){
-            $sls = MasterWilayah::updateOrCreate(['id' => $datas['id']], $datas);
-            $id = $sls->id;
-            array_push($Lsatu, $id); 
-        }
+    public function simpanLsatu(Request $request)
+    {
+        $sls = MasterWilayah::updateOrCreate(['id' => $request->input('id')], $request->all());
+        $id = $sls->id;
+
         return response()->json([
-            'message' => 'success'
+            'message' => 'success',
+            'id' => $id,
         ]);
     }
 }
