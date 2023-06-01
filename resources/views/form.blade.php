@@ -20,11 +20,11 @@
                     <div>
                         <label for="id_kab"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten/Kota</label>
-                        <select data-te-select-init data-te-select-clear-button="true" data-te-select-filter="true"
-                            id="id_kab" name="id_kab"
+                        <select data-te-select-clear-button="true" data-te-select-init data-te-select-filter="true"
+                            for="id_sls" id="id_kab" name="id_kab"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             required>
-                            <option value="">-- Pilih Kabupaten/Kota --</option>
+                            <option selected>-- Pilih Kabupaten/Kota --</option>
 
                             @foreach ($wilayah as $wil)
                                 <option value={{ $wil->id_kab }}>{{ $wil->nama_kab }}</option>
@@ -50,12 +50,11 @@
                         </select>
                     </div>
                     <div>
-                        <label for="id_sls"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SLS</label>
-                        <select id="id_sls" name="id_sls"
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SLS</label>
+                        <select data-te-select-placeholder="Pilih SLS" data-te-select-clear-button="true"
+                            data-te-select-init data-te-select-filter="true" for="id_sls" id="id_sls" name="id_sls"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             required>
-                            <option selected disabled>Pilih SLS</option>
                         </select>
                     </div>
 
@@ -96,7 +95,7 @@
                                     Tambah Ruta UP
                                 </button>
                                 <button
-                                    onclick="if($('#idsls').val()!==''){openModal('#l1-modal');loadL1($('#idsls').val());} else {alert('Silahkan Pilih Wilayah s.d SLS Terlebih dahulu!')}"
+                                    onclick="if($('#idsls').val()!==''){openModal('#l1-modal','Entri L1');loadL1($('#idsls').val());} else {alert('Silahkan Pilih Wilayah s.d SLS Terlebih dahulu!')}"
                                     type="button"
                                     class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
 
@@ -230,7 +229,7 @@
 
 
     @include('modals.ruta')
-    @include('modals.edit_ruta')
+    {{-- @include('modals.edit_ruta') --}}
     @include('modals.ruta-hapus')
     @include('modals.pengelola-hapus')
     @include('modals.lahan-hapus')
@@ -244,11 +243,11 @@
                 simpanL1(e);
             });
 
-            $('#edit-ruta-modal').hide();
+            // $('#edit-ruta-modal').hide();
             $('#hapus-ruta-modal').hide();
             $('#hapus-pengelola-modal').hide();
-            $('#hapus-lahan-modal').hide();
-            $('#hapus-ternak-modal').hide();
+            $('#lahan-hapus-modal').hide();
+            $('#ternak-hapus-modal').hide();
             // $('#rt-body').append($('#empty-container').html());
             $('#l1-modal').hide();
 
@@ -381,7 +380,8 @@
             document.getElementById("halaman-1-next").addEventListener("click", (e) => {
                 halamanSatuNext(e)
             });
-            loadRt('getRt/2')
+            loadRt('getRt/2');
+            $('#idsls').val('2')
             setTimeout(() => {
                 $('#content').show();
                 $('#splash-screen').hide();

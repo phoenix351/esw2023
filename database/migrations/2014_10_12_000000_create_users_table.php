@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nik', 16)->default('000000000000000');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('id_sobat', 12)->unique();
+            $table->string('posisi', 30)->default('Pemeriksa Lapangan Sensus');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

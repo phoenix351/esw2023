@@ -80,7 +80,7 @@ export function getKec() {
 
 export function copyValue(e) {
     console.log(e.value);
-    document.getElementById("email").value = e.value;
+    document.getElementById("nik").value = e.value;
 }
 
 export function deleteRt(nurtup, id) {
@@ -202,14 +202,11 @@ export function loadPengelola(url) {
                 });
 
                 $("#pengelola-body").append(rowPengelola);
-                $(".hapus-pengelola").on("click", (e) => {
-                    let id_hapus = $(e.target.closest("tr"))
-                        .find("td.id")
-                        .html();
-
-                    $("#id-pengelola-hapus").text(id_hapus);
-                    $("#hapus-pengelola-modal").show();
-                });
+                $(".hapus-pengelola")
+                    .off("click")
+                    .on("click", (e) => {
+                        hapusPengelola(e);
+                    });
             });
         },
     });
@@ -270,8 +267,10 @@ export function openModal(idSelector, title) {
         $("#r201u").val("");
     }
     $("#ruta-tab").click();
-    $("#modal-backdrop").show();
+    // $("#modal-backdrop").show();
+    document.getElementById("modal-backdrop").style.display = "block";
     $(idSelector).find(".modal-title").html(title);
+    $(idSelector).show();
     $(idSelector).show();
 }
 
@@ -342,11 +341,12 @@ export function tambahPengelola() {
         r301,
     });
     $("#pengelola-body").append(row);
-}
-export function hapusLahan(element) {
-    const id_lahan = $(element.closest("tr")).find("input.id").val();
-    $("#id-lahan-hapus").text(id_lahan);
-    $("#hapus-lahan-modal").show();
+
+    $(".hapus-pengelola")
+        .off("click")
+        .on("click", (e) => {
+            hapusPengelola(e);
+        });
 }
 
 export function generateRowGen2(key, value, length, dataType) {
@@ -355,10 +355,27 @@ export function generateRowGen2(key, value, length, dataType) {
 
     return `<td scope="row" class="${
         key == "id" ? "id hidden" : key
-    } px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ></td>`;
+    } px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ${
+        key === "r310" ? "readonly" : ""
+    } ></td>`;
+}
+export function reCalculateIndex(tableId, className) {
+    const rows = document.querySelectorAll(`#${tableId} tr`);
+    rows.forEach((row, indeks) => {
+        console.log({ row, indeks });
+        row.querySelector(`input.${className}`).value = indeks + 1;
+    });
 }
 export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     // console.log(data);
+    const tr_s = document.querySelectorAll(`#${bodyTableId} tr`) || [];
+    const usahaCount = tr_s.length;
+    const usahaMax = Number(document.getElementById("r309").value) || 0;
+    console.log({ usahaCount, usahaMax, jenis, bodyTableId });
+    if (jenis === "lahan" && usahaCount >= usahaMax) {
+        alert("Maaf Jumlah Lahan sudah mencapai batas");
+        return false;
+    }
     const dataDefault = {
         a: {
             id: { value: "", length: 3, dataType: "number" },
@@ -451,7 +468,9 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     };
 
     const aksiButton = `<td class="px-4 py-3 flex items-center justify-end">
-        <button onclick='${fungsiHapus}(this,"${jenis}")' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+        <button onclick='${fungsiHapus}(this,true,"${jenis}","id-${
+        jenis.length > 2 ? "lahan" : "ternak"
+    }-hapus")' class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
     </td>`;
     let rowsGenerated = "";
     for (let key in dataProcessed) {
@@ -470,11 +489,13 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     $(`#${bodyTableId}`).append(blank_lahan);
 
     $(".only_num").keypress(function (e) {
+        console.log("asu");
         //if the letter is not digit then display error and don't type anything
         if (e.which > 57 || e.which < 48) {
             e.preventDefault();
         }
     });
+    // document.
 }
 export function simpanTernak(jenis, token) {
     //show loading
@@ -544,10 +565,68 @@ export function capitalizeWord(word) {
     return firstLetterCap + remainingLetters;
 }
 export function hapusTernak(element, jenis) {
-    const id_ternak = $(element.closest("tr")).find("input.id").val();
+    const row = $(element.closest("tr"));
+    const id_ternak = row.find("input.id").val();
+
+    if (id_ternak.length < 1) {
+        if (confirm("Apakah anda yakin akan menghapus data ini ?")) {
+            row.remove();
+            return false;
+        }
+    }
     $("#id-ternak-hapus").text(id_ternak);
     $("#jenis-ternak-hapus").text(jenis);
     $("#hapus-ternak-modal").show();
+}
+
+export function hapusLahan(element) {
+    const row = $(element.closest("tr"));
+    const id_lahan = row.find("input.id").val();
+    $("#id-lahan-hapus").text(id_lahan);
+    $("#hapus-lahan-modal").show();
+}
+
+export function hapusPengelola(event) {
+    let id_hapus = $(event.target.closest("tr")).find("td.id").html();
+
+    if (id_hapus == "null") {
+        if (confirm("Apakah anda yakin akan menghapus data ini ?")) {
+            const row = $(event.target.closest("tr")).remove();
+            return 0;
+        }
+    }
+    $("#id-pengelola-hapus").text(id_hapus);
+    $("#hapus-pengelola-modal").show();
+}
+
+export async function hapusRow(
+    element,
+    isInput,
+    jenis = "",
+    idHapusContainer = ""
+) {
+    const row = element.closest("tr");
+    const id = isInput
+        ? row.querySelector("input.id").value
+        : row.querySelector("td.id").innerHTML();
+
+    if (id == "null" || id == "") {
+        if (confirm("Apakah anda yakin akan menghapus data ini ?")) {
+            await row.remove();
+            reCalculateIndex("lahan-body", "r310");
+            return false;
+        }
+    }
+    document.getElementById(idHapusContainer).innerHTML = id;
+    document.getElementById("jenis-ternak-hapus").innerHTML =
+        jenis != "lahan" ? jenis : "";
+    console.log(jenis == "lahan");
+    const modalSelector = `#${
+        jenis.length > 1 ? "lahan" : "ternak"
+    }-hapus-modal`;
+    $(modalSelector).show();
+
+    return true;
 }
 
 export function hapusTernakSubmit(indeks, token, jenis) {
@@ -580,9 +659,10 @@ export function hapusTernakSubmit(indeks, token, jenis) {
     }
 
     // done
-    $("#hapus-ternak-modal").hide();
+    $("#ternak-hapus-modal").hide();
 }
-export function hapusPengelola(indeks, token) {
+
+export function hapusPengelolaSubmit(indeks, token) {
     // show loading
 
     // delete in db is any
@@ -608,8 +688,6 @@ export function hapusPengelola(indeks, token) {
 
     // done
     $("#hapus-pengelola-modal").hide();
-
-    return row;
 }
 export function hapusLahanSubmit(indeks, token) {
     // show loading
@@ -636,7 +714,8 @@ export function hapusLahanSubmit(indeks, token) {
     }
 
     // done
-    $("#hapus-lahan-modal").hide();
+    reCalculateIndex("lahan-body", "r310");
+    $("#lahan-hapus-modal").hide();
 
     return 1;
 }
@@ -656,10 +735,6 @@ export async function editPengelola(indeks) {
     // $('#r301').val("3");
     $("#id-uup").val(id_uup);
     $("#usaha-r301").val(r301);
-    console.log({
-        r301,
-        id,
-    });
 
     // ambil data lahan berdasarkan id pengelola
     const urlPengelola = `getPengelolaById/${id_uup}`;
@@ -670,7 +745,7 @@ export async function editPengelola(indeks) {
         success: function (data) {
             console.log(data);
             if (data.length < 1) {
-                setFormValue("form-pengelola", {});
+                setFormValue("form-pengelola", { r301: r301 });
                 return 0;
             }
             setFormValue("form-pengelola", data[0]);
@@ -701,7 +776,7 @@ export function loadLahan(url) {
         dataType: "json",
         success: function (data) {
             const links = data.links;
-            if (data.links.length > 0) {
+            if (data.total > 0) {
                 $("#lahan-empty").hide();
             } else {
                 $("#lahan-empty").show();
@@ -719,7 +794,7 @@ export function loadLahan(url) {
             $.each(data.data, function (indeks, rt) {
                 const rowLahan = tambahUsaha(
                     "lahan-body",
-                    "hapusLahan",
+                    "hapusRow",
                     "lahan",
                     rt
                 );
@@ -757,9 +832,10 @@ export function loadTernak(url, jenis) {
         dataType: "json",
         success: function (data) {
             const links = data.links;
-            if (data.links.length > 0) {
+            if (data.total > 0) {
                 $(`#${idEmpty}`).hide();
             } else {
+                $(`#${idEmpty}`).show();
             }
             for (let i = 0; i < links.length; i++) {
                 links[i]["namaFungsi"] = "loadTernak";
@@ -772,12 +848,7 @@ export function loadTernak(url, jenis) {
             $(`#peternakan-${jenis}-total`).html(data.total);
             // const num_pages = data.data.length%10>0 ? data.length
             $.each(data.data, function (indeks, rt) {
-                const rowTernak = tambahUsaha(
-                    idTable,
-                    "hapusTernak",
-                    jenis,
-                    rt
-                );
+                const rowTernak = tambahUsaha(idTable, "hapusRow", jenis, rt);
                 console.log(rowTernak);
                 $(idTable).append(rowTernak);
                 // console.log({content_html});
@@ -946,7 +1017,12 @@ export function setFormValue(idForm, data) {
             let key = formInputs.eq(i).attr("name");
             // set
 
-            if (key !== "_token" && key !== "id_rt" && key !== "idsls") {
+            if (
+                key !== "_token" &&
+                key !== "id_rt" &&
+                key !== "idsls" &&
+                key !== "r301"
+            ) {
                 // console.log({ key });
 
                 let input = $(`#${idForm} input[name="${key}"]`);
@@ -977,13 +1053,13 @@ export function setFormValue(idForm, data) {
     }
 }
 
-export function simpanL1(e) {
-    $("#l1-icon").hide();
-    $("#l1-loader").show();
+export async function simpanL1(e) {
+    document.getElementById("l1-icon").classList.add("hidden");
+    document.getElementById("l1-loader").classList.remove("hidden");
     e.preventDefault();
     if (!document.getElementById("form-l1").reportValidity()) {
-        $("#l1-icon").show();
-        $("#l1-loader").hide();
+        document.getElementById("l1-icon").classList.remove("hidden");
+        document.getElementById("l1-loader").classList.add("hidden");
         return false;
     }
     let data = getFormValue("form-l1");
@@ -998,13 +1074,19 @@ export function simpanL1(e) {
         },
     })
         .done(() => {
-            $("#l1-icon").show();
-            $("#l1-loader").hide();
-            // show loadingtu
+            document.getElementById("l1-icon").classList.remove("hidden");
+            document.getElementById("l1-loader").classList.add("hidden");
+
+            alert(`data berhasil disimpan`);
+
+            new Modal(document.getElementById("l1-modal")).hide();
+
+            document.getElementById("modal-backdrop").classList.add("hidden");
         })
-        .fail(() => {
-            $("#l1-icon").show();
-            $("#l1-loader").hide();
+        .fail((error) => {
+            document.getElementById("l1-icon").classList.remove("hidden");
+            document.getElementById("l1-loader").classList.add("hidden");
+            alert(`Maaf terjadi kesalahan ${error.message}`);
         });
 }
 export function loadL1(idsls) {
