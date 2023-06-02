@@ -1,8 +1,11 @@
 {{-- Tabel A --}}
 <div class="my-4">
-    <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Kerbau Potong, Kerbau Perah, Sapi Potong,
+
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+    <h5 class="text-xl text-center font-bold dark:text-white my-4">Ternak Kerbau Potong, Kerbau Perah, Sapi Potong,
         dan
-        Sapi Perah</h4>
+        Sapi Perah</h5>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
         <button onclick="tambahUsaha('peternakan-a-body','hapusTernak','a',{})" type="button"
@@ -85,8 +88,8 @@
                 style="margin: auto; background: none; display: block; shape-rendering: auto;" width="204px"
                 height="204px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                 <circle cx="84" cy="50" r="10" fill="#e6261f">
-                    <animate attributeName="r" repeatCount="indefinite" dur="0.5s" calcMode="spline" keyTimes="0;1"
-                        values="6;0" keySplines="0 0.5 0.5 1" begin="0s" />
+                    <animate attributeName="r" repeatCount="indefinite" dur="0.5s" calcMode="spline"
+                        keyTimes="0;1" values="6;0" keySplines="0 0.5 0.5 1" begin="0s" />
                     <animate attributeName="fill" repeatCount="indefinite" dur="2s" calcMode="discrete"
                         keyTimes="0;0.25;0.5;0.75;1" values="#e6261f;#a3e048;#f7d038;#eb7532;#e6261f"
                         begin="0s" />
@@ -146,10 +149,13 @@
 </div>
 {{-- Tabel B --}}
 <div class="my-4">
-    <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Domba Potong, Domba Perah, Kambing
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+    <h5 class="text-xl text-center font-bold dark:text-white my-4">Ternak Domba Potong, Domba Perah, Kambing
         Potong,
         Kambing Perah, Babi, Kuda, Kelingci Potong, Rusa, Unta, dan
-        Keledai</h4>
+        Keledai</h5>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
         <button onclick="tambahUsaha('peternakan-b-body','hapusTernak','b',{})" type="button"
@@ -283,7 +289,10 @@
     </nav>
     {{-- Tabel C --}}
     <div class="my-4">
-        <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Unggas</h4>
+
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+        <h5 class="text-xl text-center font-bold dark:text-white my-4">Ternak Unggas</h5>
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
         <div
             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
             <button onclick="tambahUsaha('peternakan-c-body','hapusTernak','c',{})" type="button"
@@ -423,7 +432,11 @@
 </div>
 {{-- Tabel D --}}
 <div class="my-4">
-    <h4 class="my-2 text-lg font-medium text-gray-900 dark:text-white">Ternak Lainnya</h4>
+
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+    <h5 class="text-xl text-center font-bold dark:text-white my-4">Ternak Lainnya</h5>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
         <button onclick="tambahUsaha('peternakan-d-body','hapusTernak','d',{})" type="button"

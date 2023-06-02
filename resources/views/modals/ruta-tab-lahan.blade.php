@@ -1,124 +1,199 @@
 <form action="#" id="form-pengelola" class="usaha-data">
     @csrf
-    <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
+    <div class="">
         <div class="id">
             <label for="id_rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">id_rt</label>
             <input type="number" name="id_rt" id="id_rt"
                 class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 disabled>
         </div>
-        <div>
-            <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R301</label>
-            <input type="number" name="r301" id="r301"
-                class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                disabled>
+        <h5 class="text-xl text-center font-bold dark:text-white my-4">III. Total Lahan Unit Usaha Pertanian</h5>
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
+            <div>
+                <label for="r301" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.301 Nomor
+                    Urut Unit Usaha Pertanian</label>
+                <input type="number" name="r301" id="r301"
+                    class="w-[3rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    disabled>
+            </div>
+            <div>
+                <label for="r302" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.302 Nama
+                    Pengelola</label>
+                <input type="text" name="r302" id="r302"
+                    class="w-[10rem] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+            </div>
+            <div>
+                <label for="r303" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.303
+                    NIK</label>
+                <input type="text" maxlength="16" name="r303" id="r303"
+                    class="w-[10rem]  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+            </div>
+            <div>
+                <label for="r307" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.307
+                    Apakah
+                    Memiliki Kartu Tani dan atau Kusuka ?</label>
+                <input type="number" min="1" max="4" name="r307" id="r307"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[3rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+            </div>
+            <div>
+                <label for="r309" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.309
+                    Jumlah
+                    Bidang yang dikuasai</label>
+                <input type="number" min="0" max="99" name="r309" id="r309"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[3rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+            </div>
         </div>
-        <div>
-            <label for="r302" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R302</label>
-            <input type="text" name="r302" id="r302"
-                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-        </div>
-        <div>
-            <label for="r303" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R303</label>
-            <input type="text" maxlength="16" name="r303" id="r303"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[18rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="r307" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R307</label>
-            <input type="number" min="1" max="4" name="r307" id="r307"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[3rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="r309" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R309</label>
-            <input type="number" min="0" name="r309" id="r309"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1004a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1004a</label>
-            <input type="number" min="1" max="2" name="r1004a" id="1004a"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1006a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006a</label>
-            <input type="number" min="1" max="2" name="r1006a" id="1006a"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1006b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006b</label>
-            <input type="number" min="1" max="2" name="r1006b" id="1006b"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1006c" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1006c</label>
-            <input type="number" min="1" max="2" name="r1006c" id="1006c"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010a</label>
-            <input type="number" min="1" max="2" name="r1010a" id="1010a"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010b1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b1</label>
-            <input type="number" min="1" max="2" name="r1010b1" id="1010b1"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010b2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b2</label>
-            <input type="number" min="1" max="2" name="r1010b2" id="1010b2"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010b3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b3</label>
-            <input type="number" min="1" max="2" name="r1010b3" id="1010b3"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010b4" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010b4</label>
-            <input type="number" min="1" max="2" name="r1010b4" id="1010b4"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010c1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c1</label>
-            <input type="number" min="1" max="2" name="r1010c1" id="1010c1"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010c2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c2</label>
-            <input type="number" min="1" max="2" name="r1010c2" id="1010c2"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010c3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c3</label>
-            <input type="number" min="1" max="2" name="r1010c3" id="1010c3"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010c4" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c4</label>
-            <input type="number" min="1" max="2" name="r1010c4" id="1010c4"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
-        </div>
-        <div>
-            <label for="1010c5" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1010c5</label>
-            <input type="number" min="1" max="2" name="r1010c5" id="1010c5"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required="">
+
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+        <h5 class="text-xl text-center font-bold dark:text-white my-4"> X. MANAJEMEN DALAM UNIT USAHA PERTANIAN </h5>
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+
+        <div class="grid grid-rows-3 gap-4 md:grid-cols-2">
+
+            <div class="flex items-start">
+                <label for="r1004a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1004.a
+                    Apakah menjadi anggota kelompok tani/ternak/nelayan selama periode <b>1 Mei 2022 s.d 30 April
+                        2023</b></label>
+                <input type="number" maxlength="1" min="1" max="2" name="r1004a" id="r1004a"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+
+            </div>
+            <div class="flex items-start">
+                <label for="r1006a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1006.a
+                    Jenis pupuk yang digunakan untuk <b>tanaman semusim, tanaman tahunan, kehutanan, dan perikanan</b>
+                    selama periode <b>1 Mei 2022 s.d 30 April
+                        2023</b></label>
+                <input type="number" min="0" max="30" name="r1006a" id="r1006a"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required>
+            </div>
+            <div class="flex flex-col">
+                <label for="1006b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1006.b
+                    Berapa jumlah Pupuk uera dan NK yang digunakan selama periode <b>1 Mei 2022 s.d 30 April
+                        2023</b>?</label>
+                <div class="grid grid-cols-4">
+                    <input type="number" min="0" max="10000" name="r1006b1" id="r1006b1"
+                        placeholder="Urea ... kg"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <input type="number" min="0" max="10000" name="r1006b2" id="r1006b2"
+                        placeholder="Urea ... liter"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <input type="number" min="0" max="10000" name="r1006b3" id="r1006b3"
+                        placeholder="NPK ... kg"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <input type="number" min="0" max="10000" name="r1006b4" id="r1006b4"
+                        placeholder="NPK ... liter"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                </div>
+
+            </div>
+            <div class="flex items-start">
+                <label for="1006c" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1006.c
+                    Jenis pestisida yang digunakan untuk <b>tanaman semusim, tanaman tahunan, kehutanan, dan
+                        perikanan</b>
+                    selama periode <b>1 Mei 2022 s.d 30 April
+                        2023</b></label>
+                <input type="number" min="0" max="24" name="r1006c" id="1006c"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required="">
+            </div>
+            <div class="flex items-start">
+                <label for="r1010a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1010.a
+                    Apakah mendapatkan bantuan untuk usaha pertanian selama periode <b>1 Mei 2022 s.d 30 April
+                        2023</b></label>
+                <input type="number" min="1" max="2" name="r1010a" id="r1010a"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    required="">
+            </div>
+            <div class="flex flex-col">
+
+
+                <label for="1010b1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1010.b
+                    Sumber
+                    bantuan yang diperoleh :</label>
+
+                <div class="flex items-start justify-between">
+
+                    <div class="flex flex-col justiify-end">
+                        <label for="1010b1"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pemerintah</label>
+                        <input type="number" min="1" max="2" name="r1010b1" id="1010b1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="flex flex-col justiify-end">
+                        <label for="1010b2"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">BUMN/BUMD</label>
+                        <input type="number" min="1" max="2" name="r1010b2" id="1010b2"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="flex flex-col justiify-end">
+                        <label for="1010b3"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan
+                            Swasta</label>
+                        <input type="number" min="1" max="2" name="r1010b3" id="1010b3"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="flex flex-col justiify-end">
+                        <label for="1010b4"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lainnya</label>
+                        <input type="number" min="1" max="2" name="r1010b4" id="1010b4"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <label for="1010c" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1010.c
+                    Jenis bantuan yang diperoleh :</label>
+                <div class="flex items-start justify-between">
+                    <div class="">
+                        <label for="r1010c1"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pupuk subsidi</label>
+                        <input type="number" min="1" max="2" name="r1010c1" id="r1010c1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="">
+                        <label for="r1010c2"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sarana/peralatan
+                            produksi</label>
+                        <input type="number" min="1" max="2" name="r1010c2" id="r1010c2"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="">
+                        <label for="r1010c3"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bibit</label>
+                        <input type="number" min="1" max="2" name="r1010c3" id="r1010c3"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="">
+                        <label for="r1010c4"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pakan</label>
+                        <input type="number" min="1" max="2" name="r1010c4" id="r1010c4"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                    <div class="">
+                        <label for="r1010c5"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lainnya</label>
+                        <input type="number" min="1" max="2" name="r1010c5" id="r1010c5"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required="">
+                    </div>
+                </div>
+            </div>
         </div>
         {{-- <div>
             <label for="1011a" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">1011a</label>
@@ -162,6 +237,7 @@
 
     </div>
 </form>
+
 <div id="form-pengelola-loading" class="usaha-loading hidden flex items-center justify-center flex-col">
     <!-- <div class="loader z-50">Loading...</div> -->
     <div>
@@ -214,7 +290,9 @@
     <p class="text-center font-semibold text-gray-400 dark:text-gray-500">Memuat Data...</p>
 
 </div>
-
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+<h5 class="text-xl text-center font-bold dark:text-white my-4"> Daftar Lahan </h5>
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 <div class="mt-4">
     <div
         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
