@@ -388,6 +388,14 @@
             }, 1000);
 
             $('.id').hide();
+            document.querySelectorAll('input[name="qc1"]').forEach((radio) => {
+                radio.addEventListener('click', (event) => {
+                    document.querySelectorAll('input[name="qc2"]').forEach((radio) => {
+                        radio.required = event.target.value === '1';
+                    })
+                })
+
+            })
         });
     </script>
 @endsection

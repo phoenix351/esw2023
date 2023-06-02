@@ -940,14 +940,17 @@ export function simpanLahan(token) {
 }
 
 export function halamanSatuNext(e) {
-    $("#loader-hal-1").show();
-    $("#icon-hal-1").hide();
+    document.getElementById("loader-hal-1").style.display = "block";
+    document.getElementById("icon-hal-1").style.display = "none";
 
-    $(e.target).closest("button").attr("disabled", true);
+    e.target.closest("button").disabled = true;
 
     e.preventDefault();
     if (!document.getElementById("form-ruta").reportValidity()) {
-        $(e.target).closest("button").attr("disabled", false);
+        e.target.closest("button").disabled = false;
+        document.getElementById("loader-hal-1").style.display = "block";
+        document.getElementById("icon-hal-1").style.display = "none";
+
         return 0;
     }
 
@@ -974,15 +977,17 @@ export function halamanSatuNext(e) {
             document.getElementById("pengelola-tab").click();
         })
         .done(() => {
-            $(e.target).closest("button").attr("disabled", false);
-            $("#loader-hal-1").hide();
-            $("#icon-hal-1").show();
+            e.target.closest("button").disabled = false;
+            // $(e.target).closest("button").attr("disabled", false);
+            document.getElementById("loader-hal-1").style.display = "none";
+            document.getElementById("icon-hal-1").style.display = "block";
             document.getElementById("pengelola-tab").click();
         })
         .fail(() => {
-            $(e.target).closest("button").attr("disabled", false);
-            $("#loader-hal-1").hide();
-            $("#icon-hal-1").show();
+            // $(e.target).closest("button").attr("disabled", false);
+            e.target.closest("button").disabled = false;
+            document.getElementById("loader-hal-1").style.display = "none";
+            document.getElementById("icon-hal-1").style.display = "block";
         });
 
     // cek jumlah pengelola
