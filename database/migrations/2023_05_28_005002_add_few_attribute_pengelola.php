@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string('r1010c3', 2)->after('r1010c2');
             $table->string('r1010c4', 2)->after('r1010c3');
             $table->string('r1010c5', 2)->after('r1010c4');
-            $table->string('r1011a', 2)->after('r1010c5')->default('NULL');
-            $table->string('r1011b', 2)->after('r1011a')->default('NULL');
+            $table->string('r1011a', 2)->after('r1010c5')->nullable();
+            $table->string('r1011b', 2)->after('r1011a')->nullable();
         });
     }
 
