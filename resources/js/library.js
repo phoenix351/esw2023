@@ -348,15 +348,33 @@ export function tambahPengelola() {
             hapusPengelola(e);
         });
 }
+export function updateTotal(element) {
+    let total = 0;
+    element
+        .closest("tr")
+        .querySelectorAll("input.updateTotal")
+        .forEach(
+            (currentElement) => (total = total + Number(currentElement.value))
+        );
+    element.closest("tr").querySelector("input.r311").value = total;
+}
 
-export function generateRowGen2(key, value, length, dataType) {
+export function generateRowGen2(
+    key,
+    value,
+    length,
+    dataType,
+    readOnly = false,
+    onChange = ""
+) {
     const numOnly = dataType === "number" ? "only_num" : "";
     const textAlign = dataType !== "number" ? "left" : "right";
 
     return `<td scope="row" class="${
         key == "id" ? "id hidden" : key
-    } px-2 py-2 text-center"><input type="text" value="${value}"  name="${key}"  class="${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ${
-        key === "r310" ? "readonly" : ""
+    } px-2 py-2 text-center"><input type="text" value="${value}" onkeyup="${onChange}(this)"  name="${key}"  class="${onChange} ${key} ${numOnly} w-[${length}rem] bg-gray-50 border border-gray-300 text-${textAlign} text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" ${
+        readOnly ? "readonly" : ""
+    }
     } ></td>`;
 }
 export function reCalculateIndex(tableId, className) {
@@ -425,18 +443,68 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
         },
         lahan: {
             id: { value: "", length: 3, dataType: "number" },
-            r310: { value: "", length: 3, dataType: "number" },
-            r311: { value: "", length: 3, dataType: "number" },
-            r312: { value: "", length: 3, dataType: "number" },
-            r313: { value: "", length: 3, dataType: "number" },
-            r314: { value: "", length: 3, dataType: "number" },
-            r315: { value: "", length: 3, dataType: "number" },
-            r316: { value: "", length: 3, dataType: "number" },
-            r317: { value: "", length: 3, dataType: "number" },
-            r318: { value: "", length: 3, dataType: "number" },
-            r319: { value: "", length: 3, dataType: "number" },
-            r320: { value: "", length: 3, dataType: "number" },
-            r321: { value: "", length: 3, dataType: "number" },
+            r310: { value: "", length: 3, dataType: "number", readOnly: true },
+            r311: { value: 0, length: 3, dataType: "number", readOnly: true },
+            r312: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r313: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r314: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r315: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r316: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r317: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r318: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r319: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r320: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
+            r321: {
+                value: "",
+                length: 3,
+                dataType: "number",
+                onChange: "updateTotal",
+            },
             r322: { value: "", length: 3, dataType: "number" },
             r323: { value: "", length: 3, dataType: "number" },
             r324_prov: { value: "", length: 3, dataType: "number" },
@@ -478,7 +546,9 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
             key,
             dataProcessed[key].value,
             dataProcessed[key].length,
-            dataProcessed[key].dataType
+            dataProcessed[key].dataType,
+            dataProcessed[key].readOnly ?? "",
+            dataProcessed[key].onChange ?? ""
         );
         rowsGenerated += rowGenerated;
     }
@@ -488,34 +558,43 @@ export function tambahUsaha(bodyTableId, fungsiHapus, jenis, data) {
     </tr>`;
     $(`#${bodyTableId}`).append(blank_lahan);
 
-    $(".only_num").keypress(function (e) {
-        console.log("asu");
-        //if the letter is not digit then display error and don't type anything
-        if (e.which > 57 || e.which < 48) {
-            e.preventDefault();
-        }
+    // $(".only_num").keypress(function (e) {
+    //     console.log("asu");
+    //     //if the letter is not digit then display error and don't type anything
+    //     if (e.which > 57 || e.which < 48) {
+    //         e.preventDefault();
+    //     }
+    // });
+    document.querySelectorAll(".only_num").forEach((element) => {
+        element.addEventListener("keypress", onlyNumber);
     });
+
     // document.
+}
+export function onlyNumber(element) {
+    if (element.which > 57 || element.which < 48) e.preventDefault();
 }
 export function simpanTernak(jenis, token) {
     //show loading
     $(`#peternakan-${jenis}-loader`).show();
     $(`#peternakan-${jenis}-icon`).hide();
 
-    const table_inputs = $(`#peternakan-${jenis}-body`).find("tr");
-    const id_pengelola = $("#id-uup").val();
+    // const table_inputs = $(`#peternakan-${jenis}-body`).find("tr");
+    const tableRows = document.querySelectorAll(`#peternakan-${jenis}-body tr`);
     let data = [];
-    for (let i = 0; i < table_inputs.length; i++) {
-        let row_inputs = table_inputs.eq(i).find("input");
+    tableRows.forEach((row) => {
         let rowData = {};
-        for (let j = 0; j < row_inputs.length; j++) {
-            let value = row_inputs.eq(j).val();
-            let key = row_inputs.eq(j).attr("class").split(" ")[0];
+
+        const rowInputs = row.querySelectorAll("input");
+        rowInputs.forEach((input) => {
+            let value = input.value;
+            let key = input.getAttribute("name");
             rowData[key] = value;
-            rowData["id_pengelola"] = id_pengelola;
-        }
+        });
+        rowData["id_pengelola"] = document.getElementById("id-uup").value;
+
         data.push(rowData);
-    }
+    });
 
     // define url
     const jenisUrl = {
@@ -548,11 +627,13 @@ export function simpanTernak(jenis, token) {
         .done(() => {
             $(`#peternakan-${jenis}-loader`).hide();
             $(`#peternakan-${jenis}-icon`).show();
+            alert("data berhasil disimpan");
             // hide loading
         })
         .fail(() => {
             $(`#peternakan-${jenis}-loader`).hide();
             $(`#peternakan-${jenis}-icon`).show();
+            alert("data gagal disimpan");
         });
 }
 export function capitalizeWord(word) {
@@ -898,24 +979,21 @@ export function simpanLahan(token) {
     // }
     const table_inputs = $(`#lahan-body`).find("tr");
     const id_pengelola = $("#id-uup").val();
+    const tableRows = document.querySelectorAll("#lahan-body tr");
     let data = [];
-    for (let i = 0; i < table_inputs.length; i++) {
-        let row_inputs = table_inputs.eq(i).find("input");
+    tableRows.forEach((row) => {
         let rowData = {};
-        for (let j = 0; j < row_inputs.length; j++) {
-            let value = row_inputs.eq(j).val();
-            let key = row_inputs.eq(j).attr("class").split(" ")[0];
+
+        const rowInputs = row.querySelectorAll("input");
+        rowInputs.forEach((input) => {
+            let value = input.value;
+            let key = input.getAttribute("name");
             rowData[key] = value;
-            rowData["id_pengelola"] = id_pengelola;
-        }
+        });
+        rowData["id_pengelola"] = id_pengelola;
+
         data.push(rowData);
-    }
-
-    console.log(data);
-    // return 1;
-    // cek validasi
-
-    // kirim ke server
+    });
     $.ajax({
         url: "/lahan/save",
         type: "POST",
@@ -931,6 +1009,7 @@ export function simpanLahan(token) {
         .done(() => {
             $("#lahan-icon").show();
             $("#lahan-loader").hide();
+            alert("Data berhasil disimpan");
             // show loadingtu
         })
         .fail(() => {
@@ -1079,14 +1158,14 @@ export async function simpanL1(e) {
         },
     })
         .done(() => {
-            document.getElementById("l1-icon").classList.remove("hidden");
-            document.getElementById("l1-loader").classList.add("hidden");
+            document.getElementById("l1-icon").style.display = "block";
+            document.getElementById("l1-loader").style.display = "none";
 
             alert(`data berhasil disimpan`);
 
             new Modal(document.getElementById("l1-modal")).hide();
 
-            document.getElementById("modal-backdrop").classList.add("hidden");
+            document.getElementById("modal-backdrop").style.display = "none";
         })
         .fail((error) => {
             document.getElementById("l1-icon").classList.remove("hidden");

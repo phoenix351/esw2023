@@ -78,19 +78,32 @@
                 <label for="1006b" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">R.1006.b
                     Berapa jumlah Pupuk uera dan NK yang digunakan selama periode <b>1 Mei 2022 s.d 30 April
                         2023</b>?</label>
-                <div class="grid grid-cols-4">
-                    <input type="number" min="0" max="10000" name="r1006b1" id="r1006b1"
-                        placeholder="Urea ... kg"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <input type="number" min="0" max="10000" name="r1006b2" id="r1006b2"
-                        placeholder="Urea ... liter"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <input type="number" min="0" max="10000" name="r1006b3" id="r1006b3"
-                        placeholder="NPK ... kg"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    <input type="number" min="0" max="10000" name="r1006b4" id="r1006b4"
-                        placeholder="NPK ... liter"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <div class="flex justify-between items-start">
+                    <div class="flex flex-col">
+
+                        <label for="r1006b1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Urea
+                            (kg)</label>
+                        <input type="number" min="0" max="10000" name="r1006b1" id="r1006b1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="r1006b2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Urea
+                            (liter)</label>
+                        <input type="number" min="0" max="10000" name="r1006b2" id="r1006b2"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="r1006b3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPK
+                            (kg)</label>
+                        <input type="number" min="0" max="10000" name="r1006b3" id="r1006b3"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="r1006b4" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPK
+                            (liter)</label>
+                        <input type="number" min="0" max="10000" name="r1006b4" id="r1006b4"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[4rem] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
                 </div>
 
             </div>

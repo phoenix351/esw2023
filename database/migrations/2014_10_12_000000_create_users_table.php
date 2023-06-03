@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->unique();
+            $table->date('email_verified_at');
             $table->string('nik', 16)->default('000000000000000');
             $table->string('id_sobat', 12)->unique();
             $table->string('posisi', 30)->default('Pemeriksa Lapangan Sensus');
