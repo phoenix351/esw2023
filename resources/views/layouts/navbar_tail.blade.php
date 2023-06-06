@@ -93,6 +93,8 @@
                             class="block text-sm font-semibold text-gray-900 dark:text-white">{{ auth()->user()->name ?? 'Anonim' }}</span>
                         <span class="block text-sm font-light text-gray-500 truncate dark:text-gray-400">NIK :
                             {{ auth()->user()->nik ?? '0000000000000000' }}</span>
+                        <span class="block text-sm font-light text-gray-500 truncate dark:text-gray-400">Posisi :
+                            {{ auth()->user()->posisi ?? 'Belum diassign' }}</span>
                     </div>
                     {{-- <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                         <li>
